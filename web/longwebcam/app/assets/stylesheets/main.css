@@ -1,0 +1,113 @@
+/*
+CSS file for http://www.longwebcan.org
+*/
+
+html, body {
+    background-color: #EEF;
+    margin: 0px;
+    margin: 5px 25px;
+}
+
+.banner {
+#    background-color: #225;
+    padding: 15px;
+    border: 0px;
+    color: #FFF;
+#    -moz-border-radius: 25px 25px 0 0;
+#    -webkit-border-top-left-radius: 25px;
+#    -webkit-border-top-right-radius: 25px;
+#    border-top-left-radius: 25px;
+#    border-top-right-radius: 25px;
+}
+
+.content {
+    padding: 5px 20px 20px 20px;
+#    border-width: 0px 2px;
+#    border-style: solid;
+#    border-color: #225;
+    -moz-border-radius: 10px 10px 0 0;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    color: #333;
+    background-color: #FFF;
+    text-align: justify;
+}
+
+.footer {
+    background-color: #FFF;
+    padding: 10px 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #225;
+    text-align: right;
+    border-width: 1px 0px 0px 0px;
+    border-color: #225;
+    border-style: solid;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.menu {
+#    padding: 10px 20px;
+#    border-width: 0px 2px;
+#    border-style: solid;
+#    border-color: #225;
+#    background-color: #557;
+#    color: #FFF;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+a {
+    color: #225;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #CC9900;
+}
+
+a.menu {
+    color: #225;
+    text-decoration: none;
+    padding: 0px;
+    border: 0px;
+}
+
+a.menu:hover {
+    color: #EEBB00;
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h4 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+}
+
+.nav {
+    list-style: none;
+    padding-left: 40px;
+    margin: 0px 0px 20px 0px;
+    display: inline-block;
+}
+
+.nav-item {
+    float: left;
+    margin-right: 35px;
+}
+
+.floatleft {
+    float: left;
+}
+
+article, aside, figure, footer, header, hgroup, menu, nav, section { display:block; }

@@ -1,0 +1,24 @@
+<% provide(:title, 'Contact') %>
+
+<section>
+    <header>
+        <h3>Contact</h3>
+    </header>
+
+    <p>
+        If you want to host a camera, help out with the techincal side of the project, or simply talk to us, you can get in touch using one of the options below:
+    </p>
+
+    <table>
+        <tr>
+            <td><b>Email:</b></td>
+            <td><%= mail_to("contact@longwebcam.org", nil) %></td>
+        </tr>
+        <tr>
+            <td><b>Twitter:</b></td>
+            <td><%= link_to("@LongWebcam", "https://twitter.com/LongWebcam") %></td>
+        </tr>
+    </table>
+
+</section>
+
