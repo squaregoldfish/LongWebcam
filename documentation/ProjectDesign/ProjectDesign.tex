@@ -283,6 +283,27 @@ User forums may also be introduced if it is deemed useful for site developers, c
 \clearpage
 \section{Use Cases}
 \label{sec:use_cases}
+This section describes the various activities that can be performed on the site, and an overview of what those activities will entail from the user's perspective and, in some cases, how the system will achieve them.
+
+Each use case includes a description of which users will have access to them. A user may have a number of roles, which may vary depending on the specific context in which they are operating. These roles may be as follows:
+
+\begin{table}[h]
+\begin{tabular}{ | p{1.45in} | p{4.45in} | }
+\hline
+\textbf{Role} & \textbf{Description} \\
+\hline
+Anonymous User & A basic user who has not logged in to the site. \\
+\hline
+Known User & A user who has an account on the site and has logged in. Has no administrative privileges beyond their own user profile. \\
+\hline
+Camera Owner & A user who is responsible for maintenance of a specific camera. \\
+\hline
+Administrator & A user with full administration access to all areas of the site. \\
+\hline
+\end{tabular}
+\caption{The roles that a user may hold while accessing the site.}
+\label{tab:roles}
+\end{table}
 
 \section{Server Configuration}
 The Long Webcam project will be hosted by a number of different servers, each of which will perform specific tasks. This division of portions of the site is a result of the computational and storage requirements of the project and the corresponding cost of servers for those activities. The different servers and their requirements are listed in Table~\ref{tab:hosts}.
@@ -292,24 +313,22 @@ The Long Webcam project will be hosted by a number of different servers, each of
 \hline
 \textbf{Host name*} & \textbf{Purpose} & \textbf{Requirements} \\
 \hline
-\url{www} & The main web server. Provides all the functionality seen by users. Will also act as the database server for the project. & LAMP$\dag$ Server; Unlimited bandwidth \\
+\url{www} & The main web server. Provides all the functionality seen by users. Will also act as the database server for the project. & Rails/MySQL Server; Unlimited bandwidth \\
 \hline
-\url{images} & The storage server for all webcam images collected by the project. & LAMP Server; Unlimited storage; Unlimited bandwidth \\
+\url{images} & The storage server for all webcam images collected by the project. & Rails Server; Unlimited storage; Unlimited bandwidth \\
 \hline
-\url{upload} & Handles receipt of images from cameras. This will not include retrieving images from URL-based cameras. & LAMP Server; Unlimited bandwidth \\
+\url{upload} & Handles receipt of images from cameras. This will not include retrieving images from URL-based cameras. & Rails Server; Unlimited bandwidth \\
 \hline
-\url{proc} & Performs all video procssing and collects images from URL-based cameras. & Dedicated server \\
+\url{proc} & Performs all video procssing and collects images from URL-based cameras. & \\
 \hline
-\url{admin} & Provides a web interface for administering the project. & LAMP Server \\
+\url{beta} & Used for final testing of new features etc. before they are published on the main project site. & Separate Rails App \\
 \hline
-\url{beta} & Used for development and testing of new features etc. & Dedicated server \\
-\hline
-\url{dev} & Host for code repositories, bug tracking etc. & Dedicated server \\
+\url{dev} & Used for development and testing of new features etc. & Separate Server \\
 \hline
 \url{blog} & Hosts the project's blog. & WordPress and dependencies \\
 \hline
 \end{tabular}
-\caption{Servers required to run the Long Webcam project, and a basic list of their fundamental requirements. *All host names will have the suffix \protect\url{.longwebcam.org}. $\dag$Linux/Apache/MySQL/PHP.}
+\caption{Servers required to run the Long Webcam project, and a basic list of their fundamental requirements. *All host names will have the suffix \protect\url{.longwebcam.org}.}
 \label{tab:hosts}
 \end{table}
 
@@ -324,7 +343,7 @@ This will be the main web server for the Long Webcam project.
 The server will be accessible from anywhere on the web. Uploading of website files will be performed through the standard secure facilities provided by the web host.
 
 \subsubsection{Hosting Requirements}
-The design of the Long Webcam project will be such that its sites can be transferred between hosts with a minimum of effort. This places certain restrictions on the implmentation approach taken. Implementation of the site will be in PHP/MySQL, due to the ubiquity of LAMP servers available from web hosts. This will have an added advantage that any future contributors to the project are more likely to have experience of working with LAMP systems than virtually any other configuration.
+The design of the Long Webcam project will be such that its sites can be transferred between hosts with a minimum of effort. This places certain restrictions on the implmentation approach taken. Implementation of the site will be in Ruby on Rails with a MySQL database, due to the relative abundance of such facilities available from web hosts.
 
 \url{www.longwebcam.org} will not have large requirements initially, but as the archive becomes larger so will its likely usage.
 
@@ -333,7 +352,7 @@ The design of the Long Webcam project will be such that its sites can be transfe
 This will be the image storage server for the project. It will be configured as a standard web server, but will not have any `normal' web pages. Instead, it will provide a number of `virtual' pages through which images can be uploaded for storage and subsequently retrieved.
 
 \subsubsection{Functions performed}
-The \url{images.longwebcam.org} server will be responsible for storing and retrieving images for the project. It will not perform any other actions.
+The \url{images.longwebcam.org} server will be responsible for storing and retrieving images for the project. It will not perform any other actions. It will have access to the main site database on \url{www.longwebcam.org} to maintain the link between the database and the image archive, as well as performing appropriate security checks for uploaded images.
 
 \subsubsection{Access}
 Access to \url{images.longwebcam.org} will be restricted to requests sent by other servers in the Long Webcam project. Any requests from other locations on the Internet will be ignored.
@@ -352,7 +371,7 @@ This server will be responsible for handling all incoming images for the project
 
 Images for the project will come from three types of camera setup, and each will be handled in different ways.
 
-\paragraph{URL-based cameras} For cameras that upload their images to a website, the project will be given a URL for the image. The server will download an image from the URL at the local midday time in the camera's location and store it in the archive.
+\paragraph{URL-based cameras} For cameras that upload their images to a website, the project will be given a URL for the image. The server will download an image from the URL at the local midday time in the camera's location and store it in the archive. This will almost certainly be implemented as a standalone script running periodically, outside any web server software.
 
 \paragraph{Network-connected standalone camera} Some cameras will be connected to a PC or set up in a standalone configuration with network access. In both cases, the camera will capture an image at midday and upload it to the server. The server will receive the image and transfer it to the archive.
 
@@ -360,12 +379,12 @@ Images for the project will come from three types of camera setup, and each will
 
 \subsubsection{Access}
 
-The \url{upload.longwebcam.org} server must accept uploads from any host on the Internet. However, all attempted uploads must be authenticated against a known user of the Long Webcam project and must also supply metadata t oidentify the specific camera.
+The \url{upload.longwebcam.org} server must accept uploads from any host on the Internet. However, all attempted uploads must be authenticated against a known user of the Long Webcam project and must also supply metadata to identify the specific camera.
 
 \subsubsection{Hosting Requirements}
 \url{upload.longwebcam.org} will receive a large number of uploaded images as the number of cameras hosted by the project increases, and as such will require unlimited bandwidth. However, storage and processing requirements will be minimal.
 
-The server must not only receive image uploads from cameras, but also have the ability to retrieve images from the web on a schedule. As such a server with full programmable and scheduling control is required in addition to web server capabilities.
+The server must not only receive image uploads from cameras, but also have the ability to retrieve images from the web on a schedule. As such a server with full programmable and scheduling control and unlimited download bandwidth is required in addition to web server capabilities.
 
 \subsection{\protect\url{proc.longwebcam.org}}
 
@@ -383,34 +402,13 @@ The most visible work done by the \url{proc.longwebcam.org} server will be the g
 This server will not provide any web-based funtcionality, save for that required by any system monitoring tools used by the project. Any web-based access will therefore be limited to project servers only. All other access to this server will be through SSH alone.
 
 \subsubsection{Hosting Requirements}
-\url{proc.longwebcam.org} will have a number of tasks to be run at specific times that are not part of a standard web server. The fine control required for these tasks means that a standard web server will not suffice, so a dedicated server is required. Dedicated hosting is expensive, and will not be required in the early days of the project while demand for videos is low. This server will therefore be hosted on a machine owned and run by a member of the project staff in the first instance.
-
-\subsection{\protect\url{admin.longwebcam.org}}
-
-This server will provide the administration website for the Long Webcam project.
-
-\subsubsection{Functions performed}
-
-The functions provided by this server will be cover all the administrative tasks that someone might need, including:
-
-\begin{itemize}
-    \item User management
-    \item Camera management
-    \item Viewing and acting on system-generated alerts and messages
-    \item System Monitoring
-\end{itemize}
-
-\subsubsection{Access}
-The \url{admin.longwebcam.org} server will be accessible from anywhere on the web. Access to the site will be strictly controlled to those users with administrative access. Access controls on users may be set to multiple levels to allow different users access to different functions.
-
-\subsubsection{Hosting Requirements}
-\url{admin.longwebcam.org} will be a website for performing administrative functions for the projecct, such as user, camera and image management. System-generated alerts and related emails will also be handled through this site. The \url{admin} site will be hosted alongside the main \url{www} site.
+\url{proc.longwebcam.org} will have a number of tasks to be run at specific times that are not part of a standard web server. The fine control required for these tasks means that a standard web server will not suffice, so a server with full programming and scheduling control is required.
 
 \subsection{\protect\url{beta.longwebcam.org}}
-\url{beta.longwebcam.org} will be used to host development versions of the site to try new designs and features. Only a select few people will be invited to use this site, and it is likely that changes will be made and tested live on this server. As such it makes sense that the server is placed on a dedicated server with full SSH access. Therefore the same hosting considerations apply as for \url{proc}. It is possible that, in the future, the \url{beta} site will become a more formal part of the Long Webcam project and open to users who are not directly involved in the project. In this instance the \url{beta} site may become less dynamic in nature, and the functions described here will be hosted on an \url{alpha} server.
+\url{beta.longwebcam.org} will be used to host development versions of the site to try new designs and features. Only a select few people will be invited to use this site. The site will run on the live project database and image store alongside \url{www.longwebcam.org}, and as such will have similar hosting requirements. Note that this means that any new functions added to the \url{beta} site must be thoroughly tested to ensure that the risk to the live project data is minimal.
 
 \subsection{\protect\url{dev.longwebcam.org}}
-\url{dev.longwebcam.org} will host repositories of all documents, code and bug reports related to the project. It will be hosted on a dedicated server. Decisions regarding the supporting software for these functions will be made at a later date.
+\url{dev.longwebcam.org} will be used for the development of all project code. It will be completely independent of the main project site, with its own copies of all software, the database and the image archive. This dedicated machine will be accessible only to developers for sharing developments.
 
 \subsection{\protect\url{blog.longwebcam.org}}
 \url{blog.longwebcam.org} will host the project's blog, used to provide site news, updates etc. to interested parties. WordPress will most likely be used as the blog software.
