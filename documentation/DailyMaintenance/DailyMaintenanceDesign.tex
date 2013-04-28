@@ -1,0 +1,59 @@
+ \documentclass[11pt]{article}
+\usepackage{parskip}
+\parskip=1\baselineskip \advance\parskip by 0pt plus 2pt
+\usepackage[pdftex]{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+\includegraphics[width=0.85\textwidth]{./Logo_Large-cropped_black.png}
+
+\vspace{3 cm}
+
+\textbf{\Huge{Daily Maintenance Design}}
+
+\vspace{1 cm}
+
+\textit{\large{Version 0.1 - 27th April 2013}}
+
+\vspace{4 cm}
+
+\textbf{\Large{Authors:}}
+
+\textbf{Steve Jones} (steve@longwebcam.org)
+
+\end{center}
+
+\end{titlepage}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\clearpage
+\pagenumbering{roman}
+\section*{Document History}
+    \addcontentsline{toc}{section}{Document History}
+\begin{table*}[tbhp!]
+\begin{tabular}{ c c p{4in} }
+\textbf{Version} & \textbf{Date} & \textbf{Notes} \\
+0.1 & 27 Apr 2013 & Document development; The version number will be held at 0.1 until all sections have been written. \\
+\end{tabular}
+\end{table*}
+
+\clearpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+A number of automatic maintenance tasks will be run each day to ensure the smooth running of the site. This document contains the details of those tasks.
+
+The tasks will be run at 02:45 on the local server time. This will minimise the chances of the maintenance tasks impacting the server performance for other tasks. 
+
+\section{Locating missing data}
+
+\section{Updating camera time zones}
+
+\end{document}
+

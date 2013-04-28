@@ -152,6 +152,8 @@ The technical specification of the camera itself will be recorded where it is av
 \item Camera model and make
 \item Lens details
 \item CCD details
+\item Image format
+\item Image dimensions
 \end{itemize}
 
 Since this is a long-term project, it is likely that cameras will break or grow old and require replacement from time to time. It will be necessary to update the stored camera details as this happens, but the details of previous cameras must be maintained to match the images that were taken before the camera's replacement. The date of each new camera's installation will be sufficient to cross-reference stored images and establish the specific camera with which they were taken.
@@ -177,7 +179,7 @@ The project must provide textual details of each camera to allow users to search
 \subparagraph{Specific Items} Some cameras will inevitably be trained on specific locations of interest, e.g. the Niagara Falls. It will be possible to list these places of interest as a part of each camera's description, along with a category (e.g. Building: York Minster).
 
 \subsection{Image Details}
-The details stored with each image will be relatively simple, since most of the details of human interest will be stored in relation to the camera or the list of captured events (see below). However, some details will need to be stored with each image for the technical operation of the project, such as the format of the image file and its dimensions.
+The details stored with each image will be relatively simple, since most of the details of human interest will be stored in relation to the camera or the list of captured events (see below). However, some details additional details pertaining to the individual images will be stored, such as the prevailing weather conditions.
 
 \subsection{Observed Events}
 The primary purpose of the Long Webcam project is to record the events seen by its cameras. The details of these events will be stored alongside the images. The exact nature of these details will be decided at a later date, and may well change over time. However, it is anticipated that event details will include:
@@ -295,6 +297,8 @@ Each use case includes a description of which users will have access to them. A 
 Anonymous User & A basic user who has not logged in to the site. \\
 \hline
 Known User & A user who has an account on the site and has logged in. Has no administrative privileges beyond their own user profile. \\
+\hline
+Test User & A Known User who has access to beta testing data and functionality of the site that is not available to `normal' users. Has no administrative privileges beyond their own user profile. \\
 \hline
 Camera Owner & A user who is responsible for maintenance of a specific camera. \\
 \hline
