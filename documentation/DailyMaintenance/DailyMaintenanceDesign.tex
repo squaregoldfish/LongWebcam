@@ -1,4 +1,4 @@
- \documentclass[11pt]{article}
+\documentclass[11pt]{article}
 \usepackage{parskip}
 \parskip=1\baselineskip \advance\parskip by 0pt plus 2pt
 \usepackage[pdftex]{graphicx}
@@ -49,11 +49,16 @@
 \section{Introduction}
 A number of automatic maintenance tasks will be run each day to ensure the smooth running of the site. This document contains the details of those tasks.
 
-The tasks will be run at 02:45 on the local server time. This will minimise the chances of the maintenance tasks impacting the server performance for other tasks. 
+The tasks will be run in the early hours of the morning on the local server time, away from the hourly data retrieval schedule. This will minimise the chances of the maintenance tasks impacting the server performance for other tasks. 
 
-\section{Locating missing data}
+\section{Detecting missing data}
+The primary task of the daily maintenance program is to detect missing data that should have been collected or sent to the project but is missing. The data to be detected includes the following:
 
-\section{Updating camera time zones}
+\subparagraph{Network-connected cameras} If no image has been uploaded for more than 24 hours, a system alert will be raised,
+
+\subparagraph{Standalone cameras} These cameras will be given a schedule for batch uploads that corresponds to the anticipated maintenance schedule for that camera (i.e. when the camera maintainer plans to retrieve images from the camera and upload them to the site). If more than the scheduled amount of time has passed since the last upload, a system alert will be raised.
+
+Missing images from URL cameras and missing weather data will be detected by the Data Retrieval program, which will raise the necessary system alerts itself.
 
 \end{document}
 
