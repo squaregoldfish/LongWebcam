@@ -1,0 +1,41 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  camera_id: 1
+  date: 2013-05-11
+  image_present: 1
+  image_time: 
+  image_time_offeet_hour: 1
+  image_time_offset_minute: 1
+  weather_time: 2013-05-11 21:53:31
+  weather_time_offset_hour: 1
+  weather_time_offset_minute: 1
+  temperature: 1
+  weather_type: 1
+  wind_speed: 1
+  wind_bearing: 1
+  rain: 1.5
+  visibility: 1.5
+  pressure: 1
+  cloud_cover: 1
+  air_quality: 1
+
+two:
+  camera_id: 1
+  date: 2013-05-11
+  image_present: 1
+  image_time: 
+  image_time_offeet_hour: 1
+  image_time_offset_minute: 1
+  weather_time: 2013-05-11 21:53:31
+  weather_time_offset_hour: 1
+  weather_time_offset_minute: 1
+  temperature: 1
+  weather_type: 1
+  wind_speed: 1
+  wind_bearing: 1
+  rain: 1.5
+  visibility: 1.5
+  pressure: 1
+  cloud_cover: 1
+  air_quality: 1

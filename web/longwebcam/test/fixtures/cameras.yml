@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  owner: 1
+  type: 1
+  url: MyString
+  serial_number: MyString
+  schedule: 1
+  test_camera: 1
+  licence: MyString
+  upload_code: MyString
+  watermark: 1
+
+two:
+  owner: 1
+  type: 1
+  url: MyString
+  serial_number: MyString
+  schedule: 1
+  test_camera: 1
+  licence: MyString
+  upload_code: MyString
+  watermark: 1
