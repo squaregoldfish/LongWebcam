@@ -1,3 +1,3 @@
 class CameraTag < ActiveRecord::Base
-    attr_accessible :tag, :parent
+    attr_accessible 
 end
