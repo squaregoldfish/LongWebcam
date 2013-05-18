@@ -1,3 +1,3 @@
 class MessageType < ActiveRecord::Base
-    attr_accessible :subject, :text
+    attr_accessible
 end

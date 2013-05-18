@@ -9,65 +9,82 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511205331) do
+ActiveRecord::Schema.define(:version => 20130516205408) do
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
-    t.date     "details_date"
-    t.float    "longitude"
-    t.float    "latitude"
-    t.integer  "bearing"
+    t.date     "details_date",  :null => false
+    t.float    "longitude",     :null => false
+    t.float    "latitude",      :null => false
+    t.integer  "bearing",       :null => false
     t.integer  "ground_height"
     t.integer  "camera_height"
     t.string   "manufacturer"
     t.string   "model"
-    t.integer  "resolution_x"
-    t.integer  "resolution_y"
+    t.integer  "resolution_x",  :null => false
+    t.integer  "resolution_y",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "camera_details", ["details_date"], :name => "cameradetails_detailsdate_idx"
+  add_index "camera_details", ["latitude"], :name => "cameradetails_latitude_idx"
+  add_index "camera_details", ["longitude"], :name => "cameradetails_longitude_idx"
+
   create_table "camera_tags", :force => true do |t|
-    t.string   "tag"
+    t.string   "tag",        :null => false
     t.integer  "parent"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "camera_tags", ["parent"], :name => "cameratags_parent_idx"
+  add_index "camera_tags", ["tag"], :name => "cameratags_tag_idx"
+
   create_table "cameras", :force => true do |t|
-    t.integer  "owner"
-    t.integer  "type",          :limit => 1
+    t.integer  "owner",                                         :null => false
+    t.integer  "type",          :limit => 1,                    :null => false
     t.string   "url"
     t.string   "serial_number"
     t.integer  "schedule"
-    t.integer  "test_camera",   :limit => 1
-    t.string   "licence"
+    t.boolean  "test_camera",                :default => false, :null => false
+    t.string   "licence",                                       :null => false
     t.string   "upload_code",   :limit => 4
-    t.integer  "watermark",     :limit => 1
+    t.boolean  "watermark",                  :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cameras", ["owner"], :name => "cameras_owner_idx"
+  add_index "cameras", ["test_camera"], :name => "cameras_testcamera_idx"
 
   create_table "cameras_events", :id => false, :force => true do |t|
-    t.integer  "camera_id"
-    t.integer  "event_id"
+    t.integer  "camera_id",  :null => false
+    t.integer  "event_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cameras_events", ["camera_id", "event_id"], :name => "camerasevents_ids_idx", :unique => true
 
   create_table "cameras_tags", :id => false, :force => true do |t|
-    t.integer  "camera_id"
-    t.integer  "tag_id"
+    t.integer  "camera_id",  :null => false
+    t.integer  "tag_id",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "cameras_tags", ["camera_id", "tag_id"], :name => "camerastags_ids_idx", :unique => true
+
   create_table "event_tags", :force => true do |t|
-    t.string   "tag"
+    t.string   "tag",        :null => false
     t.integer  "parent"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "event_tags", ["tag"], :name => "eventtags_parent_idx"
+  add_index "event_tags", ["tag"], :name => "eventtags_tag_idx"
 
   create_table "event_urls", :force => true do |t|
     t.string   "title"
@@ -81,20 +98,26 @@ ActiveRecord::Schema.define(:version => 20130511205331) do
   end
 
   create_table "events", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.date     "start_date"
+    t.string   "name",               :null => false
+    t.text     "description",        :null => false
+    t.date     "start_date",         :null => false
     t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description_source"
+  end
+
+  add_index "events", ["end_date"], :name => "events_enddate_idx"
+  add_index "events", ["start_date"], :name => "events_startdate_idx"
+
+  create_table "events_tags", :id => false, :force => true do |t|
+    t.integer  "event_id",   :null => false
+    t.integer  "tag_id",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "events_tags", :id => false, :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "events_tags", ["event_id", "tag_id"], :name => "eventstags_ids_idx", :unique => true
 
   create_table "events_urls", :id => false, :force => true do |t|
     t.integer  "event_id"
@@ -104,9 +127,9 @@ ActiveRecord::Schema.define(:version => 20130511205331) do
   end
 
   create_table "images", :id => false, :force => true do |t|
-    t.integer  "camera_id"
-    t.date     "date"
-    t.integer  "image_present",              :limit => 1
+    t.integer  "camera_id",                  :null => false
+    t.date     "date",                       :null => false
+    t.boolean  "image_present",              :null => false
     t.time     "image_time"
     t.integer  "image_time_offeet_hour"
     t.integer  "image_time_offset_minute"
@@ -126,28 +149,37 @@ ActiveRecord::Schema.define(:version => 20130511205331) do
     t.datetime "updated_at"
   end
 
+  add_index "images", ["camera_id", "date"], :name => "image_camid-date_idx", :unique => true
+  add_index "images", ["date"], :name => "image_date_idx"
+  add_index "images", ["image_present"], :name => "image_imagepresent_idx"
+
   create_table "message_types", :force => true do |t|
-    t.string   "subject"
-    t.text     "text"
+    t.string   "subject",    :null => false
+    t.text     "text",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "camera_id"
-    t.datetime "timestamp"
-    t.integer  "message_type",  :limit => 1
-    t.integer  "read_by_user",  :limit => 1
-    t.integer  "read_by_admin", :limit => 1
-    t.integer  "resolved",      :limit => 1
+    t.integer  "camera_id",                        :null => false
+    t.datetime "timestamp",                        :null => false
+    t.integer  "message_type",                     :null => false
+    t.boolean  "read_by_user",  :default => false, :null => false
+    t.boolean  "read_by_admin", :default => false, :null => false
+    t.boolean  "resolved",      :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "messages", ["camera_id"], :name => "messages_cameraid_idx"
+  add_index "messages", ["message_type"], :name => "messages_messagetype_idx"
+  add_index "messages", ["read_by_admin"], :name => "messages_readbyadmin_idx"
+  add_index "messages", ["read_by_user"], :name => "messages_readbyuser_idx"
+
   create_table "users", :force => true do |t|
-    t.string   "username"
+    t.string   "username",                       :null => false
     t.string   "password_digest"
-    t.string   "email"
+    t.string   "email",                          :null => false
     t.string   "firstname"
     t.string   "lastname"
     t.string   "address1"
@@ -157,14 +189,17 @@ ActiveRecord::Schema.define(:version => 20130511205331) do
     t.string   "county"
     t.string   "country"
     t.string   "postcode"
-    t.integer  "privileges"
+    t.integer  "privileges",      :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "users", ["email"], :name => "users_email_idx", :unique => true
+  add_index "users", ["username"], :name => "users_username_idx", :unique => true
+
   create_table "weather_codes", :id => false, :force => true do |t|
     t.integer  "code"
-    t.string   "condition"
+    t.string   "condition",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
