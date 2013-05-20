@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516205408) do
+ActiveRecord::Schema.define(:version => 20130518201738) do
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
@@ -161,14 +161,15 @@ ActiveRecord::Schema.define(:version => 20130516205408) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "camera_id",                        :null => false
-    t.datetime "timestamp",                        :null => false
-    t.integer  "message_type",                     :null => false
-    t.boolean  "read_by_user",  :default => false, :null => false
-    t.boolean  "read_by_admin", :default => false, :null => false
-    t.boolean  "resolved",      :default => false, :null => false
+    t.integer  "camera_id",                             :null => false
+    t.datetime "timestamp",                             :null => false
+    t.integer  "message_type",                          :null => false
+    t.boolean  "read_by_user",       :default => false, :null => false
+    t.boolean  "read_by_admin",      :default => false, :null => false
+    t.boolean  "resolved",           :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "despatched_to_user", :default => false, :null => false
   end
 
   add_index "messages", ["camera_id"], :name => "messages_cameraid_idx"
