@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20130518201738) do
     t.datetime "updated_at"
   end
 
-  create_table "images", :id => false, :force => true do |t|
+  create_table "images", :force => true do |t|
     t.integer  "camera_id",                  :null => false
     t.date     "date",                       :null => false
     t.boolean  "image_present",              :null => false

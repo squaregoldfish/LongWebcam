@@ -183,7 +183,7 @@ class LimitsAndIndexes < ActiveRecord::Migration
       change_column :images, :date, :date, {:null => true}
       change_column :images, :image_present, :integer, {:null => true, :limit => 1}
 
-      remove_index :images, :image_camid-date_idx
+      remove_index :images, :image_camid_date_idx
       remove_index :images, :image_date_idx
       remove_index :images, :image_imagepresent_idx
 

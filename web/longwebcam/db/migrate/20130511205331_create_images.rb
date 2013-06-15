@@ -1,6 +1,6 @@
 class CreateImages < ActiveRecord::Migration
   def self.up
-    create_table :images, {:id => false} do |t|
+    create_table :images do |t|
       t.integer :camera_id
       t.date :date
       t.integer :image_present, :limit => 1
