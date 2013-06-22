@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518201738) do
+ActiveRecord::Schema.define(:version => 20130622154732) do
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20130518201738) do
     t.integer  "privileges",      :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_salt",                  :null => false
   end
 
   add_index "users", ["email"], :name => "users_email_idx", :unique => true
