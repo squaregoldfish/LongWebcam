@@ -7,9 +7,12 @@ class Camera < ActiveRecord::Base
     has_many :images
     has_many :events, :through => :cameras_events
 
-    # Codes for camera types
-    URL_TYPE = 1
-    NETWORK_TYPE = 2
-    STANDALONE_TYPE = 3
 
+	#####################
+    # Constants
+	#
+	# Codes for camera types
+    URL_TYPE = 1
+    NET_CONNECTED_TYPE = 2
+    STANDALONE_TYPE = 3
 end
