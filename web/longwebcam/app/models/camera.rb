@@ -6,4 +6,10 @@ class Camera < ActiveRecord::Base
     has_many :camera_tags, :through => :cameras_tags
     has_many :images
     has_many :events, :through => :cameras_events
+
+
+    # Constants
+    URL_TYPE = 1
+    NET_CONNECTED_TYPE = 2
+    STANDALONE_TYPE = 3
 end
