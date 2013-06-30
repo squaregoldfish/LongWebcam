@@ -9,22 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622154732) do
+ActiveRecord::Schema.define(:version => 20130629190628) do
+
+  create_table "accounts", :force => true do |t|
+    t.string "account",  :null => false
+    t.string "username"
+    t.string "password"
+    t.string "api_key"
+  end
+
+  add_index "accounts", ["account"], :name => "accounts_account_idx", :unique => true
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
-    t.date     "details_date",  :null => false
-    t.float    "longitude",     :null => false
-    t.float    "latitude",      :null => false
-    t.integer  "bearing",       :null => false
+    t.date     "details_date",      :null => false
+    t.float    "longitude",         :null => false
+    t.float    "latitude",          :null => false
+    t.integer  "bearing",           :null => false
     t.integer  "ground_height"
     t.integer  "camera_height"
     t.string   "manufacturer"
     t.string   "model"
-    t.integer  "resolution_x",  :null => false
-    t.integer  "resolution_y",  :null => false
+    t.integer  "resolution_x",      :null => false
+    t.integer  "resolution_y",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "utc_offset_hour"
+    t.integer  "utc_offset_minute"
   end
 
   add_index "camera_details", ["details_date"], :name => "cameradetails_detailsdate_idx"
