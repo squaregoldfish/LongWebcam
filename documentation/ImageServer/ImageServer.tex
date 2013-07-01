@@ -18,7 +18,7 @@
 
 \vspace{1 cm}
 
-\textit{\large{Version 1.01 - 1st July 2013}}
+\textit{\large{Version 1.02 - 1st July 2013}}
 
 \vspace{4 cm}
 
@@ -41,7 +41,8 @@
 \textbf{Version} & \textbf{Date} & \textbf{Notes} \\
 0.10 & 5 May 2013 & Document development; The version number will be held at 0.1 until all sections have been written. \\
 1.00 & 11 May 2013 & Document completed. \\
-1.01 & 1 Jul 2013 & Image server will now be folded into the main Long Webcam site. Note added to introduction.
+1.01 & 1 Jul 2013 & Image server will now be folded into the main Long Webcam site. Note added to introduction. \\
+1.02 & 1 Jul 2013 & Added details of time zone requirements for image uploads.
 \end{tabular}
 \end{table*}
 
@@ -68,10 +69,12 @@ Each upload to the image server must supply several pieces of information to all
 \begin{itemize}
 \item Camera ID
 \item Camera security code
-\item Image date
+\item Image date/time
 \item Image type (JPG, PNG etc.)
 \item Image data
 \end{itemize}
+
+The image date and time will be in the local time zone of the camera, and will be converted to UTC with an offset as part of the data storage process.
 
 This information will be passed to the Image Server as an XML document in a POST request. The format of the XML will be as follows:
 
@@ -88,6 +91,7 @@ This information will be passed to the Image Server as an XML document in a POST
     </image>
 </image_upload>
 \end{verbatim}
+
 
 \subsection{Upload processing}
 Assuming the upload request contains the required data in the correct format, the Image Server will process the data in the following steps:
