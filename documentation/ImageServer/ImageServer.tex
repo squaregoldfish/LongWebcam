@@ -40,7 +40,8 @@
 \begin{tabular}{ c c p{4in} }
 \textbf{Version} & \textbf{Date} & \textbf{Notes} \\
 0.1 & 5 May 2013 & Document development; The version number will be held at 0.1 until all sections have been written. \\
-1.0 & 11 May 2013 & Document completed.
+1.0 & 11 May 2013 & Document completed. \\
+1.1 & 1 Jul 2013 & Image server will now be folded into the main Long Webcam site. Note added to introduction.
 \end{tabular}
 \end{table*}
 
@@ -50,6 +51,8 @@
 
 \section{Introduction}
 The Image Server will be responsible for managing all image storage and retrieval for the Long Webcam project. These are the only two functions that will be performed.
+
+\textbf{Note:} The image server will no longer be a standalone server, but will be folded into the main Long Webcam application. Image retrieval will be accessed via \url{http://www.longwebcam.org/image/<cam_id>/<date>}, and uploads will be through \url{http://www.longwebcam.org/upload}.
 
 \section{Data Storage}
 All the images for the project will be stored in a single directory tree, whose root will be configured in the Image Server. Beneath this, each camera will have its own sub-directory (named as the camera's ID as stored in the database). All images for that camera will be stored in the directory, with a filename corresponding to the date that the image was captured (i.e. YYYYMMD.jpg). 
