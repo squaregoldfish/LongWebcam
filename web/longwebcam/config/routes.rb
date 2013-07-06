@@ -5,6 +5,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/get_involved', :controller => 'StaticPages', :action => 'get_involved'
   map.connect '/contact', :controller => 'StaticPages', :action => 'contact'
 
+  # Upload handler
+  map.connect '/upload', :controller => 'Upload', :action => 'upload', :conditions => { :method => :post }
+
 
 
   # Fallthrough, if nothing else matches.

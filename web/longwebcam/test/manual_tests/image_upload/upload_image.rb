@@ -3,8 +3,22 @@ require 'date'
 require 'builder'
 require 'base64'
 
+require 'net/http'
+
 # Host name of the test server
 SERVER_HOST="192.168.0.10:3000"
+
+req = Net::HTTP.post_form(URI.parse('http://' + SERVER_HOST + '/upload'), {})
+
+
+print req.body
+
+
+exit
+
+
+
+
 
 # Get the upload details
 print "Camera ID: "
@@ -37,4 +51,5 @@ upload_doc = xml.image_upload {
     xml.image { |b| b.date(image_date); b.type(format); b.file_data(file_content) }
 }
 
+print xml
 
