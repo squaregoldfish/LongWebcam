@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130629190628) do
+ActiveRecord::Schema.define(:version => 20130706180355) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
@@ -36,11 +36,13 @@ ActiveRecord::Schema.define(:version => 20130629190628) do
     t.datetime "updated_at"
     t.integer  "utc_offset_hour"
     t.integer  "utc_offset_minute"
+    t.string   "timezone_id"
   end
 
   add_index "camera_details", ["details_date"], :name => "cameradetails_detailsdate_idx"
   add_index "camera_details", ["latitude"], :name => "cameradetails_latitude_idx"
   add_index "camera_details", ["longitude"], :name => "cameradetails_longitude_idx"
+  add_index "camera_details", ["timezone_id"], :name => "camera_details_timzoneid_idx"
 
   create_table "camera_tags", :force => true do |t|
     t.string   "tag",        :null => false
@@ -53,21 +55,18 @@ ActiveRecord::Schema.define(:version => 20130629190628) do
   add_index "camera_tags", ["tag"], :name => "cameratags_tag_idx"
 
   create_table "cameras", :force => true do |t|
-    t.integer  "owner",                                         :null => false
-    t.integer  "type",          :limit => 1,                    :null => false
+    t.integer  "owner",                      :null => false
+    t.integer  "camera_type",                :null => false
     t.string   "url"
     t.string   "serial_number"
     t.integer  "schedule"
-    t.boolean  "test_camera",                :default => false, :null => false
-    t.string   "licence",                                       :null => false
+    t.boolean  "test_camera"
+    t.string   "licence"
     t.string   "upload_code",   :limit => 4
-    t.boolean  "watermark",                  :default => false, :null => false
+    t.boolean  "watermark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "cameras", ["owner"], :name => "cameras_owner_idx"
-  add_index "cameras", ["test_camera"], :name => "cameras_testcamera_idx"
 
   create_table "cameras_events", :id => false, :force => true do |t|
     t.integer  "camera_id",  :null => false
@@ -158,6 +157,8 @@ ActiveRecord::Schema.define(:version => 20130629190628) do
     t.integer  "air_quality"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_timezone_id"
+    t.string   "weather_timezine_id"
   end
 
   add_index "images", ["camera_id", "date"], :name => "image_camid-date_idx", :unique => true
