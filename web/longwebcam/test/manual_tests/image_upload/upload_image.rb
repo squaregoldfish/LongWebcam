@@ -8,17 +8,6 @@ require 'net/http'
 # Host name of the test server
 SERVER_HOST="192.168.0.10:3000"
 
-req = Net::HTTP.post_form(URI.parse('http://' + SERVER_HOST + '/upload'), {})
-
-
-print req.body
-
-
-exit
-
-
-
-
 
 # Get the upload details
 print "Camera ID: "
@@ -45,11 +34,15 @@ File.open(image_file, "r") do|image_file|
 end
 
 # Build the XML
-xml = Builder::XmlMarkup.new
-upload_doc = xml.image_upload {
+xml = Builder::XmlMarkup.new(:target => upload_xml = "")
+upload_doc = xml.image_upload(:xmlns => "http://www.longwebcam.org/xml/upload",
+                              :"xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
+                              :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload image_upload.xsd") {
     xml.camera { |b| b.id(cam_id); b.code(upload_code) }
     xml.image { |b| b.date(image_date); b.type(format); b.file_data(file_content) }
 }
 
-print xml
+req = Net::HTTP.post_form(URI.parse('http://' + SERVER_HOST + '/upload'), {:image_details => upload_xml})
+puts req.code
+puts req.body
 

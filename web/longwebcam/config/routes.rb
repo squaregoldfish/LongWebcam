@@ -6,7 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/contact', :controller => 'StaticPages', :action => 'contact'
 
   # Upload handler
-  map.connect '/upload', :controller => 'Upload', :action => 'upload', :conditions => { :method => :post }
+  #map.connect '/upload', :controller => 'Upload', :action => 'upload', :conditions => { :method => :post }
+  map.connect '/upload', :controller => 'Upload', :action => 'upload'
 
 
 
