@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130706180355) do
+ActiveRecord::Schema.define(:version => 20130714193932) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
@@ -60,16 +60,13 @@ ActiveRecord::Schema.define(:version => 20130706180355) do
     t.string   "url"
     t.string   "serial_number"
     t.integer  "schedule"
-    t.boolean  "test_camera",                :default => false, :null => false
-    t.string   "licence",                                       :null => false
+    t.boolean  "test_camera"
+    t.string   "licence"
     t.string   "upload_code",   :limit => 4
-    t.boolean  "watermark",                  :default => false, :null => false
+    t.boolean  "watermark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "cameras", ["owner"], :name => "cameras_owner_idx"
-  add_index "cameras", ["test_camera"], :name => "cameras_testcamera_idx"
 
   create_table "cameras_events", :id => false, :force => true do |t|
     t.integer  "camera_id",  :null => false
@@ -185,12 +182,21 @@ ActiveRecord::Schema.define(:version => 20130706180355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "despatched_to_user", :default => false, :null => false
+    t.text     "message",                               :null => false
+    t.text     "extra_data"
   end
 
   add_index "messages", ["camera_id"], :name => "messages_cameraid_idx"
   add_index "messages", ["message_type"], :name => "messages_messagetype_idx"
   add_index "messages", ["read_by_admin"], :name => "messages_readbyadmin_idx"
   add_index "messages", ["read_by_user"], :name => "messages_readbyuser_idx"
+
+  create_table "upload_responses", :force => true do |t|
+    t.integer "code",    :null => false
+    t.string  "message", :null => false
+  end
+
+  add_index "upload_responses", ["code"], :name => "uploadresponses_code_idx", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username",                       :null => false
