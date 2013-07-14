@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<image_upload xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./image_upload.xsd">
+<image_upload xmlns="http://www.longwebcam.org/xml/upload" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.longwebcam.org/xml/upload image_upload.xsd">
   <camera>
     <id>1</id>
     <code>6067</code>
