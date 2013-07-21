@@ -86,7 +86,6 @@ This information will be passed to the Image Server as an XML document in a POST
     </camera>
     <image>
         <date>20130505120000</date>
-        <type>JPG</type>
         <file_data>[[Base64-encoded image file]]</file_data>
     </image>
 </image_upload>
@@ -104,38 +103,48 @@ Assuming the upload request contains the required data in the correct format, th
 \item Search the database for an image record for the camera and date. If it doesn't exist, create it and store the image details. If it does exist,add the image details to it.\footnote{For standalone cameras, the image records will be created every day to store weather information. The images will be provided in batches at a later date.}
 \end{enumerate}
 
-\subsection{Error handling}
-There are a number of potential error conditions that can occur during a file upload. This section describes how those conditions will be handled.
+\subsection{Upload Response}
+The upload handler will give one of two possible HTTP responses to an upload request. If the request fails any of the following criteria, the HTTP response will be 400 (Bad Request):
 
-\subsubsection{Malformed upload information}
-If the passed in XML cannot be read, or is missing any information, this will result in an HTML return code of 400 (Bad Request). No further action will be taken.
+\begin{itemize}
+    \item Request is not sent as a POST
+    \item The parameter that should contain the XML is missing
+    \item The XML is badly formed and/or does not conform to the schema requirements
+\end{itemize}
 
-\subsubsection{Unrecognised camera ID}
-If the specified camera ID is not recognised, a 404 Not Found error will be returned
-
-\subsubsection{Invalid security code}
-If the supplied security code does not match that stored for the camera, a 403 Forbidden error will be returned.
-
-\subsubsection{Image already exists}
-If an image already exists for the specified camera and date, it is assumed that there is a problem with the client if it is supplying the same image multiple times. To help debugging, and to prevent the potential loss of project images, the uploaded XML document will be stored in a holding area for further examination. An error code of 409 (Conflict) will be returned.
-
-\subsubsection{Bad image data}
-If the encoded image data cannot be decoded into a valid image file, a 400 (Bad Request) error code will be returned. The XML request document will be stored for further examination to help with debugging.
-
-\subsubsection{Insufficient disk space}
-If there is not enough disk space on the server to store the uploaded image, a 507 (Insufficient storage) error will be returned. The client should keep the image and attempt to upload it again at a later date.
-
-\subsection{Output}
-The output of the the image upload request will be the HTTP status code (described above) and an XML document. The document will be very simple, taking the form:
+If the upload request can be successfully parsed by the upload handler, the HTTP response will be 200 (OK), and the response body will contain an XML document containing the results of processing the uploaded data. The document will take the form:
 
 \begin{verbatim}
 <upload_response>
-    <result>[[OK|FAIL]]</result>
-    <message>[[Message]]</message>
+    <code>[[CODE]]</code>
+    <message>[[MESSAGE]]</message>
 </upload_response>
 \end{verbatim}
 
-The \verb+result+ element will contain either OK or FAIL, depending on whether or not the image was stored successfully. The \verb+message+ element will contain a short message containing the nature of the failure, or confirming successful storage.
+The code will be a number indicating the result of the processing, which can be used by upload programs to parse the results. These codes will be based on HTTP response codes, as they cover a comprehensive range of possible errors. The message will be a human-readable equivalent to aid debugging on the client side. The possible codes and messages are as follows:
+
+\begin{table}[h]
+    \begin{tabular}{ | p{2in} | p{1in} | p{1.8in} | }
+        \hline
+        \textbf{Outcome} & \textbf{Code} & \textbf{Message} \\
+        \hline
+        Image stored successfully & 200 & Image stored successfully \\
+        \hline
+        Camera ID not found & 404 & No such camera \\
+        \hline
+        Invalid security code & 403 & Forbidden \\
+        \hline
+        Image already exists & 409 & Image already uploaded \\
+        \hline
+        Image cannot be parsed & 400 & Bad image data \\
+        \hline
+        Insufficient disk space & 507 & Server out of space \\
+        \hline
+        Unhandled error & 500 & Unknown server error \\
+        \hline
+    \end{tabular}
+\end{table}
+
 
 \subsection{Signals to project administrators}
 Failures to store images will be raised as system notifications against the camera concerned. However, these will not be flagged as messages that can be forwarded to the camera owner, as it is unlikely that they will be able to rectify the problem.

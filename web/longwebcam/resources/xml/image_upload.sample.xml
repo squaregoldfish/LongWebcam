@@ -6,7 +6,6 @@
   </camera>
   <image>
     <date>2013-01-01T01:01:01+00:00</date>
-    <type>jpg</type>
     <file_data>Base64'd image data</file_data>
   </image>
 </image_upload>
