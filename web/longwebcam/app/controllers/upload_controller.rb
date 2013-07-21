@@ -130,8 +130,8 @@ class UploadController < ApplicationController
             # database doesn't think it does!
             if File.exist? image_path
                 Message.createMessage(camera_record.id, MessageType.getIdFromCode("ImageFileExistsNoRecord"),
-                                      "Image date: #{image_date}", image_data)
-                result_code = IMAGE_EXISTS_CODE
+                                      false, "Image date: #{image_date}", image_data)
+                result_code = UNKNOWN_ERROR_CODE
             else
 
             end
