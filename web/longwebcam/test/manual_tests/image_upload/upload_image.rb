@@ -13,7 +13,6 @@ SERVER_HOST="192.168.0.10:3000"
 cam_id = 1
 upload_code = 6067
 image_date = DateTime.now
-format = "dlfkjg"
 image_file = '3.png'
 
 
@@ -35,7 +34,7 @@ upload_doc = xml.image_upload(:xmlns => "http://www.longwebcam.org/xml/upload",
                               :"xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
                               :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload") {
     xml.camera { |b| b.id(cam_id); b.code(upload_code) }
-    xml.image { |b| b.date(image_date); b.type(format); b.file_data(file_content) }
+    xml.image { |b| b.date(image_date); b.file_data(file_content) }
 }
 
 req = Net::HTTP.post_form(URI.parse('http://' + SERVER_HOST + '/upload'), {:image_details => upload_xml})
