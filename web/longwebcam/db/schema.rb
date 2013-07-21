@@ -9,13 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130714193932) do
+ActiveRecord::Schema.define(:version => 20130721175327) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
     t.string "username"
     t.string "password"
     t.string "api_key"
+    t.string "url"
+    t.string "path"
   end
 
   add_index "accounts", ["account"], :name => "accounts_account_idx", :unique => true
@@ -170,7 +172,10 @@ ActiveRecord::Schema.define(:version => 20130714193932) do
     t.text     "text",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code",       :null => false
   end
+
+  add_index "message_types", ["code"], :name => "message_types_code_idx", :unique => true
 
   create_table "messages", :force => true do |t|
     t.integer  "camera_id",                             :null => false
@@ -182,8 +187,9 @@ ActiveRecord::Schema.define(:version => 20130714193932) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "despatched_to_user", :default => false, :null => false
-    t.text     "message",                               :null => false
-    t.text     "extra_data"
+    t.boolean  "can_despatch",       :default => false
+    t.string   "extra_text"
+    t.binary   "extra_data"
   end
 
   add_index "messages", ["camera_id"], :name => "messages_cameraid_idx"

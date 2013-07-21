@@ -9,22 +9,16 @@ require 'net/http'
 SERVER_HOST="192.168.0.10:3000"
 
 
-# Get the upload details
-print "Camera ID: "
-cam_id = gets.strip
+# Input data
+cam_id = 1
+upload_code = 6067
+image_date = DateTime.now
+format = "dlfkjg"
+image_file = '3.png'
 
-print "Upload code: "
-upload_code = gets.strip
 
-print "Image date (yyyymmddhhmmss): "
-input_date = gets.strip
-image_date = DateTime.parse(input_date)
 
-print "Image format: "
-format = gets.strip
-
-print "Image file: "
-image_file = gets.strip
+# Build request
 
 file_content = nil
 
@@ -33,11 +27,13 @@ File.open(image_file, "r") do|image_file|
     file_content = Base64.encode64(image_file.read)
 end
 
+#file_content = "dlkfjglkfdj"
+
 # Build the XML
 xml = Builder::XmlMarkup.new(:target => upload_xml = "")
 upload_doc = xml.image_upload(:xmlns => "http://www.longwebcam.org/xml/upload",
                               :"xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
-                              :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload image_upload.xsd") {
+                              :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload") {
     xml.camera { |b| b.id(cam_id); b.code(upload_code) }
     xml.image { |b| b.date(image_date); b.type(format); b.file_data(file_content) }
 }

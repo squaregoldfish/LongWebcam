@@ -28,6 +28,7 @@ GEM
       activesupport (= 2.3.18)
       rake (>= 0.8.3)
     rake (10.0.4)
+    rmagick (2.13.2)
 
 PLATFORMS
   ruby
@@ -40,3 +41,4 @@ DEPENDENCIES
   libxml-ruby (= 2.6.0)
   mysql2
   rails (= 2.3.18)
+  rmagick (= 2.13.2)
