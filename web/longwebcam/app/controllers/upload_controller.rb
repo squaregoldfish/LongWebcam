@@ -23,6 +23,7 @@ class UploadController < ApplicationController
         upload_xml = nil
         camera_record = nil
         image_date = nil
+        image_datetime = nil
         image_record = nil
         image_data = nil
 
@@ -85,6 +86,7 @@ class UploadController < ApplicationController
         if result_code == OK_CODE
             image_date_string = upload_xml.find_first('//x:image_upload/x:image/x:date', ns_string).content
             image_date = Date.parse(image_date_string)
+            image_datetime = DateTime.parse(image_date_string)
 
             existing_image = Image.find_by_sql("SELECT * FROM images WHERE camera_id=#{camera_id} AND date='#{image_date}'")
 
@@ -124,8 +126,6 @@ class UploadController < ApplicationController
         if result_code == OK_CODE
             image_path = Image.getImagePath(camera_record.id, image_date, 'png')
 
-            logger.debug image_path
-
             # If this file exists already, there's something wrong because the
             # database doesn't think it does!
             if File.exist? image_path
@@ -134,10 +134,39 @@ class UploadController < ApplicationController
                 result_code = UNKNOWN_ERROR_CODE
             else
 
+                # Write the image to disk
+                File.open(image_path, 'w') do |f|
+                    f.write image_data
+                end
+
+                # Now update the database.
+                # If the image record didn't already exist, we create it now
+                if image_record.nil?
+                    image_record = Image.new
+                    image_record.camera_id = camera_id
+                    image_record.date = image_date
+                end
+
+                # Now fill in the image details. This is time and time zome info.
+                image_record.image_time = image_datetime
+
+                camera_details = CameraDetails.find_by_camera_id(camera_id)
+                if camera_details.nil?
+                    Message.createMessage(camera_record.id, MessageType.getIdFromCode("MissingCameraDetails"),
+                                          false, "Camera ID: #{camera_id}; while storing uploaded image", image_data)
+                    result_code = UNKNOWN_ERROR_CODE
+                else
+
+                    image_record.image_present = true
+                    image_record.image_time_offset_hour = camera_details.utc_offset_hour
+                    image_record.image_time_offset_minute = camera_details.utc_offset_minute
+                    image_record.image_daylight_saving = camera_details.daylight_saving
+                    image_record.image_timezone_id = camera_details.timezone_id
+
+                    image_record.save
+                end
             end
         end
-
-
         
         # This is where we respond to the client.
         # If the HTTP response code isn't OK,
