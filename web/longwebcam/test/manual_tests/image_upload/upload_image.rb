@@ -15,18 +15,15 @@ upload_code = 6067
 image_date = DateTime.now
 image_file = '3.png'
 
-
+##################################################
 
 # Build request
-
 file_content = nil
 
 # Read the file into memory and Base64 it
 File.open(image_file, "r") do|image_file|
     file_content = Base64.encode64(image_file.read)
 end
-
-#file_content = "dlkfjglkfdj"
 
 # Build the XML
 xml = Builder::XmlMarkup.new(:target => upload_xml = "")
