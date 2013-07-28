@@ -9,6 +9,7 @@ class Message < ActiveRecord::Base
         new_message.camera_id = cam_id
         new_message.timestamp = DateTime.now
         new_message.message_type = type
+        new_message.can_despatch = despatch_to_user
         new_message.extra_text = extra_text
         new_message.extra_data = extra_data
 
