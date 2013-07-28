@@ -158,8 +158,8 @@ class UploadController < ApplicationController
                 else
 
                     image_record.image_present = true
-                    image_record.image_time_offset_hour = camera_details.utc_offset_hour
-                    image_record.image_time_offset_minute = camera_details.utc_offset_minute
+                    image_record.image_time_offset= camera_details.utc_offset
+                    image_record.image_time_offset= camera_details.utc_offset
                     image_record.image_daylight_saving = camera_details.daylight_saving
                     image_record.image_timezone_id = camera_details.timezone_id
 
