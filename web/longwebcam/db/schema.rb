@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727194456) do
+ActiveRecord::Schema.define(:version => 20130728092048) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
@@ -24,22 +24,21 @@ ActiveRecord::Schema.define(:version => 20130727194456) do
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
-    t.date     "details_date",      :null => false
-    t.float    "longitude",         :null => false
-    t.float    "latitude",          :null => false
-    t.integer  "bearing",           :null => false
+    t.date     "details_date",    :null => false
+    t.float    "longitude",       :null => false
+    t.float    "latitude",        :null => false
+    t.integer  "bearing",         :null => false
     t.integer  "ground_height"
     t.integer  "camera_height"
     t.string   "manufacturer"
     t.string   "model"
-    t.integer  "resolution_x",      :null => false
-    t.integer  "resolution_y",      :null => false
+    t.integer  "resolution_x",    :null => false
+    t.integer  "resolution_y",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "utc_offset_hour"
-    t.integer  "utc_offset_minute"
     t.string   "timezone_id"
-    t.boolean  "daylight_saving",   :null => false
+    t.boolean  "daylight_saving", :null => false
+    t.integer  "utc_offset"
   end
 
   add_index "camera_details", ["details_date"], :name => "cameradetails_detailsdate_idx"
@@ -140,15 +139,11 @@ ActiveRecord::Schema.define(:version => 20130727194456) do
   end
 
   create_table "images", :force => true do |t|
-    t.integer  "camera_id",                  :null => false
-    t.date     "date",                       :null => false
-    t.boolean  "image_present",              :null => false
+    t.integer  "camera_id",               :null => false
+    t.date     "date",                    :null => false
+    t.boolean  "image_present",           :null => false
     t.datetime "image_time"
-    t.integer  "image_time_offset_hour"
-    t.integer  "image_time_offset_minute"
     t.datetime "weather_time"
-    t.integer  "weather_time_offset_hour"
-    t.integer  "weather_time_offset_minute"
     t.integer  "temperature"
     t.integer  "weather_type"
     t.integer  "wind_speed"
@@ -164,6 +159,8 @@ ActiveRecord::Schema.define(:version => 20130727194456) do
     t.string   "weather_timezine_id"
     t.boolean  "image_daylight_saving"
     t.boolean  "weather_daylight_saving"
+    t.integer  "image_time_offset"
+    t.integer  "weather_time_offset"
   end
 
   add_index "images", ["camera_id", "date"], :name => "image_camid-date_idx", :unique => true
