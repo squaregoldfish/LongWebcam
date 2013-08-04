@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728092048) do
+ActiveRecord::Schema.define(:version => 20130706180355) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20130728092048) do
     t.integer  "resolution_y",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "utc_offset_hour"
+    t.integer  "utc_offset_minute"
     t.string   "timezone_id"
     t.boolean  "daylight_saving", :null => false
     t.integer  "utc_offset"
@@ -69,6 +71,9 @@ ActiveRecord::Schema.define(:version => 20130728092048) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cameras", ["owner"], :name => "cameras_owner_idx"
+  add_index "cameras", ["test_camera"], :name => "cameras_testcamera_idx"
 
   create_table "cameras_events", :id => false, :force => true do |t|
     t.integer  "camera_id",  :null => false
