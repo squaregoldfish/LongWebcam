@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804152532) do
+ActiveRecord::Schema.define(:version => 20130804200034) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20130804152532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_timezone_id"
-    t.string   "weather_timezine_id"
+    t.string   "weather_timezone_id"
     t.boolean  "image_daylight_saving"
     t.boolean  "weather_daylight_saving"
     t.integer  "image_time_offset"
