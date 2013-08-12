@@ -34,6 +34,7 @@
         <xs:element name="wind_speed" type="xs:integer"/>
         <xs:element name="wind_bearing" type="xs:integer"/>
         <xs:element name="rain" type="xs:integer"/>
+        <xs:element name="humidity" type="xs:integer"/>
         <xs:element name="visibility" type="xs:integer"/>
         <xs:element name="pressure" type="xs:integer"/>
         <xs:element name="cloud_cover" type="xs:integer"/>

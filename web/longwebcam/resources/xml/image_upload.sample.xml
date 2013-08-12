@@ -15,6 +15,7 @@
     <wind_speed>5</wind_speed>
     <wind_bearing>231</wind_bearing>
     <rain>0</rain>
+    <humidity>45</humidity>
     <visibility>9999</visibility>
     <pressure>1003</pressure>
     <cloud_cover>90</cloud_cover>
