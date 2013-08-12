@@ -4,8 +4,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="camera"/>
-        <xs:element ref="image"/>
-        <xs:element ref="weather"  minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="image" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="weather" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
