@@ -7,9 +7,11 @@ class CameraDetails < ActiveRecord::Base
 
     # Before saving, look up the time zone for the camera if (a) this is a
     # brand new record (where the details aren't set) or (b) if the position
-    # has been changed (indicated by the pos_chanegd flag
-    before_save :set_timezone_info, :if=>:timezone_required?
+    # has been changed (indicated by the pos_changed flag)
+    #
+    # before_save :set_timezone_info, :if=>:timezone_required?
 
-    def timezone_required?
-        pos_changed != "" || utc_offset_hour.nil?
-    end
+    # def timezone_required?
+    #     pos_changed != "" || utc_offset_hour.nil?
+    # end
+end
