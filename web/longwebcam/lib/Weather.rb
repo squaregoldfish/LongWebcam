@@ -82,7 +82,7 @@ class Weather
                 @wind_speed = response_xml.find_first(xpath_root + "windspeedMiles").content
                 @wind_bearing = response_xml.find_first(xpath_root + "winddirDegree").content
                 @rain = response_xml.find_first(xpath_root + "precipMM").content
-                @humidity = response_xml.find_first(xpath_root + "humidity").conent
+                @humidity = response_xml.find_first(xpath_root + "humidity").content
                 @visibility = response_xml.find_first(xpath_root + "visibility").content
                 @pressure = response_xml.find_first(xpath_root + "pressure").content
                 @cloud_cover = response_xml.find_first(xpath_root + "cloudcover").content
@@ -92,11 +92,66 @@ class Weather
             end
         end
 
-
-
         @data_retrieved = true
-
         return @data_retrieved
+    end
+
+    # Accessor methods
+    #
+    def data_retrieved?
+        @data_retrieved
+    end
+    
+    def temperature
+        @temperature
+    end
+
+    def weather_code
+        @weather_code
+    end
+
+    def wind_speed
+        @wind_speed
+    end
+
+    def wind_bearing
+        @wind_bearing
+    end
+
+    def rain
+        @rain
+    end
+
+    def humidity
+        @humidity
+    end
+
+    def visibility
+        @visibility
+    end
+
+    def pressure
+        @pressure
+    end
+
+    def cloud_cover
+        @cloud_cover
+    end
+
+    def air_quality
+        @air_quality
+    end
+
+    def observation_time
+        @observation_time
+    end
+
+    def observation_lon
+        @observation_lon
+    end
+
+    def observation_lat
+        @observation_lat
     end
 
 

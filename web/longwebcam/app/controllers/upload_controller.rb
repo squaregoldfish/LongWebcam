@@ -26,6 +26,7 @@ class UploadController < ApplicationController
         image_datetime = nil
         image_record = nil
         image_data = nil
+        weather_data = nil
 
         # Only POSTs are allowed
         if !request.post?
@@ -82,90 +83,136 @@ class UploadController < ApplicationController
             end
         end
 
-        # See if an image already exists for this date
+        # Retrieve the camera details for timezone info etc.
         if result_code == OK_CODE
+             camera_details = CameraDetails.find_by_camera_id(camera_id)
+             if camera_details.nil?
+                Message.createMessage(camera_record.id, MessageType.getIdFromCode("MissingCameraDetails"),
+                                      false, "Camera ID: #{camera_id}; while storing uploaded image", image_data)
+
+                result_code = UNKNOWN_ERROR_CODE
+             end
+        end
+
+
+        # See if an image already exists for this date
+        # If it does, retrieve it. Otherwise create a new one
+        if result_code == OK_CODE
+
+
             image_date_string = upload_xml.find_first('//x:image_upload/x:image/x:date', ns_string).content
             image_date = Date.parse(image_date_string)
             image_datetime = DateTime.parse(image_date_string)
 
-            existing_image = Image.find_by_sql("SELECT * FROM images WHERE camera_id=#{camera_id} AND date='#{image_date}'")
+            image_record = Image::getImageRecord(camera_id, image_date)
+            if image_record.nil?
+                image_record = Image.new
+                image_record.camera_id = camera_id
+                image_record.date = image_date
+                image_record.image_present = false
+            end
 
-            if existing_image.length > 0
-                image_record = existing_image[0]
+            # Extract the image data from the XML (if it exists), and parse it.
+            #
+            image_data_element = upload_xml.find_first('//x:image_upload/x:image/x:file_data', ns_string)
+            if !image_data_element.nil?
 
+                # See if there's already an image stored
+                #
                 if image_record.image_present?
                     result_code = IMAGE_EXISTS_CODE
-                end
-            end
-        end
-
-        # Decode the image data and see if we can decipher it.
-        # If we can, convert it to PNG (if necessary).
-        if result_code == OK_CODE
-            # Extract the image data from the XML
-            # This will implicitly verify that the image is valid
-            begin
-                image_data_encoded = upload_xml.find_first('//x:image_upload/x:image/x:file_data', ns_string).content
-                image_data_unbase64 = Base64.decode64(image_data_encoded)
-                image_data_decoded = Magick::Image.from_blob(image_data_unbase64)[0]
-
-
-                # Convert the image to PNG if necessary
-                if image_data_decoded.format != 'PNG'
-                    image_data = image_data_decoded.to_blob { |attrs| attrs.format = 'PNG' }
                 else
-                    # Just return the original decoded data - it's a PNG blob
-                    image_data = image_data_unbase64
+                    begin
+
+                        # Decode the image
+                        #
+                        image_data_unbase64 = Base64.decode64(image_data_element.content)
+                        image_data_decoded = Magick::Image.from_blob(image_data_unbase64)[0]
+                        if image_data_decoded.format != 'PNG'
+                            image_data = image_data_decoded.to_blob { |attrs| attrs.format = 'PNG' }
+                        else
+                            # Just use the original decoded data - it's a PNG blob
+                            image_data = image_data_unbase64
+                        end
+
+                        # Add the image time details to the record
+                        #
+                        image_record.image_time = image_datetime
+                        image_record.image_time_offset= camera_details.utc_offset
+                        image_record.image_time_offset= camera_details.utc_offset
+                        image_record.image_daylight_saving = camera_details.daylight_saving
+                        image_record.image_timezone_id = camera_details.timezone_id
+
+                        image_record.image_present = true
+                    rescue => ex
+                        logger.error "#{ex.class}: #{ex.message}"
+                        logger.error ex.backtrace
+                        result_code = BAD_IMAGE_CODE
+                    end
                 end
-            rescue
-                result_code = BAD_IMAGE_CODE
+            end
+
+
+            # Extract the weather data from the XML (if it exists), and add it to the image record
+            #
+            weather_element = upload_xml.find_first('//x:image_upload/x:weather', ns_string)
+            if !weather_element.nil?
+                weather_time = DateTime.parse(upload_xml.find_first('//x:image_upload/x:weather/x:time', ns_string).content)
+                image_record.weather_time = weather_time
+
+                image_record.temperature = upload_xml.find_first('//x:image_upload/x:weather/x:temperature', ns_string).content
+                image_record.weather_code = upload_xml.find_first('//x:image_upload/x:weather/x:weather_code', ns_string).content
+                image_record.wind_speed = upload_xml.find_first('//x:image_upload/x:weather/x:wind_speed', ns_string).content
+                image_record.wind_bearing = upload_xml.find_first('//x:image_upload/x:weather/x:wind_bearing', ns_string).content
+                image_record.rain = upload_xml.find_first('//x:image_upload/x:weather/x:rain', ns_string).content
+                image_record.humidity = upload_xml.find_first('//x:image_upload/x:weather/x:humidity', ns_string).content
+                image_record.visibility = upload_xml.find_first('//x:image_upload/x:weather/x:visibility', ns_string).content
+                image_record.pressure = upload_xml.find_first('//x:image_upload/x:weather/x:pressure', ns_string).content
+                image_record.cloud_cover = upload_xml.find_first('//x:image_upload/x:weather/x:cloud_cover', ns_string).content
+
+                image_record.air_quality = upload_xml.find_first('//x:image_upload/x:weather/x:air_quality', ns_string).content
+                if image_record.air_quality == -1
+                    image_record.air_quality = nil
+                end
+
+
+                image_record.weather_time_offset= camera_details.utc_offset
+                image_record.weather_daylight_saving = camera_details.daylight_saving
+                image_record.weather_timezone_id = camera_details.timezone_id
             end
         end
 
-        # Store the image to disk and add/update the database record
+        # We've extracted everything we need from the XML.
+        #
+        # Assuming everything is OK, we can store the image and save the record.
+        #
         if result_code == OK_CODE
-            image_path = Image.getImagePath(camera_record.id, image_date, 'png')
 
-            # If this file exists already, there's something wrong because the
-            # database doesn't think it does!
-            if File.exist? image_path
-                Message.createMessage(camera_record.id, MessageType.getIdFromCode("ImageFileExistsNoRecord"),
-                                      false, "Image date: #{image_date}", image_data)
-                result_code = UNKNOWN_ERROR_CODE
-            else
+            # If we've got an image, save it to the archive
+            #
+            if !image_data.nil?
 
-                # Write the image to disk
-                File.open(image_path, 'w') do |f|
-                    f.write image_data
-                end
+                image_path = Image.getImagePath(camera_record.id, image_date, 'png')
 
-                # Now update the database.
-                # If the image record didn't already exist, we create it now
-                if image_record.nil?
-                    image_record = Image.new
-                    image_record.camera_id = camera_id
-                    image_record.date = image_date
-                end
-
-                # Now fill in the image details. This is time and time zome info.
-                image_record.image_time = image_datetime
-
-                camera_details = CameraDetails.find_by_camera_id(camera_id)
-                if camera_details.nil?
-                    Message.createMessage(camera_record.id, MessageType.getIdFromCode("MissingCameraDetails"),
-                                          false, "Camera ID: #{camera_id}; while storing uploaded image", image_data)
+                # If this file exists already, there's something wrong because the
+                # database doesn't think it does!
+                if File.exist? image_path
+                    Message.createMessage(camera_record.id, MessageType.getIdFromCode("ImageFileExistsNoRecord"),
+                                          false, "Image date: #{image_date}", image_data)
                     result_code = UNKNOWN_ERROR_CODE
                 else
 
-                    image_record.image_present = true
-                    image_record.image_time_offset= camera_details.utc_offset
-                    image_record.image_time_offset= camera_details.utc_offset
-                    image_record.image_daylight_saving = camera_details.daylight_saving
-                    image_record.image_timezone_id = camera_details.timezone_id
-
-                    image_record.save
+                    # Write the image to disk
+                    File.open(image_path, 'w') do |f|
+                        f.write image_data
+                    end
                 end
             end
+        end
+
+        if result_code == OK_CODE
+            # Save the record to the database
+            image_record.save
         end
         
         # This is where we respond to the client.

@@ -1,5 +1,6 @@
 require 'RMagick'
 require 'Upload'
+require 'Weather'
 
 namespace :lwc do
     desc "Retrieves URL-based camera images and weather"
@@ -16,11 +17,9 @@ namespace :lwc do
         # For the minute we'll just use camera 1
         camera_id = 1
 
-
-
-
         # Get the image URL and build the HTTP request
         camera_record = Camera.find_by_id(camera_id)
+        camera_details = CameraDetails.find_by_camera_id(camera_id)
         uri = URI.parse(camera_record.url)
         http = Net::HTTP.new(uri.host, uri.port)
 
@@ -57,14 +56,26 @@ namespace :lwc do
             end
 
             if image_ok
-                upload = Upload.new(camera_id, DateTime.now, download_response.body)
-                upload_response = upload.doUpload
+                # Create the upload object and add the image to it
+                image_date = DateTime.now
+                upload = Upload.new(camera_id, image_date)
+                upload.addImage(download_response.body)
 
+                # Download the weather and add it to the upload object
+                #
+                weather = Weather.new(camera_details.longitude, camera_details.latitude, camera_id)
+                weather.retrieve_data
+
+                if weather.data_retrieved?
+                    upload.addWeather(weather)
+                end
+
+                # Send the upload
+                upload_response = upload.doUpload
                 if upload_response != Upload::RESPONSE_OK
                     Message.createMessage(camera_id, MessageType.getIdFromCode("ImageUploadFailure"),
                                           false, "Response code = #{upload_response}", download_response.body)
                 end
-
             end
         end
     end

@@ -12,4 +12,34 @@ class Image < ActiveRecord::Base
 
         return path
     end
+
+    # Locate the image record for a given camera and date
+    #
+    def Image.getImageRecord(camera_id, date)
+        record = nil
+
+        records = find(:all, :conditions => ['camera_id LIKE ? AND date LIKE ?', camera_id, date])
+
+        if records.size > 0
+            record = records.first
+        end
+
+        return record
+    end
+
+    # Add a set of weather data to this record
+    # Note that this does not save the record
+    #
+    def add_weather(weather)
+        self.weather_time = weather.observation_time
+        self.temperature = weather.temperature
+        self.weather_code = weather.weather_code
+        self.wind_speed = weather.wind_speed
+        self.wind_bearing = weather.wind_bearing
+        self.rain = weather.rain
+        self.visibility = weather.visibility
+        self.pressure = weather.pressure
+        self.cloud_cover = weather.cloud_cover
+        self.air_quality = weather.air_quality
+    end
 end

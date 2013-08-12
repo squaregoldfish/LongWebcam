@@ -1,7 +1,8 @@
 require 'xml'
 require 'base64'
+require 'RMagick'
 
-# Class for handling the upload of images.
+# Class for handling the upload of images and related weather information.
 class Upload
 
     # CONSTANTS
@@ -11,12 +12,13 @@ class Upload
     # Constructor - stores passed in info and retrieves additional
     # required details
     #
-    def initialize(camera_id, image_date, image_data)
+    def initialize(camera_id, image_date)
 
         # Store the passed in values in instance variables
         @camera_id = camera_id
         @image_date = image_date
-        @image_data = image_data
+        @image_data = nil
+        @weather_data = nil
 
         # Retrieve the camera's upload code
         #
@@ -24,6 +26,26 @@ class Upload
         @upload_code = camera_record.upload_code
 
         @uploadResponseXML = nil
+    end
+
+    # Add an image to the data to be uploaded
+    def addImage(data)
+        begin
+            # Make sure we've been given a proper image before adding it
+            parsed_image = Magick::Image.from_blob(data)[0]
+            @image_data = data
+        rescue
+            raise ArgumentError, "Passed in data is not an image"
+        end
+    end
+
+    # Add weather details to the data to be uploaded
+    def addWeather(weather)
+        if !weather.instance_of?(Weather)
+            raise ArgumentError, "Passed in data is not a Weather object"
+        else
+            @weather_data = weather
+        end
     end
 
     # Upload the image to the LWC Server for storage.
@@ -63,6 +85,21 @@ class Upload
                                       :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload") {
         xml.camera { |b| b.id(@camera_id); b.code(@upload_code) }
         xml.image { |b| b.date(@image_date); b.file_data(Base64.encode64(@image_data)) }
+
+        if !@weather_data.nil?
+            xml.weather { |b| b.time(@weather_data.observation_time);
+                          b.temperature(@weather_data.temperature);
+                          b.weather_code(@weather_data.weather_code);
+                          b.wind_speed(@weather_data.wind_speed);
+                          b.wind_bearing(@weather_data.wind_bearing);
+                          b.rain(@weather_data.rain);
+                          b.humidity(@weather_data.humidity);
+                          b.visibility(@weather_data.visibility);
+                          b.pressure(@weather_data.pressure);
+                          b.cloud_cover(@weather_data.cloud_cover);
+                          b.air_quality(@weather_data.air_quality);
+            }
+        end
         }
 
         return upload_xml
