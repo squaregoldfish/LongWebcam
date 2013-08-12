@@ -8,4 +8,16 @@
     <date>2013-01-01T01:01:01+00:00</date>
     <file_data>Base64'd image data</file_data>
   </image>
+  <weather>
+    <time>2013-01-01T01:01:01+00:00</time>
+    <temperature>29</temperature>
+    <weather_code>102</weather_code>
+    <wind_speed>5</wind_speed>
+    <wind_bearing>231</wind_bearing>
+    <rain>0</rain>
+    <visibility>9999</visibility>
+    <pressure>1003</pressure>
+    <cloud_cover>90</cloud_cover>
+    <air_quality>-1</air_quality>
+  </weather>
 </image_upload>

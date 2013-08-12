@@ -5,6 +5,7 @@
       <xs:sequence>
         <xs:element ref="camera"/>
         <xs:element ref="image"/>
+        <xs:element ref="weather"  minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -21,6 +22,22 @@
       <xs:sequence>
         <xs:element name="date" type="xs:string"/>
         <xs:element name="file_data" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="weather">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="time" type="xs:string"/>
+        <xs:element name="temperature" type="xs:integer"/>
+        <xs:element name="weather_code" type="xs:integer"/>
+        <xs:element name="wind_speed" type="xs:integer"/>
+        <xs:element name="wind_bearing" type="xs:integer"/>
+        <xs:element name="rain" type="xs:integer"/>
+        <xs:element name="visibility" type="xs:integer"/>
+        <xs:element name="pressure" type="xs:integer"/>
+        <xs:element name="cloud_cover" type="xs:integer"/>
+        <xs:element name="air_quality" type="xs:integer"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
