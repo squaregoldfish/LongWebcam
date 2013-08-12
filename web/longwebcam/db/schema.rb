@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804200034) do
+ActiveRecord::Schema.define(:version => 20130812201529) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
@@ -24,16 +24,16 @@ ActiveRecord::Schema.define(:version => 20130804200034) do
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
-    t.date     "details_date",    :null => false
-    t.float    "longitude",       :null => false
-    t.float    "latitude",        :null => false
-    t.integer  "bearing",         :null => false
+    t.date     "details_date",      :null => false
+    t.float    "longitude",         :null => false
+    t.float    "latitude",          :null => false
+    t.integer  "bearing",           :null => false
     t.integer  "ground_height"
     t.integer  "camera_height"
     t.string   "manufacturer"
     t.string   "model"
-    t.integer  "resolution_x",    :null => false
-    t.integer  "resolution_y",    :null => false
+    t.integer  "resolution_x",      :null => false
+    t.integer  "resolution_y",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "timezone_id"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20130804200034) do
     t.boolean  "weather_daylight_saving"
     t.integer  "image_time_offset"
     t.integer  "weather_time_offset"
+    t.integer  "humidity"
   end
 
   add_index "images", ["camera_id", "date"], :name => "image_camid-date_idx", :unique => true

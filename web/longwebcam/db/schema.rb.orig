@@ -10,9 +10,9 @@
 # It's strongly recommended to check this file into your version control system.
 
 <<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130728092048) do
+ActiveRecord::Schema.define(:version => 20130804200034) do
 =======
-ActiveRecord::Schema.define(:version => 20130714180833) do
+ActiveRecord::Schema.define(:version => 20130812201529) do
 >>>>>>> origin/master
 
   create_table "accounts", :force => true do |t|
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
     t.datetime "image_time"
     t.datetime "weather_time"
     t.integer  "temperature"
-    t.integer  "weather_type"
+    t.integer  "weather_code"
     t.integer  "wind_speed"
     t.integer  "wind_bearing"
     t.float    "rain"
@@ -160,11 +160,15 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_timezone_id"
-    t.string   "weather_timezine_id"
+    t.string   "weather_timezone_id"
     t.boolean  "image_daylight_saving"
     t.boolean  "weather_daylight_saving"
     t.integer  "image_time_offset"
     t.integer  "weather_time_offset"
+<<<<<<< HEAD
+=======
+    t.integer  "humidity"
+>>>>>>> origin/master
   end
 
   add_index "images", ["camera_id", "date"], :name => "image_camid-date_idx", :unique => true
@@ -191,14 +195,9 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "despatched_to_user", :default => false, :null => false
-<<<<<<< HEAD
     t.boolean  "can_despatch",       :default => false
     t.string   "extra_text"
     t.binary   "extra_data"
-=======
-    t.text     "message",                               :null => false
-    t.text     "extra_data"
->>>>>>> origin/master
   end
 
   add_index "messages", ["camera_id"], :name => "messages_cameraid_idx"
