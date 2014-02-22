@@ -9,34 +9,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130714180833) do
+ActiveRecord::Schema.define(:version => 20130812201529) do
 
   create_table "accounts", :force => true do |t|
     t.string "account",  :null => false
     t.string "username"
     t.string "password"
     t.string "api_key"
+    t.string "url"
+    t.string "path"
   end
 
   add_index "accounts", ["account"], :name => "accounts_account_idx", :unique => true
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
-    t.date     "details_date",      :null => false
-    t.float    "longitude",         :null => false
-    t.float    "latitude",          :null => false
-    t.integer  "bearing",           :null => false
+    t.date     "details_date",    :null => false
+    t.float    "longitude",       :null => false
+    t.float    "latitude",        :null => false
+    t.integer  "bearing",         :null => false
     t.integer  "ground_height"
     t.integer  "camera_height"
     t.string   "manufacturer"
     t.string   "model"
-    t.integer  "resolution_x",      :null => false
-    t.integer  "resolution_y",      :null => false
+    t.integer  "resolution_x",    :null => false
+    t.integer  "resolution_y",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "utc_offset_hour"
-    t.integer  "utc_offset_minute"
     t.string   "timezone_id"
+    t.boolean  "daylight_saving", :null => false
+    t.integer  "utc_offset"
   end
 
   add_index "camera_details", ["details_date"], :name => "cameradetails_detailsdate_idx"
@@ -137,17 +139,13 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
   end
 
   create_table "images", :force => true do |t|
-    t.integer  "camera_id",                  :null => false
-    t.date     "date",                       :null => false
-    t.boolean  "image_present",              :null => false
-    t.time     "image_time"
-    t.integer  "image_time_offeet_hour"
-    t.integer  "image_time_offset_minute"
-    t.time     "weather_time"
-    t.integer  "weather_time_offset_hour"
-    t.integer  "weather_time_offset_minute"
+    t.integer  "camera_id",               :null => false
+    t.date     "date",                    :null => false
+    t.boolean  "image_present",           :null => false
+    t.datetime "image_time"
+    t.datetime "weather_time"
     t.integer  "temperature"
-    t.integer  "weather_type"
+    t.integer  "weather_code"
     t.integer  "wind_speed"
     t.integer  "wind_bearing"
     t.float    "rain"
@@ -158,7 +156,12 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_timezone_id"
-    t.string   "weather_timezine_id"
+    t.string   "weather_timezone_id"
+    t.boolean  "image_daylight_saving"
+    t.boolean  "weather_daylight_saving"
+    t.integer  "image_time_offset"
+    t.integer  "weather_time_offset"
+    t.integer  "humidity"
   end
 
   add_index "images", ["camera_id", "date"], :name => "image_camid-date_idx", :unique => true
@@ -170,7 +173,10 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
     t.text     "text",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code",       :null => false
   end
+
+  add_index "message_types", ["code"], :name => "message_types_code_idx", :unique => true
 
   create_table "messages", :force => true do |t|
     t.integer  "camera_id",                             :null => false
@@ -182,14 +188,22 @@ ActiveRecord::Schema.define(:version => 20130714180833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "despatched_to_user", :default => false, :null => false
-    t.text     "message",                               :null => false
-    t.text     "extra_data"
+    t.boolean  "can_despatch",       :default => false
+    t.string   "extra_text"
+    t.binary   "extra_data"
   end
 
   add_index "messages", ["camera_id"], :name => "messages_cameraid_idx"
   add_index "messages", ["message_type"], :name => "messages_messagetype_idx"
   add_index "messages", ["read_by_admin"], :name => "messages_readbyadmin_idx"
   add_index "messages", ["read_by_user"], :name => "messages_readbyuser_idx"
+
+  create_table "upload_responses", :force => true do |t|
+    t.integer "code",    :null => false
+    t.string  "message", :null => false
+  end
+
+  add_index "upload_responses", ["code"], :name => "uploadresponses_code_idx", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username",                       :null => false
