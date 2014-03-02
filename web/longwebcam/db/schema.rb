@@ -24,21 +24,23 @@ ActiveRecord::Schema.define(:version => 20140222194513) do
 
   create_table "camera_details", :force => true do |t|
     t.integer  "camera_id"
-    t.date     "details_date",    :null => false
-    t.float    "longitude",       :null => false
-    t.float    "latitude",        :null => false
-    t.integer  "bearing",         :null => false
+    t.date     "details_date",                    :null => false
+    t.float    "longitude",                       :null => false
+    t.float    "latitude",                        :null => false
+    t.integer  "bearing",                         :null => false
     t.integer  "ground_height"
     t.integer  "camera_height"
     t.string   "manufacturer"
     t.string   "model"
-    t.integer  "resolution_x",    :null => false
-    t.integer  "resolution_y",    :null => false
+    t.integer  "resolution_x",                    :null => false
+    t.integer  "resolution_y",                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "timezone_id"
-    t.boolean  "daylight_saving", :null => false
+    t.boolean  "daylight_saving",                 :null => false
     t.integer  "utc_offset"
+    t.integer  "download_start",  :default => 10
+    t.integer  "download_end",    :default => 14
   end
 
   add_index "camera_details", ["details_date"], :name => "cameradetails_detailsdate_idx"
@@ -57,18 +59,18 @@ ActiveRecord::Schema.define(:version => 20140222194513) do
   add_index "camera_tags", ["tag"], :name => "cameratags_tag_idx"
 
   create_table "cameras", :force => true do |t|
-    t.integer  "owner",                                       :null => false
-    t.integer  "camera_type",                                 :null => false
+    t.integer  "owner",                        :null => false
+    t.integer  "camera_type",                  :null => false
     t.string   "url"
     t.string   "serial_number"
     t.boolean  "test_camera"
     t.string   "licence"
-    t.string   "upload_code",    :limit => 4
+    t.string   "upload_code",   :limit => 4
     t.boolean  "watermark"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "download_start",              :default => 10
-    t.integer  "download_end",                :default => 14
+    t.string   "title",         :limit => 100
+    t.text     "description"
   end
 
   create_table "cameras_events", :id => false, :force => true do |t|
