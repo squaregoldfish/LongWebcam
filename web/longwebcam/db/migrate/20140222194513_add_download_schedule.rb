@@ -5,8 +5,8 @@ class AddDownloadSchedule < ActiveRecord::Migration
       remove_column :cameras, :schedule
 
       # Add columns for download time limits
-      add_column :cameras, :download_start, :integer, {:null => false, :default => 10}
-      add_column :cameras, :download_end, :integer, {:null => false, :default => 14}
+      add_column :cameras, :download_start, :integer, {:default => 10}
+      add_column :cameras, :download_end, :integer, {:default => 14}
   end
 
   def self.down
