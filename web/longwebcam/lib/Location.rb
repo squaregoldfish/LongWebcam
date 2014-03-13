@@ -3,7 +3,7 @@
 module Location
 
     # Converts a longitude from -180 to 180 range into 0 to 360 range
-    def self.convert_lon(lon)
+    def self.convert_lon_to_positive(lon)
         converted_lon = lon
         if lon < 0
             converted_lon = 360 - lon.abs
@@ -11,6 +11,17 @@ module Location
 
         if lon == 360
             converted_lon = 0
+        end
+
+        converted_lon
+    end
+
+    # Converts a longitude from 0 to 360 range into -180 to 180 range
+    def self.convert_lon_to_negative(lon)
+        converted_lon = lon
+
+        if lon > 180
+            converted_lon = (360 - lon) * -1
         end
 
         converted_lon

@@ -20,7 +20,7 @@ class Weather
          raise ArgumentError, "Invalid latitude" if !Location.lat_ok?(lat)
 
          # Store the input parameters as instance variables
-         @lon = Location.convert_lon(lon)
+         @lon = Location.convert_lon_to_negative(lon)
          @lat = lat
          @camera_id = camera_id
 
@@ -173,8 +173,6 @@ class Weather
 
         # Other API options
         url = url + "&format=xml&extra=localObsTime&num_of_days=1&cc=yes&includelocation=yes"
-
-        puts url
 
         return url
     end

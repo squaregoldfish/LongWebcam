@@ -6,6 +6,8 @@ namespace :lwc do
     desc "Retrieves URL-based camera images and weather"
     task :url_image_retrieval => :environment do
 
+        logger = Logger.new("log/url_image_retrieval.log")
+
         # Constants
         #
         RESPONSE_OK = '200'
