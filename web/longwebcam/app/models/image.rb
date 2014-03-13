@@ -5,12 +5,21 @@ class Image < ActiveRecord::Base
 
     # A utility method for getting the path to an image file
     # identified by Camera ID and date.
+    #
+    # Automatically creates the directory if it doesn't exist
     def Image.getImagePath(id, date, suffix)
         # The root path is stored in the database
         root = Account.find_by_account('ImageStore').path
+
+        image_dir = "#{root}/#{id}"
+        if !File.exists? image_dir
+            Dir.mkdir image_dir
+        end
+
+
         path = "#{root}/#{id}/#{date}.#{suffix}"
 
-        return path
+        path
     end
 
     # Locate the image record for a given camera and date

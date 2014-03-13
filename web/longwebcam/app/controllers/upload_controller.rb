@@ -44,6 +44,9 @@ class UploadController < ApplicationController
             # Read in the XML and validate it against the schema
             upload_data = params.fetch(:image_details)
             upload_xml = LibXML::XML::Parser.string(upload_data).parse
+
+            logger.debug upload_xml
+
             schema = LibXML::XML::Schema.new("#{RAILS_ROOT}/resources/xml/image_upload.xsd")
 
             schema_valid = true
@@ -53,9 +56,10 @@ class UploadController < ApplicationController
                 schema_valid = false
             end
 
-            if !schema_valid
-                response_code = :bad_request
-            end
+#            if !schema_valid
+#                logger.error "Upload XML invalid"
+#                response_code = :bad_request
+#            end
         end
 
         # At this point, we know the request itself is valid (at the HTTP level at least).
