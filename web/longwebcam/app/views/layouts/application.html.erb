@@ -1,36 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <%= stylesheet_link_tag "main", :media => "all" %>
-        <%= javascript_include_tag "application" %>
-        <%= csrf_meta_tag %>
-        <title><%= full_title yield(:title) %></title>
-    </head>
+<html>
+<head>
+  <title>Longwebcam</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
 
-    <body>
-        <nav>
-            <div class="banner">
-                <a href="/"><%= image_tag "bannerlogo.png", :width => 392, :height => 60 %></a>
-                <ul class="nav">
-                    <li class="nav-item"><%= link_to "Home", '/', :class => 'menu' %></li>
-                    <li class="nav-item"><%= link_to "About", 'about', :class => 'menu' %></li>
-                    <li class="nav-item"><%= link_to "Get Involved", 'get_involved', :class => 'menu' %></li>
-                    <li class="nav-item"><%= link_to "Contact", 'contact', :class => 'menu' %></li>
-                </ul>
-            </div>
-        </nav>
+<%= yield %>
 
-        <div class="content">
-            <%= yield %>
-        </div>
-
-        <footer>
-            <div class="footer">
-                <%= image_tag "footerlogo.png", :class => "floatleft" %>
-                <br/>
-                Copyright &copy; 2011-<%= Time.now.year %> LongWebcam.org
-            </div>
-        </footer>
-    </body>
+</body>
 </html>
