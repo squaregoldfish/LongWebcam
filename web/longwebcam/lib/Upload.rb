@@ -79,7 +79,7 @@ class Upload
     # Build the upload XML document for this upload instance
     #
     def buildXML()
-        xml = Builder::XmlMarkup.new(:target => upload_xml = "")
+        xml = ::Builder::XmlMarkup.new(:target => upload_xml = "")
         upload_doc = xml.image_upload(:xmlns => "http://www.longwebcam.org/xml/upload",
                                       :"xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
                                       :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload") {
@@ -114,7 +114,7 @@ class Upload
 
         if !@uploadResponseXML.nil?
             parsed_xml = LibXML::XML::Parser.string(@uploadResponseXML).parse
-            schema = LibXML::XML::Schema.new("#{RAILS_ROOT}/resources/xml/upload_response.xsd")
+            schema = LibXML::XML::Schema.new("#{Rails.root}/lib/assets/xml/upload_response.xsd")
 
             begin
                 validation_result = parsed_xml.validate_schema(schema)

@@ -1,4 +1,4 @@
-require 'builder'
+require 'xml'
 
 # The response codes and messages for image uploads
 # are stored in the database so they can be tweaked
@@ -11,8 +11,8 @@ require 'builder'
 class UploadResponse < ActiveRecord::Base
     include ActiveModel::ForbiddenAttributesProtection
 
-    def to_xml
-        xml = Builder::XmlMarkup.new(:target => response_xml = "")
+    def to_xml(arg)
+        xml = ::Builder::XmlMarkup.new(:target => response_xml = "")
         response_doc = xml.upload_response(:xmlns => "http://www.longwebcam.org/xml/upload_response",
                                            :"xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
                                            :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/upload_response upload_response.xsd") { |b|

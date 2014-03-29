@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<upload_response xmlns="http://www.longwebcam.org/xml/upload_response" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.longwebcam.org/xml/upload_response upload_response.xsd">
+  <code>200</code>
+  <message>OK</message>
+</upload_response>

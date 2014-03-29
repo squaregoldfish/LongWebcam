@@ -107,6 +107,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  builder (~> 3.0)
   debugger
   jbuilder (~> 1.2)
   jquery-rails

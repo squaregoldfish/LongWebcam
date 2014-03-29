@@ -42,3 +42,7 @@ gem 'libxml-ruby', '~> 2.7.0'
 # Image processing
 gem 'rmagick', '~> 2.13.2'
 
+# XML Builder
+gem 'builder', '~> 3.0'
+
+

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<image_upload xmlns="http://www.longwebcam.org/xml/upload" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.longwebcam.org/xml/upload image_upload.xsd">
+  <camera>
+    <id>1</id>
+    <code>6067</code>
+  </camera>
+  <image>
+    <date>2013-01-01T01:01:01+00:00</date>
+    <file_data>Base64'd image data</file_data>
+  </image>
+  <weather>
+    <time>2013-01-01T01:01:01+00:00</time>
+    <temperature>29</temperature>
+    <weather_code>102</weather_code>
+    <wind_speed>5</wind_speed>
+    <wind_bearing>231</wind_bearing>
+    <rain>0</rain>
+    <humidity>45</humidity>
+    <visibility>9999</visibility>
+    <pressure>1003</pressure>
+    <cloud_cover>90</cloud_cover>
+    <air_quality>-1</air_quality>
+  </weather>
+</image_upload>

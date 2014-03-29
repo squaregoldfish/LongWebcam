@@ -4,6 +4,8 @@ require 'base64'
 require 'RMagick'
 
 class UploadController < ApplicationController
+    # This controller does not use user security, so there's no session
+    skip_before_filter :verify_authenticity_token
 
     # Status codes for various processing responses
     # These will be used to look up the appropriate
@@ -47,7 +49,7 @@ class UploadController < ApplicationController
 
             logger.debug upload_xml
 
-            schema = LibXML::XML::Schema.new("#{RAILS_ROOT}/resources/xml/image_upload.xsd")
+            schema = LibXML::XML::Schema.new("#{Rails.root}/lib/assets/xml/image_upload.xsd")
 
             schema_valid = true
             begin
@@ -131,13 +133,11 @@ class UploadController < ApplicationController
                         # Decode the image
                         #
                         image_data_unbase64 = Base64.decode64(image_data_element.content)
-                        image_data_decoded = Magick::Image.from_blob(image_data_unbase64)[0]
-                        if image_data_decoded.format != 'PNG'
-                            image_data = image_data_decoded.to_blob { |attrs| attrs.format = 'PNG' }
-                        else
-                            # Just use the original decoded data - it's a PNG blob
-                            image_data = image_data_unbase64
-                        end
+                        image_data = Magick::Image.from_blob(image_data_unbase64)[0]
+
+                        # Make sure the format is PNG - the conversion happens
+                        # at write time
+                        image_data.format = 'PNG'
 
                         # Add the image time details to the record
                         #
@@ -207,9 +207,7 @@ class UploadController < ApplicationController
                 else
 
                     # Write the image to disk
-                    File.open(image_path, 'w') do |f|
-                        f.write image_data
-                    end
+                    image_data.write(image_path)
                 end
             end
         end
