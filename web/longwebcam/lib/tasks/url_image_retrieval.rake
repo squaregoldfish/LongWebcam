@@ -48,29 +48,37 @@ namespace :lwc do
         cameras_to_download.each { |camera_id|
             logger.debug("Downloading image for camera ID #{camera_id}")
 
-            # Get the image URL and build the HTTP request
-            camera_record = Camera.find_by_id(camera_id)
-            camera_details = CameraDetails.find_by_camera_id(camera_id)
-            uri = URI.parse(camera_record.url)
-            http = Net::HTTP.new(uri.host, uri.port)
+            download_response = nil
+            begin
 
-            if camera_record.url.start_with?('https')
-                # You will note that we're not verifying the SSL certificate.
-                #  This is because we're on an outdated version of Ruby,
-                # and the workaround is too much hassle.
-                #
-                # Given that we're only grabbing images, this shouldn't really be a problem.
-                #
-                http.use_ssl = true
-                http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+                # Get the image URL and build the HTTP request
+                camera_record = Camera.find_by_id(camera_id)
+                camera_details = CameraDetails.find_by_camera_id(camera_id)
+                uri = URI.parse(camera_record.url)
+                http = Net::HTTP.new(uri.host, uri.port)
+
+                if camera_record.url.start_with?('https')
+                    # You will note that we're not verifying the SSL certificate.
+                    #  This is because we're on an outdated version of Ruby,
+                    # and the workaround is too much hassle.
+                    #
+                    # Given that we're only grabbing images, this shouldn't really be a problem.
+                    #
+                    http.use_ssl = true
+                    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+                end
+
+
+                download_request = Net::HTTP::Get.new(uri.request_uri)
+                download_response = http.request(download_request)
+            rescue Exception
+                # No need to do anyting
             end
 
-            download_request = Net::HTTP::Get.new(uri.request_uri)
-
-            # Send the request
-            download_response = http.request(download_request)
-
-            if download_response.code != RESPONSE_OK
+            if download_response.nil?
+                Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalFailure"),
+                                      true, "URL = #{camera_record.url}; Connection Failure", nil)
+            elsif download_response.code != RESPONSE_OK
                 Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalFailure"),
                                       true, "URL = #{camera_record.url}; HTTP Response = #{download_response.code}", nil)
             else
