@@ -2,8 +2,6 @@ namespace :lwc do
     desc "Select cameras for URL download"
     task :camera_select => :environment do
 
-        logger = Logger.new("log/camera_select.log")
-
         cameras_to_download = Array.new
 
         # Loop through all the camera details
@@ -28,7 +26,7 @@ namespace :lwc do
             end
         end
 
-        logger.debug(cameras_to_download)
+        print cameras_to_download
     end
 end
 
