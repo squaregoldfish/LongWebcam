@@ -45,4 +45,6 @@ gem 'rmagick', '~> 2.13.2'
 # XML Builder
 gem 'builder', '~> 3.0'
 
+# Job control
+gem 'whenever', '~> 0.9'
 
