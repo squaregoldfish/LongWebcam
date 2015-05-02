@@ -1,0 +1,53 @@
+% LongWebcam Database Design
+
+This document lists the structure of all the tables in the LongWebcam databases, as generated through the Rails migrations.
+The types are Rails types, not those used by MySQL.
+
+## Main Website database
+The main database which backs the website.
+
+### accounts
+
+Keeps account details of external services used by the site.
+
+Field Name        Type           Description
+-----------       ------         ----------------
+account           string         The name of the service
+username          string         The username for the account
+password          string         The password for the account
+api_key           string         The API Key for the account
+url               string         The root URL of the service
+path              string         The path portion of the URL for a specifc service
+
+
+### camera_details
+
+Details about each camera, which may change over time.
+
+Field Name        Type           Description
+-----------       ------         ----------------
+camera_id         integer        The main Camera ID
+details_date      date           The date on which this set of details applied to the camera
+longitude         float          The longitude of the camera's position
+latitude          float          The latitude of the camera's position
+bearing           integer        The direction, in degrees, in which the camera is facing
+ground_height     integer        The elevation of the ground at the camera's location
+camera_height     integer        The height above ground at which the camera is mounted
+manufacturer      string         The manufacturer of the camera
+model             string         The camera model
+resolution_x      integer        The horizontal resolution of pictures taken by the camera
+resolution_y      integer        The vertical resolution of pictures taken by the camera
+utc_offset        integer        The UTC offset of the timezone in which the camera is located
+download_start    integer        The hour of the day which denotes the start of the download window
+download_end      integer        The hour of the day which denotes the end of the download window
+
+For URL-based cameras, the system will attempt to download an image at some point between the download_start and download_end hours.
+
+### camera_tags
+
+The set of tags that can be applied to camaeras. The tags are heirarchical.
+
+Field Name        Type           Description
+-----------       ------         ----------------
+tag               string         The tag name
+parent            integer        The ID of the tag's parent

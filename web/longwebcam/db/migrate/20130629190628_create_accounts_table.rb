@@ -5,6 +5,8 @@ class CreateAccountsTable < ActiveRecord::Migration
           t.string :username
           t.string :password
           t.string :api_key
+          t.string :url
+          t.string :path
       end
 
       add_index :accounts, :account, {:name => "accounts_account_idx", :unique => true}
