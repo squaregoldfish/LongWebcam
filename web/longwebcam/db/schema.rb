@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20140222194513) do
     t.string "username"
     t.string "password"
     t.string "api_key"
+    t.string "url"
+    t.string "path"
   end
 
   add_index "accounts", ["account"], name: "accounts_account_idx", unique: true, using: :btree
@@ -102,7 +104,7 @@ ActiveRecord::Schema.define(version: 20140222194513) do
   create_table "event_urls", force: true do |t|
     t.string   "title"
     t.string   "url"
-    t.integer  "accessible",       limit: 1
+    t.boolean  "accessible"
     t.date     "last_check_date"
     t.date     "last_access_date"
     t.string   "archive_url"
