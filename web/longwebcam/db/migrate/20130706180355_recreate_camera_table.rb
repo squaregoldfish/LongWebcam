@@ -7,7 +7,6 @@ class RecreateCameraTable < ActiveRecord::Migration
         t.integer :camera_type, {:null => false}
         t.string :url
         t.string :serial_number
-        t.integer :schedule
         t.boolean :test_camera
         t.string :licence
         t.string :upload_code, :limit => 4
