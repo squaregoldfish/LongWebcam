@@ -193,7 +193,6 @@ ActiveRecord::Schema.define(version: 20140222194513) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "despatched_to_user", default: false, null: false
-    t.text     "message",                            null: false
     t.boolean  "can_despatch",       default: false
     t.string   "extra_text"
     t.binary   "extra_data"
