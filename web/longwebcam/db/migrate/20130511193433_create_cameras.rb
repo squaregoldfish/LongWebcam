@@ -10,6 +10,8 @@ class CreateCameras < ActiveRecord::Migration
       t.string :licence
       t.string :upload_code, :limit => 4
       t.integer :watermark, :limit => 1
+      t.string :title
+      t.string :description
 
       t.timestamps
     end

@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20140222194513) do
     t.string   "licence"
     t.string   "upload_code",   limit: 4
     t.boolean  "watermark"
+    t.string   "title"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
