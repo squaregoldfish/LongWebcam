@@ -1,4 +1,6 @@
 namespace :lwc do
+
+    # This code is for testing only. The real version is in url_image_retrieval.rake
     desc "Select cameras for URL download"
     task :camera_select => :environment do
 
@@ -29,4 +31,3 @@ namespace :lwc do
         print cameras_to_download
     end
 end
-
