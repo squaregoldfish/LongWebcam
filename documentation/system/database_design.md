@@ -34,6 +34,8 @@ manufacturer      string         The manufacturer of the camera
 model             string         The camera model
 resolution_x      integer        The horizontal resolution of pictures taken by the camera
 resolution_y      integer        The vertical resolution of pictures taken by the camera
+timezone_id       string         The name of the time zone that the camera is in
+daylight_saving   boolean        Indicates whether or not daylight savings time is in effect
 utc_offset        integer        The UTC offset of the timezone in which the camera is located
 download_start    integer        The hour of the day which denotes the start of the download window
 download_end      integer        The hour of the day which denotes the end of the download window
@@ -61,6 +63,8 @@ test_camera       boolean        If true, this is a test camera that is not visi
 licence           string         The licence under which the images from this camera are published
 upload_code       string(4)      The 4-digit security code that must be used when uploading images for the camera
 watermark         boolean        Indicates whether or not a watermark should be applied to published images
+title             string         The camera's title
+description       string         The detailed description of the camera
 
 ^1^The camera type is one of the following:
 
