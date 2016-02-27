@@ -1,0 +1,12 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/home/HOME_DIR/.rvm/gems/ruby-2.1.2/bin:/home/HOME_DIR/.rvm/gems/ruby-2.1.2@global/bin:/home/HOME_DIR/.rvm/rubies/ruby-2.1.2/bin/home/HOME_DIR/.rvm/bin
+MAILTO=""
+HOME=/home/HOME_DIR
+
+# URL Image Retrieval
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * /bin/bash -l -c 'cd /home/HOME_DIR/longwebcam.org && RAILS_ENV=development bundle exec rake lwc:url_image_retrieval --silent >> /home/HOME_DIR/longwebcam.org/log/url_image_retrieval_cron.log 2>&1'
+
+# Database backup
+8 3 * * * /bin/bash -l -c 'cd /home/HOME_DIR/backups && mysqldump --user LWC_DB_USER --password=PASSWORD LWC_DB > mysql_dump.sql'
+12 3 * * * /bin/bash -l -c 'cd /home/HOME_DIR/backups && mysqldump --user LWC_WORDPRESS_USER --password=PASSWORD WORDPRESS_DB > wordpress_db.sql'
+
