@@ -1,5 +1,12 @@
 % LongWebcam Database Design
 
+# Version History
+
+Version      Date          Description
+-------      ------        --------------------------------------------------------
+0.1          6 Mar 2016    Version history added. No previous history is known!
+
+# Introduction
 This document lists the structure of all the tables in the LongWebcam databases, as generated through the Rails migrations.
 The types are Rails types, not those used by MySQL.
 
