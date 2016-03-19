@@ -4,7 +4,7 @@
 
 Version      Date          Description
 -------      ------        --------------------------------------------------------
-0.1          6 Mar 2016    Image upload API
+0.1.0        6 Mar 2016    Image upload API
 
 # Introduction
 This document describes the public API for the Long Webcam site. The API provides functionality for uploading images and other functions that do not require the user to be logged in to the main website.
