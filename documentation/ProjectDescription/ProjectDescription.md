@@ -5,6 +5,7 @@
 Version      Date          Description
 -------      ------        --------------------------------------------------------
 1.0.0        13 Mar 2013   First version. Converted to Markdown 27 Feb 2016.
+1.1.0        19 Mar 2016   Added more functionality
 
 # Introduction
 This document outlines the background and goals of the Long Webcam project, which aims to produce time-lapse videos of landscapes over very long time periods. The document will serve as a high-level overview of all the features that the project will provide in some detail, but will not give any technical details of the manner in which those features will be implemented.
