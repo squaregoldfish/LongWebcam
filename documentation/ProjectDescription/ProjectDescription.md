@@ -4,7 +4,7 @@
 
 Version      Date          Description
 -------      ------        --------------------------------------------------------
-1.0          13 Mar 2013   First version. Converted to Markdown 27 Feb 2016.
+1.0.0        13 Mar 2013   First version. Converted to Markdown 27 Feb 2016.
 
 # Introduction
 This document outlines the background and goals of the Long Webcam project, which aims to produce time-lapse videos of landscapes over very long time periods. The document will serve as a high-level overview of all the features that the project will provide in some detail, but will not give any technical details of the manner in which those features will be implemented.
@@ -16,72 +16,134 @@ Some projects have recorded events of much longer time scales – construction o
 # Using the Website
 The easiest way to describe the operation of the Long Webcam project is to describe the functions that will be available to users of the website. These functions will imply the data and features that the project will provide, which can then be described in more detail.
 
+## Home Page
+The home page for the website will provide some or all[^homepage_functionality] of the following features:
+
+* Newest cameras
+* Camera of the day
+* Latest events
+* Popular cameras/events
+* Videos
+* Your cameras/events (for registered users)
+* Links, contact, help etc.
+
+[^homepage_functionality]: The exact features presented on the Home page will be determined at a later date.
+
 ## Finding images
 The primary function of the Long Webcam site is to provide access to the images stored in its archive. Users will be able to use these images for a number of purposes. The fundamental purpose of the site is to allow users to locate images of interest.
 
 ## Cameras
 Since the whole purpose of this project is to look at changing scenes through time, it makes sense that the primary method of finding images of interest is to search for cameras; once a camera is located, the user will be able to look through the history of its images. Users are most likely to locate cameras in terms of the content of the captured images. Content of interest may be broadly categorised (e.g. cities, forests, landscapes etc.) or very specific (searching for specific locations or landmarks). The site will allow users to search for images in a number of ways to maximise the likelihood of locating the desired images.
 
-### Search by location
+### Searching
+
+#### Search by location
 It is likely that most users will search for cameras by their location. There are any number of ways to enter location information, and several of these will be provided by the site.
 
-### User's location
+#### User's location
 The latest web browsers allow sites to determine a user's current location (with the user's permission). If this information is not available, it is often possible to establish a user's approximate location using their IP address. The site will therefore be able to find cameras that are closest to the user.
 
-### Browsing a map
+#### Browsing a map
 The site will allow users to navigate a map of the world to locate cameras. Google Maps is the most frequently seen implementation of this functionality. This could be extended to a Google Earth plugin in the future.
 
-### Place name/address search
+#### Place name/address search
 Users will be allowed to enter place names or addresses (similar to the Google Maps search) to locate cameras near certain locations of interest. The level of detail that is available (countries, cities, postal codes etc.) will be dependent on the availability of geographical search information.
 
-### Co-ordinates
+#### Co-ordinates
 The user will be able to enter specific co-ordinates for searching by location. In the beginning this will be restricted to latitude/longitude, but may encompass other co-ordinate systems (e.g. Ordnance Survey grid references) in the future.
 
-### Search by category
+#### Search by category
 Each camera will be given a set of keywords describing its view. These keywords will be in the form of a category tree, so users can browse the categories for subjects that interest them.
 
-### Search by text
+#### Search by text
 Each camera will be given a title and a short piece of descriptive text to help users understand the focus of the images. This information will be fully searchable, allowing users to enter any words they wish to search for cameras.
 
-### Search by time coverage
-
+#### Search by time coverage
 Some users will only be interested in finding cameras that have captured pictures during a specific period of time or a specific span of time.
+
+### Viewing
+When viewing a camera, the user will be able to browse its images in a number of ways. The default view for a camera will show the its title and description, the current image, and map of the camera's location. Additional links will provide access to the camera's history:
+
+* Complete timeline for the camera, allowing access to any image
+* Events captured by the camera
+* Pre-made timelapse videos from the camera
+
+The user will also be able to bookmark images they find interesting, and make these public for others to see. These may be converted to full Events.[^event_functionality]
+
+[^event_functionality]: As of 19 March 2016, the exact functionality is still to be decided. Event creation may be restricted to camera owners (for their own cameras only) and site adminsitrators, but could be prompted by public bookmarks.
 
 ## Events
 The Long Webcam project will record specific events of interest that are captured by its cameras. This may include natural disasters/events, construction or destruction of buildings, or any other happening that daily images capture in an interesting way. Users will be able to search for these events in order to obtain the images that show them.
 
-### Search by location
+### Searching
+
+#### Search by location
 As with cameras, users will be allowed to search for events near a specified location. All the location search options allowed for cameras will also be present for events.
 
-### Search by text
+#### Search by text
 As with cameras, each event will be given a name and have a short text description. This will allow free text search for events.
 
-### Search by event type
+#### Search by event type
 Events will be given keywords from a category hierarchy similar to that for cameras. Users will therefore be able to find events matching those keywords.
 
-### Search by date
+#### Search by date
 Obviously, events will occur at specific times. Users will be allowed to locate events based on specified dates or ranges of dates.
 
-### Search by timeline
+#### Search by timeline
 The event search feature will allow users to view events in a timeline. This will give the function of browsing for items of interest through time.
 
+### Viewing
+The default view for a specific event will show the title and description of the event, and a list of cameras that captured it (with a representative image from each camera). External web links will also be listed.[^viewing_functionality]
+
+[^viewing_functionality]: Further functionality, including timelapse generation, will be added when they have been designed.
+
 ## Using images
-The Long Webcam project exists to make its archive of images available to anybody. Users will be able to download any image they choose from the archve, or request a timelapse video to be generated from a camera for a specified time period.
+The Long Webcam project exists to make its archive of images available to anybody. Users will be able to download any image they choose from the archive, or request a timelapse video to be generated from a camera for a specified time period.
 
 ### Licensing {#licensing}
-Use of images from the Long Webcam site will be subject to a licensing agreement to protect both the site's and camera owners' interests. The default agreement will be very broad allowing any non-commercial use without explicit permission but with credit to both the Long Webcam project and the camera owner. (The camera owner may wish to remain anoymous and uncredited. The project will allow the owner's name not to appear on the site, but their details will be kept by the project for contact and record-keeping purposes.) A Creative Commons licence is the most likely candidate for such a licence.
+Use of images from the Long Webcam site will be subject to a licensing agreement to protect both the site's and camera owners' interests. The default agreement will be very broad allowing any non-commercial use without explicit permission but with credit to both the Long Webcam project and the camera owner. (The camera owner may wish to remain anoymous and uncredited. The project will allow the owner's name not to appear on the site, but their details will be kept by the project for contact and record-keeping purposes.) A [Creative Commons](https://creativecommons.org/) licence is the most likely candidate for such a licence.
 
 While all camera owners will be strongly encouraged to release their images under this generous licence, some may have very good reasons to have a more restrictive usage policy for their images. The Long Webcam project will respect these wishes and ensure that images are presented with the appropriate licensing terms. The site may also add watermarks to images and videos exported from the project if required.
 
 # Cameras {#cameras}
 The webcams employed by the project will be maintained by individuals or organisations who will own the cameras together with any equipment required to maintain them and submit images to the Long Webcam site.
 
+## Camera Requirements
+### Adding a camera to Long Webcam
+The Long Webcam site's aim is to provide a long-term perspective on the changing world, and its intent is to appeal to a wide range of people. The cameras it uses must therefore record something of interest to that perspective. 'Normal' webcams taking pictures of gardens or other very local arenas are not suitable. Consequently, cameras will only be added to the site after it has been checked by a member of the project team. In order to have a camera considered for inclusion on the Long Webcam site, potential camera hosts must provide certain details to allow the project team to assess its suitability. These details will include:
+
+* Detail of the camera location and viewing direction, so its position can be checked on, for example, Google Earth.
+* A description of what the camera will be looking at.
+* The potential changes that the camera will observe, and the timescale of those changes.
+* A photograph taken from the camera site to show its field of view.
+
+In order to encourage as many submissions as possible, the application process for adding a camera will be very informal. In the first instance, potential hosts can submit as much or as little information as they please - perhaps just the wish to host a camera somewhere. The project team will then establish the necessary requirements through a dialogue with the potential host, and assist them to set up the best possible camera for the site's goals.
+
+### Camera Host Obligations
+Camera hosts will have to fulfill certain obligations as part of their role in the making the Long Webcam project a success. These obligations will be set out in full to the host before their camera is added to their site, as much to help them decide whether they are able to contribute effectively to the project as to ensure that the project doesn't suffer from poor quality camera locations.
+
+A number of these obligations will be formalised to ensure that the project can operate as planned and both the project and the camera host can be protected from possible legal issues. These will be presented to the camera host as a Terms and Conditions document to be signed by the host prior to the camera being added to the site. The formal obligations will include, but not be restricted to, the following:
+
+* The camera must have full legal permission to place the camera in the desired location.
+* The camera host must own full initial copyright on the images from the camera, and therefore be in a position to fulfil the licensing requirements of images for the project.
+* The camera must not be placed in such a way that it captures anything that cannot be legally photographed.
+* The camera must not be placed in such a way that is captures images that are offensive or unsuitable for viewing by all people.
+* The images taken by the camera must not infringe anybody's privacy.
+* The camera host must allow the Long Webcam project to use the captured images for any purpose that helps the project fulfil its aims. This includes disseminating the images to other media outlets.
+* In addition to the special license terms for the Long Webcam project, the camera owner must allow users of the website to download and make use of the images under licensing terms described in [Licensing](#licensing).
+
+There is also a list of less formal obligations for camera hosts. These are not legal in nature, but are required to ensure the smooth running of the Long Webcam project.
+
+* The camera host must understand the long-term nature of the project, and be prepared to maintain the camera for several years at least. The level of maintenance required will depend on the specific location of the camera.
+* The camera host must be prepared to liaise with the Long Webcam project on a regular basis to help resolve maintenance issues (e.g. images not being received) and to provide information required for the project's archives.
+* The camera host must be prepared to help document any changes observed by the camera.
+
 ## Types of camera
 The Long Webcam site will support the collection of images from webcams in three different modes:
 
 * Webcam publishing images to a web page
 * Webcam with software sending images to the Long Webcam site
-* Standalone webcam unit
+* [Standalone webcam unit](#standalone)
     + network connection: sends images to the site automatically
     + Without network connection: images must be manually uploaded to the site
 
@@ -111,37 +173,22 @@ Many modern digital cameras can be controlled via a PC, so it is not inconceivab
 
 In the first instance, the support for such cameras will be provided on an _ad hoc_ basis.
 
-# Events
+# Events {#events}
 Some of the images captured by the project's cameras will be classifiable as specific events, either natural or of man-made origin. Buildings may be constructed or demolished, natural disasters may occur, or other significant changes in which people may be interested.
 
 As these events occur, details about them will be stored alongside the image archive of the camera(s) that capture them. At the very minimum, a text description of the event will be stored in the project's archive so that its details are maintained and are searchable. If the event is large enough to be recorded elsewhere on the internet, links to news stories, Wikipedia entries and the like will also be stored so users can find more detail as required. Due to the long-term nature of the Long Webcam project, it is likely that some interface with other internet archiving projects (e.g. [The Internet Archive](http://archive.org)) will be required to ensure longevity of the linked web pages.
 
-# Camera Requirements
-## Adding a camera to Long Webcam
-The Long Webcam site's aim is to provide a long-term perspective on the changing world, and its intent is to appeal to a wide range of people. The cameras it uses must therefore record something of interest to that perspective. 'Normal' webcams taking pictures of gardens or other very local arenas are not suitable. Consequently, cameras will only be added to the site after it has been checked by a member of the project team. In order to have a camera considered for inclusion on the Long Webcam site, potential camera hosts must provide certain details to allow the project team to assess its suitability. These details will include:
+# User roles and functions
+The functionality provided by the website will vary according to the role of the user.
 
-* Detail of the camera location and viewing direction, so its position can be checked on, for example, Google Earth.
-* A description of what the camera will be looking at.
-* The potential changes that the camera will observe, and the timescale of those changes.
-* A photograph taken from the camera site to show its field of view.
+## Visitor (no account)
+Visitors with no account will be able to view all cameras, images, events etc., but will not be able to request videos or access any functions that require storage of data (e.g. favourites etc.)
 
-In order to encourage as many submissions as possible, the application process for adding a camera will be very informal. In the first instance, potential hosts can submit as much or as little information as they please - perhaps just the wish to host a camera somewhere. The project team will then establish the necessary requirements through a dialogue with the potential host, and assist them to set up the best possible camera for the site's goals.
+## Registered user
+Registered users will be allowed to request videos, store favourite cameras, events or searches, and be sent email alerts of new items on the website in which they may be interested.
 
-## Camera Host Requirements
-Camera hosts will have to fulfil certain obligations as part of their role in the making the Long Webcam project a success. These obligations will be set out in full to the host before their camera is added to their site, as much to help them decide whether they are able to contribute effectively to the project as to ensure that the project doesn't suffer from poor quality camera locations.
+## Camera owner
+Camera owners will be allowed to modify all details of the cameras they own, and add [Events](#events) to those cameras.
 
-A number of these obligations will be formalalised to ensure that the project can operate as planned and both the project and the camera host can be protected from possible legal issues. These will be presented to the camera host as a Terms and Conditions document to be signed by the host prior to the camera being added to the site. The formal obligations will include, but not be restricted to, the following:
-
-* The camera must have full legal permission to place the camera in the desired location.
-* The camera host must own full initial copyright on the images from the camera, and therefore be in a position to fulfil the licensing requirements of images for the project.
-* The camera must not be placed in such a way that it captures anything that cannot be legally photographed.
-* The camera must not be placed in such a way that is captures images that are offensive or unsuitable for viewing by all people.
-* The images taken by the camera must not infringe anybody's privacy.
-* The camera host must allow the Long Webcam project to use the captured images for any purpose that helps the project fulfil its aims. This includes disseminating the images to other media outlets.
-* In addition to the special license terms for the Long Webcam project, the camera owner must allow users of the website to download and make use of the images under licensing terms described in [Licensing](#licensing).
-
-There is also a list of less formal obligations for camera hosts. These are not legal in nature, but are required to ensure the smooth running of the Long Webcam project.
-
-* The camera host must understand the long-term nature of the project, and be prepared to maintain the camera for several years at least. The level of maintenance required will depend on the specific location of the camera.
-* The camera host must be prepared to liaise with the Long Webcam project on a regular basis to help resolve maintenance issues (e.g. images not being received) and to provide information required for the project's archives.
-* The camera host must be prepared to help document any changes observed by the camera.
+## Curator
+This special status may be given to some users, who can perform certain tasks such as creating events and other curation tasks that normal registered users cannot.
