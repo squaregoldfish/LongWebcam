@@ -1,0 +1,33 @@
+source 'https://rubygems.org'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.4'
+
+# Use mysql as the database for Active Record
+gem 'mysql2', '0.3.15'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+#
+# We may use this in future.
+# gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
+# XML handler
+gem 'libxml-ruby', '~> 2.7.0'
+
+# Image processing
+gem 'rmagick', '~> 2.13.2'
+
+# XML Builder
+gem 'builder', '~> 3.0'
+
