@@ -47,7 +47,7 @@ class UploadController < ApplicationController
             upload_data = params.fetch(:image_details)
             upload_xml = LibXML::XML::Parser.string(upload_data).parse
 
-            logger.debug upload_xml
+            #logger.debug upload_xml
 
             schema = LibXML::XML::Schema.new("#{Rails.root}/lib/assets/xml/image_upload.xsd")
 
@@ -216,7 +216,7 @@ class UploadController < ApplicationController
             # Save the record to the database
             image_record.save
         end
-        
+
         # This is where we respond to the client.
         # If the HTTP response code isn't OK,
         # we simply return it.
