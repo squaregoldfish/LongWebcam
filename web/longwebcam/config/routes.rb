@@ -3,7 +3,8 @@ Longwebcam::Application.routes.draw do
   # Upload handler
   match '/upload', to: 'upload#upload', via: [:post]
 
-
+  # Grunt camera details retrieval for backup URL retreival
+  match '/grunt/get_camera_details', to: 'camera_details#get_details', via: [:get]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
