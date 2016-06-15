@@ -7,6 +7,8 @@ class CameraDetailsController < ApplicationController
     skip_before_filter :verify_authenticity_token
     before_filter :init_vars
 
+    ACCOUNT_NAME = "Grunt"
+
     # The SQL statement for getting the camera details required by the grunt.
     # We only want the latest set of details for each camera.
     CAMERA_SELECT_STATEMENT = "SELECT c.id, c.url, c.upload_code, " +
@@ -32,12 +34,15 @@ class CameraDetailsController < ApplicationController
         response_code = :ok
 
         # Only POSTs are allowed
-#        if !request.post?
-#            response_code = :forbidden
-#        end
+        if !request.post?
+            response_code = :forbidden
+        end
 
-        # TODO Validate passcode
-
+        # Validate the API key
+        account = Account.find_by_account(ACCOUNT_NAME)
+        if (account.api_key != params.fetch(:api_key))
+            response_code = :forbidden
+        end
 
         if response_code == :ok
             @cameras = ActiveRecord::Base.connection.execute(CAMERA_SELECT_STATEMENT)
