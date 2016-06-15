@@ -1,0 +1,12 @@
+defaults: &defaults
+  main_url: "http://localhost:3000"
+  grunt_api_key: "apikey"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
