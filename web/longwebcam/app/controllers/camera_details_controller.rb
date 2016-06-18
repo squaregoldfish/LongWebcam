@@ -59,9 +59,9 @@ class CameraDetailsController < ApplicationController
     def to_xml(arg)
         # Build the XML
         output = ::Builder::XmlMarkup.new(:target => camera_xml = "")
-        camera_doc = output.camera_details(:xmlns => "http://www.longwebcam.org/xml/grunt",
+        camera_doc = output.camera_details(:xmlns => APP_CONFIG["base_url"] + "/xml/camera_details",
                                         :"xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-instance",
-                                        :"xsi:schemaLocation" => "http://www.longwebcam.org/xml/grunt camera_details.xsd") {
+                                        :"xsi:schemaLocation" => APP_CONFIG["grunt_url"] + "xml/camera_details.xsd") {
 
             @cameras.each do |camera|
                 output.camera { |b| b.id(camera[COL_CAMERA_ID]);
@@ -74,7 +74,6 @@ class CameraDetailsController < ApplicationController
                              b.upload_code(camera[COL_UPLOAD_CODE]);
                 }
             end
-
         }
     end
 end
