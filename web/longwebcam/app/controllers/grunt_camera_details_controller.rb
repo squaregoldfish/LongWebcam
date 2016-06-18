@@ -2,7 +2,7 @@ require 'xml'
 
 # THis controller returns the camera details for all URL cameras for the grunt.
 # It will only work if the correct security code is supplied.
-class CameraDetailsController < ApplicationController
+class GruntCameraDetailsController < ApplicationController
     # This controller does not use user security, so there's no session
     skip_before_filter :verify_authenticity_token
     before_filter :init_vars
@@ -30,7 +30,7 @@ class CameraDetailsController < ApplicationController
         @cameras = nil
     end
 
-    def get_details
+    def get_camera_details
         response_code = :ok
 
         # Only POSTs are allowed
