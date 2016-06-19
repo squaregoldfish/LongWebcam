@@ -114,7 +114,7 @@ class Upload
 
         if !@uploadResponseXML.nil?
             parsed_xml = LibXML::XML::Parser.string(@uploadResponseXML).parse
-            schema = LibXML::XML::Schema.new("#{Rails.root}/lib/assets/xml/upload_response.xsd")
+            schema = LibXML::XML::Schema.new("#{Rails.root}/public/xml/upload_response.xsd")
 
             begin
                 validation_result = parsed_xml.validate_schema(schema)
