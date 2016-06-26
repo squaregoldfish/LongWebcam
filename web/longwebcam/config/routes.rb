@@ -8,6 +8,8 @@ Longwebcam::Application.routes.draw do
 
   match '/grunt/ping', to: 'grunt#ping', via: [:post]
 
+  match '/grunt/image_exists', to: 'grunt#image_exists', via: [:post]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

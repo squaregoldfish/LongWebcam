@@ -86,4 +86,38 @@ class GruntController < ApplicationController
     def ping()
         head :ok
     end
+
+    # See if an image from the specified camera/date exists.
+    # Returns a 1 or 0 in the response body
+    def image_exists()
+
+        response_code = :ok
+        camera_id = nil
+        date = nil
+        image_exists = false
+
+        # Only POSTs are allowed
+        if !request.post?
+            response_code = :forbidden
+        end
+
+        if response_code == :ok
+
+            camera_id = params[:camera_id]
+            date = params[:date]
+
+            if camera_id.nil? || date.nil?
+                response_code = :bad_request
+            else
+                image = Image.getImageRecord(camera_id, date)
+                image_exists = !image.nil?
+            end
+        end
+
+        if response_code != :ok
+            head response_code
+        else
+            render :text => image_exists
+        end
+    end
 end
