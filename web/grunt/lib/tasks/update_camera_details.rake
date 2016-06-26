@@ -89,6 +89,8 @@ namespace :lwc_grunt do
                     database_camera.download_end = xml_camera.find_first('x:download_end', ns_string).content
                     database_camera.url = xml_camera.find_first('x:url', ns_string).content
                     database_camera.upload_code = xml_camera.find_first('x:upload_code', ns_string).content
+                    database_camera.longitude = xml_camera.find_first('x:longitude', ns_string).content
+                    database_camera.latitude = xml_camera.find_first('x:latitude', ns_string).content
 
                     # Save the camera
                     database_camera.save

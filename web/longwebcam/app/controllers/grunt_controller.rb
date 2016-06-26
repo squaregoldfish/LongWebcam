@@ -2,7 +2,7 @@ require 'xml'
 
 # THis controller returns the camera details for all URL cameras for the grunt.
 # It will only work if the correct security code is supplied.
-class GruntCameraDetailsController < ApplicationController
+class GruntController < ApplicationController
     # This controller does not use user security, so there's no session
     skip_before_filter :verify_authenticity_token
     before_filter :init_vars
@@ -12,7 +12,8 @@ class GruntCameraDetailsController < ApplicationController
     # The SQL statement for getting the camera details required by the grunt.
     # We only want the latest set of details for each camera.
     CAMERA_SELECT_STATEMENT = "SELECT c.id, c.url, c.upload_code, " +
-                "d.timezone_id, d.daylight_saving, d.utc_offset, d.download_start, d.download_end " +
+                "d.timezone_id, d.daylight_saving, d.utc_offset, d.download_start, d.download_end, " +
+                "d.longitude, d.latitude " +
                 "FROM cameras c INNER JOIN camera_details d ON c.id = d.camera_id " +
                 "INNER JOIN (SELECT camera_id, max(details_date) AS details_date FROM camera_details GROUP BY camera_id) m " +
                 "ON d.camera_id = m.camera_id AND d.details_date = m.details_date"
@@ -25,6 +26,8 @@ class GruntCameraDetailsController < ApplicationController
     COL_UTC_OFFSET = 5
     COL_DOWNLOAD_START = 6
     COL_DOWNLOAD_END = 7
+    COL_LONGITUDE = 8
+    COL_LATITUDE = 9
 
     def init_vars
         @cameras = nil
@@ -72,8 +75,15 @@ class GruntCameraDetailsController < ApplicationController
                              b.download_end(camera[COL_DOWNLOAD_END]);
                              b.url(camera[COL_URL]);
                              b.upload_code(camera[COL_UPLOAD_CODE]);
+                             b.longitude(camera[COL_LONGITUDE]);
+                             b.latitude(camera[COL_LATITUDE]);
                 }
             end
         }
+    end
+
+    # Simply return a 200 response
+    def ping()
+        head :ok
     end
 end

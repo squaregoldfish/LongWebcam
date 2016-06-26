@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222194513) do
+ActiveRecord::Schema.define(version: 20160626144433) do
 
   create_table "accounts", force: true do |t|
     t.string "account",  null: false
@@ -61,18 +61,18 @@ ActiveRecord::Schema.define(version: 20140222194513) do
   add_index "camera_tags", ["tag"], name: "cameratags_tag_idx", using: :btree
 
   create_table "cameras", force: true do |t|
-    t.integer  "owner",                   null: false
-    t.integer  "camera_type",             null: false
+    t.integer  "owner",                     null: false
+    t.integer  "camera_type",               null: false
     t.string   "url"
     t.string   "serial_number"
     t.boolean  "test_camera"
     t.string   "licence"
     t.string   "upload_code",   limit: 4
     t.boolean  "watermark"
-    t.string   "title"
-    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title",         limit: 100
+    t.text     "description"
   end
 
   create_table "cameras_events", id: false, force: true do |t|
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20140222194513) do
   create_table "event_urls", force: true do |t|
     t.string   "title"
     t.string   "url"
-    t.boolean  "accessible"
+    t.integer  "accessible",       limit: 1
     t.date     "last_check_date"
     t.date     "last_access_date"
     t.string   "archive_url"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20140222194513) do
     t.integer  "humidity"
   end
 
-  add_index "images", ["camera_id", "date"], name: "image_camid_date_idx", unique: true, using: :btree
+  add_index "images", ["camera_id", "date"], name: "image_camid-date_idx", unique: true, using: :btree
   add_index "images", ["date"], name: "image_date_idx", using: :btree
   add_index "images", ["image_present"], name: "image_imagepresent_idx", using: :btree
 
@@ -184,18 +184,18 @@ ActiveRecord::Schema.define(version: 20140222194513) do
   add_index "message_types", ["code"], name: "message_types_code_idx", unique: true, using: :btree
 
   create_table "messages", force: true do |t|
-    t.integer  "camera_id",                          null: false
-    t.datetime "timestamp",                          null: false
-    t.integer  "message_type",                       null: false
-    t.boolean  "read_by_user",       default: false, null: false
-    t.boolean  "read_by_admin",      default: false, null: false
-    t.boolean  "resolved",           default: false, null: false
+    t.integer  "camera_id",                                           null: false
+    t.datetime "timestamp",                                           null: false
+    t.integer  "message_type",                                        null: false
+    t.boolean  "read_by_user",                        default: false, null: false
+    t.boolean  "read_by_admin",                       default: false, null: false
+    t.boolean  "resolved",                            default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "despatched_to_user", default: false, null: false
-    t.boolean  "can_despatch",       default: false
-    t.string   "extra_text"
-    t.binary   "extra_data"
+    t.boolean  "despatched_to_user",                  default: false, null: false
+    t.boolean  "can_despatch",                        default: false
+    t.text     "extra_text",         limit: 16777215
+    t.binary   "extra_data",         limit: 16777215
   end
 
   add_index "messages", ["camera_id"], name: "messages_cameraid_idx", using: :btree

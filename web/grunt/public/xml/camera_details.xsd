@@ -16,6 +16,8 @@
                             <xs:element name="download_end" type="xs:integer"/>
                             <xs:element name="url" type="xs:string"/>
                             <xs:element name="upload_code" type="xs:string"/>
+                            <xs:element name="longitude" type="xs:decimal"/>
+                            <xs:element name="latitude" type="xs:decimal"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
