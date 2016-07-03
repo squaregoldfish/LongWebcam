@@ -3,6 +3,7 @@ defaults: &defaults
   grunt_api_key: "apikey"
   weather_url: "https://api.worldweatheronline.com/free/v1/weather.ashx"
   weather_api_key: "gqfq4hge4ypeh345frsrqf2z"
+  upload_url: "http://localhost:3000/upload"
 
 development:
   <<: *defaults

@@ -146,5 +146,50 @@ namespace :lwc_grunt do
 
         end
     end
+
+    #######################################################################################
+
+    desc "Upload backup retrievals to the main server"
+    task :upload_backup_retrievals => :environment do
+
+        Images.all.each do |image|
+
+            # An invalid response is ignored
+            image_exists = image.exists_on_server
+
+            delete_image = false
+
+            if image_exists != -1
+
+                if image_exists == 0
+
+                    upload = Upload.new(image.camera_id, image.image_time)
+                    upload.addImage(image.image_data)
+
+                    # If image.weather_retrieved
+                    upload.addWeather(image.get_weather)
+
+                    upload_response = upload.doUpload
+                    if upload_response != Upload::RESPONSE_OK
+                        Message.createMessage(camera_id, MessageType.getIdFromCode("ImageUploadFailure"),
+                                              false, "Response code = #{upload_response}", download_response.body)
+                    else
+                        # The image uploaded OK - we can delete it
+                        delete_image = true
+                    end
+                else
+                    delete_image = true
+                end
+
+                # Delete the local image
+                if delete_image
+                    image.destroy
+                end
+
+            end
+
+        end
+
+    end
 end
 

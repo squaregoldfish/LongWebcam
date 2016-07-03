@@ -101,58 +101,113 @@ class Weather
         @data_retrieved
     end
 
+    def set_data_retrieved(data_retrieved)
+        @data_retrieved = data_retrieved
+    end
+
     def temperature
         @temperature
+    end
+
+    def set_temperature(temperature)
+        @temperature = temperature
     end
 
     def weather_code
         @weather_code
     end
 
+    def set_weather_code(weather_code)
+        @weather_code = weather_code
+    end
+
     def wind_speed
         @wind_speed
+    end
+
+    def set_wind_speed(wind_speed)
+        @wind_speed = wind_speed
     end
 
     def wind_bearing
         @wind_bearing
     end
 
+    def set_wind_bearing(wind_bearing)
+        @wind_bearing = wind_bearing
+    end
+
     def rain
         @rain
+    end
+
+    def set_rain(rain)
+        @rain = rain
     end
 
     def humidity
         @humidity
     end
 
+    def set_humidity(humidity)
+        @humidity = humidity
+    end
+
     def visibility
         @visibility
+    end
+
+    def set_visibility(visibility)
+        @visibility = visibility
     end
 
     def pressure
         @pressure
     end
 
+    def set_pressure(pressure)
+        @pressure = pressure
+    end
+
     def cloud_cover
         @cloud_cover
+    end
+
+    def set_cloud_cover(cloud_cover)
+        @cloud_cover = cloud_cover
     end
 
     def air_quality
         @air_quality
     end
 
+    def set_air_quality(air_quality)
+        @air_quality = air_quality
+    end
+
     def observation_time
         @observation_time
+    end
+
+    def set_observation_time(observation_time)
+        @observation_time = observation_time
     end
 
     def observation_lon
         @observation_lon
     end
 
+    def set_observation_lon(observation_lon)
+        @observation_lon = observation_lon
+    end
+
     def observation_lat
         @observation_lat
     end
 
+    def set_observation_lat(observation_lat)
+        @observation_lat = observation_lat
+    end
 
     #====================================================
     #
