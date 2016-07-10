@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.longwebcam.org/xml/grunt"
+    xmlns="http://www.longwebcam.org/xml/grunt" elementFormDefault="qualified">
+    <xs:element name="camera_details">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="camera" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:integer"/>
+                            <xs:element name="timezone_id" type="xs:string"/>
+                            <xs:element name="daylight_saving" type="xs:integer"/>
+                            <xs:element name="utc_offset" type="xs:integer"/>
+                            <xs:element name="download_start" type="xs:integer"/>
+                            <xs:element name="download_end" type="xs:integer"/>
+                            <xs:element name="url" type="xs:string"/>
+                            <xs:element name="upload_code" type="xs:string"/>
+                            <xs:element name="longitude" type="xs:decimal"/>
+                            <xs:element name="latitude" type="xs:decimal"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

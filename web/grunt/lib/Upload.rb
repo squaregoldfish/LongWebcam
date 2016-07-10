@@ -22,7 +22,7 @@ class Upload
 
         # Retrieve the camera's upload code
         #
-        camera_record = Camera.find_by_id(camera_id)
+        camera_record = Camera.find(camera_id)
         @upload_code = camera_record.upload_code
 
         @uploadResponseXML = nil
@@ -54,8 +54,7 @@ class Upload
     # if there's no returned XML.
     #
     def doUpload()
-        upload_account = Account.find_by_account(ACCOUNT_NAME)
-        req = Net::HTTP.post_form(URI.parse(upload_account.url + upload_account.path), {:image_details => buildXML()})
+        req = Net::HTTP.post_form(URI.parse(GRUNT_CONFIG["upload_url"]), {:image_details => buildXML()})
 
         response_code = req.code
 
