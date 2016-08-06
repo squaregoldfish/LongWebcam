@@ -1,5 +1,8 @@
 Longwebcam::Application.routes.draw do
 
+  # Root
+  root :to => 'welcome#index'
+
   # Upload handler
   match '/upload', to: 'upload#upload', via: [:post]
 
