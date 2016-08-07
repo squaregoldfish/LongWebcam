@@ -14,6 +14,10 @@ class Message < ActiveRecord::Base
 
         new_message.save
 
-        return new_message.id
+        return new_message
+    end
+
+    def to_s
+        return "#{self.camera_id}: #{self.extra_text}"
     end
 end

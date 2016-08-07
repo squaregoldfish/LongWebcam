@@ -9,7 +9,7 @@ class Images < ActiveRecord::Base
 
     def Images.createImageRecord(cam_id, image)
 
-        camera_utc_offset = Camera.find_by_id(cam_id).utc_offset
+        camera_utc_offset = Camera.find(cam_id).utc_offset
 
         new_image = Images.new
         new_image.camera_id = cam_id
@@ -104,5 +104,9 @@ class Images < ActiveRecord::Base
         weather.set_data_retrieved(true)
 
         return weather
+    end
+
+    def to_s
+        return "Camera #{self.camera_id}, Date #{self.date}"
     end
 end

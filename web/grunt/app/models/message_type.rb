@@ -14,4 +14,17 @@ class MessageType < ActiveRecord::Base
         return result
 
     end
+
+    def MessageType.getCode(id)
+
+        result = "No such code"
+
+        mtype = MessageType.find(id)
+        if !mtype.nil?
+            result = mtype.code
+        end
+
+        return result
+
+    end
 end
