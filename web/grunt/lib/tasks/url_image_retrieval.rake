@@ -133,6 +133,10 @@ namespace :lwc_grunt do
         logger = Logger.new("log/upload_backup_retrievals.log")
 
         if (!MainServer.server_up)
+            logger.info("Main server down - quitting")
+        else
+            logger.info("Processing downloaded images")
+
             Images.all.each do |image|
 
                 logger.info("Processing #{image.to_s}")
@@ -186,7 +190,10 @@ namespace :lwc_grunt do
 
         logger = Logger.new("log/update_camera_details.log")
 
-        if (MainServer.server_up)
+        if (!MainServer.server_up)
+            logger.info("Main server down - quitting")
+        else
+            logger.info("Updating camera details")
 
             # Retrieve the Camera Details XML
             url = GRUNT_CONFIG["main_url"] + "/grunt/get_camera_details"
