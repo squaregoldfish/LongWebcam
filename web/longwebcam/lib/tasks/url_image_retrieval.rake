@@ -76,11 +76,13 @@ namespace :lwc do
             end
 
             if download_response.nil?
-                Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalFailure"),
+                message = Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalFailure"),
                                       true, "URL = #{camera_record.url}; Connection Failure", nil)
+                logger.info("Download failed: #{message.to_s}")
             elsif download_response.code != RESPONSE_OK
-                Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalFailure"),
+                message = Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalFailure"),
                                       true, "URL = #{camera_record.url}; HTTP Response = #{download_response.code}", nil)
+                logger.info("Download failed: #{message.to_s}")
             else
                 image_ok = true
 
@@ -88,8 +90,9 @@ namespace :lwc do
                 begin
                     image = Magick::Image.from_blob(download_response.body)[0]
                 rescue
-                    Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalNotImage"),
+                    message = Message.createMessage(camera_id, MessageType.getIdFromCode("URLRetrievalNotImage"),
                                           true, "URL = #{camera_record.url}", download_response.body)
+                    logger.info("Download failed: #{message.to_s}")
 
                     image_ok = false
                 end
@@ -112,8 +115,9 @@ namespace :lwc do
                     # Send the upload
                     upload_response = upload.doUpload
                     if upload_response != Upload::RESPONSE_OK
-                        Message.createMessage(camera_id, MessageType.getIdFromCode("ImageUploadFailure"),
+                        message = Message.createMessage(camera_id, MessageType.getIdFromCode("ImageUploadFailure"),
                                               false, "Response code = #{upload_response}", download_response.body)
+                        logger.error("Failed to upload image: #{message}")
                     end
                 end
             end
