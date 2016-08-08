@@ -2,6 +2,8 @@
 #
 module MainServer
 
+    RESPONSE_OK = "200"
+
 	def MainServer.server_up()
         server_up = true
 
