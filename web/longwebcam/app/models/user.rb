@@ -47,4 +47,35 @@ class User < ActiveRecord::Base
         # password was provided.  But we don't want to let an attacker know which. 
         return authenticated_user
     end
+
+    # Create a new user and generate a password for them
+    def User.create_user_and_generate_password(username, email, name)
+
+        # See if the user already exists
+        raise UserExists if !User.find_by_username(username).nil?
+        raise EmailExists if !User.find_by_email(email).nil?
+
+        # Generate a password
+        require 'securerandom'
+        generated_password = SecureRandom.urlsafe_base64(8)
+
+        user = User.new
+        user.username = username
+        user.email = email
+        user.firstname = name
+        user.new_password = generated_password
+
+        user.save
+
+        return generated_password
+
+    end
+end
+
+
+# Exception classes
+class UserExists < ArgumentError
+end
+
+class EmailExists < ArgumentError
 end
