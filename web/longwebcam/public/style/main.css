@@ -1,0 +1,21 @@
+/* Google Fonts */
+@import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,700|Ek+Mukta:400,700';
+
+body {
+	font-family: 'Ek Mukta', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+}
+
+article {
+	font-family: 'Cormorant Infant', serif;
+	font-weight: 600;
+	font-size: 1.2rem;
+}
+
+h1 {
+	font-family: 'Cormorant Infant', serif;
+	font-weight: 700;
+	font-variant: small-caps;
+	font-size: 2.5em;
+}
