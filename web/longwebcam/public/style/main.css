@@ -7,15 +7,31 @@ body {
 	font-size: 18px;
 }
 
-article {
-	font-family: 'Cormorant Infant', serif;
-	font-weight: 600;
-	font-size: 1.2rem;
+header {
+	margin-bottom: 40px;
 }
-
 h1 {
 	font-family: 'Cormorant Infant', serif;
 	font-weight: 700;
 	font-variant: small-caps;
 	font-size: 2.5em;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+a, a:visited {
+	color: black;
+	transition-property: box-shadow;
+	transition-duration: 0.25s;
+}
+
+a:hover {
+	color: black;
+	box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.4);
+	transition-property: box-shadow;
+	transition-duration: 0.25s;
+}
+
+p.majorLink {
+	text-align: center;
 }

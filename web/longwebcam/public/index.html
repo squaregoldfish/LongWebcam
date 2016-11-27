@@ -4,15 +4,66 @@
 		<title>Long Webcam</title>
  		<link rel="stylesheet" type="text/css" href="style/main.css">	
  		<link rel="stylesheet" type="text/css" href="style/landing_page.css">	
+ 		<link rel="stylesheet" type="text/css" href="style/prose.css">
+ 		<script src="script/jquery.min.js"></script>
+		<script src="script/jquery-ui.min.js"></script>
+
+ 		<script type="text/javascript">
+ 			function showDescription() {
+ 				$('#alpha').hide("blind", {direction: "up"}, 500);
+ 				$('#projectDescription').show("fade", {direction: "up"}, 500);
+ 			}
+
+ 			function hideDescription() {
+ 				$('#alpha').show("blind", {direction: "up"}, 500);
+ 				$('#projectDescription').hide("fade", {direction: "up"}, 500);
+ 			}
+ 		</script>
  	</head>
 	<body>
 		<header>
 			<img src="images/logo_large.png" alt="Long Webcam Logo"/>
 		</header>
-		<article>
+		<article id="alpha" class="summary">
 			<h1>Restricted Alpha</h1>
-			Long Webcam is currently in development, with invited participants only.
+			<p>
+				Long Webcam is currently in development, with invited participants only.
+			</p>
+			<p class="majorLink">
+				<a href="#" onclick="showDescription()">Read about the project</a>
+			</p>
+		</article>
+		<article id="projectDescription">
+			<div class="quote">
+				<p class="quote-body">
+					I saw trees growing and changing like puffs of vapour, now brown, now green;
+					they grew, spread, shivered, and passed away.  I saw huge buildings rise up faint
+					and fair, and pass like dreams.  The whole surface of the earth seemed changed
+					&mdash; melting and flowing under my eyes.
+				</p>
+				<p class="quote-byline">
+					H. G. Wells, The Time Traveller
+				</p>
+			</div>
+			<p>
+				The Long Webcam project has grown out of a fascination of all forms of time-lapse photography,
+				together with an interest in the work of the <a href="https://www.longwebcam.org">Long Now Foundation</a>.
+			</p>
+			<p>
+				Time-lapse photography produces videos of events that take too long for conventional video to capture
+				comfortably &ndash; single events that take hours or longer to complete. They allow us to see the changes
+				in objects that our normal senses cannot easily comprehend &ndash; stars moving across the sky, flowers opening etc.
+				Some projects have recorded events of much longer time scales &ndash; construction of buildings, or the ageing of a person
+				over several years.
+			</p>
+			<p>
+				It is still very hard to capture changes on the scales at which landscapes changes.
+				Trees grow and perish, glaciers advance and retreat, buildings are built and destroyed. Streets change around us.
+				The Long Webcam project aims to capture such events over many years, and create an archive of our changing world.
+			</p>
+			<p class="majorLink">
+				<a href="#" onclick="hideDescription()">Back</a>
+			</p>
 		</article>
 	</body>
 </html>
-

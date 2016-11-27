@@ -1,8 +1,13 @@
 body {
 	text-align: center;
 	margin-top: 65px;
+	overflow: hidden;
 }
 
 header {
-	margin-bottom: 30px;
+}
+
+#projectDescription {
+	display: none;
+	top: 2000;
 }
