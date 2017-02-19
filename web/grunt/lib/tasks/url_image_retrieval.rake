@@ -154,12 +154,15 @@ namespace :lwc_grunt do
                         upload.addImage(image.image_data)
 
                         # If image.weather_retrieved
-                        upload.addWeather(image.get_weather)
+                        weather = image.get_weather
+                        unless weather.nil?
+                            upload.addWeather(image.get_weather)
+                        end
 
                         upload_response = upload.doUpload
                         if upload_response != Upload::RESPONSE_OK
-                            message = Message.createMessage(camera_id, MessageType.getIdFromCode("ImageUploadFailure"),
-                                                  false, "Response code = #{upload_response}", download_response.body)
+                            message = Message.createMessage(image.camera_id, MessageType.getIdFromCode("ImageUploadFailure"),
+                                                  false, "Response code = #{upload_response}")
                             logger.error("Image upload failed: #{message.to_s}")
                         else
                             # The image uploaded OK - we can delete it

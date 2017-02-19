@@ -88,20 +88,25 @@ class Images < ActiveRecord::Base
         # Get lon/lat from camera record...
         camera = Camera.find(self.camera_id)
 
-        weather = Weather.new(camera.longitude, camera.latitude, self.camera_id)
-        weather.set_temperature(self.temperature)
-        weather.set_weather_code(self.weather_code)
-        weather.set_wind_speed(self.wind_speed)
-        weather.set_wind_bearing(self.wind_bearing)
-        weather.set_rain(self.rain)
-        weather.set_humidity(self.humidity)
-        weather.set_visibility(self.visibility)
-        weather.set_pressure(self.pressure)
-        weather.set_cloud_cover(self.cloud_cover)
-        weather.set_air_quality(self.air_quality)
-        weather.set_observation_time(self.weather_time)
+        weather = nil
 
-        weather.set_data_retrieved(true)
+        unless self.weather_time.nil?
+
+            weather = Weather.new(camera.longitude, camera.latitude, self.camera_id)
+            weather.set_temperature(self.temperature)
+            weather.set_weather_code(self.weather_code)
+            weather.set_wind_speed(self.wind_speed)
+            weather.set_wind_bearing(self.wind_bearing)
+            weather.set_rain(self.rain)
+            weather.set_humidity(self.humidity)
+            weather.set_visibility(self.visibility)
+            weather.set_pressure(self.pressure)
+            weather.set_cloud_cover(self.cloud_cover)
+            weather.set_air_quality(self.air_quality)
+            weather.set_observation_time(self.weather_time)
+
+            weather.set_data_retrieved(true)
+        end
 
         return weather
     end
