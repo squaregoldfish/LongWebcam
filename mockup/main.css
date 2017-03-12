@@ -3,12 +3,24 @@
 body {
 	font-family: 'Ek Mukta', sans-serif;
 	font-weight: 400;
-	font-size: 15px;
+	font-size: 18px;
 	margin: 0px;
 
 }
 
-#pageHeader {
+input {
+	font-family: 'Ek Mukta', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	border: 1px solid;
+}
+
+input:focus {
+	outline: none;
+	border: 3px solid;
+}
+
+#preHeader {
 	position: absolute;
 	top: 0px;
 	width: 100%;
@@ -31,13 +43,38 @@ body {
 	background: -webkit-linear-gradient(left, rgba(30,87,153,0) 0px,rgba(255,255,255,1) 40px,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to right, rgba(30,87,153,0) 0px,rgba(255,255,255,1) 40px,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
-	
-#searchBar {
+
+.heading {
 	padding: 8px;
 	margin-top: 40px;
+	display: flex;
+	align-items: center;
+	background-color: #595959;
+	color: #eeeeee;
 }
 
-.controls {
-	color: white;
-	background-color: #595959;
+.headingItem {
+	margin-right: 50px;
+	flex-grow: 1;
+}
+
+.headingItem:last-child {
+	flex-grow: 1000;
+	margin-right: 20px;
+}
+
+.heading input {
+	background-color: inherit;
+	color: inherit;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 10px;
+}
+
+#search {
+	background-image: url('search.png');
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
 }
