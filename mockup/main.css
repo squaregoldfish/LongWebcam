@@ -3,7 +3,7 @@
 body {
 	font-family: 'Ek Mukta', sans-serif;
 	font-weight: 400;
-	font-size: 18px;
+	font-size: 16px;
 	margin: 0px;
 
 }
@@ -37,6 +37,7 @@ input:focus {
 	top: 0px;
 	right: 4px;
 	font-weight: 700;
+	font-size: 1.1em;
 	height: 40px;
 	padding-left: 60px;
 	background: -moz-linear-gradient(left, rgba(30,87,153,0) 0px, rgba(255,255,255,1) 40px, rgba(255,255,255,1) 100%); /* FF3.6-15 */
@@ -77,4 +78,42 @@ input:focus {
 	background-image: url('search.png');
 	background-repeat: no-repeat;
 	background-position: 5px 50%;
+}
+
+.cameraWidget {
+	border: 2px solid #aaaaaa;
+	width: 320px;
+	height: 300px;
+	margin: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.widgetHeader {
+	color: white;
+	background-color: #aaaaaa;
+	flex-grow: 0;
+}
+
+.widgetImage {
+	text-align: center;
+	margin: 5px;
+	flex-grow: 1000;
+	display: flex;
+	align-items: center;
+}
+
+.thumbnail {
+	max-width: 300px;
+	max-height: 300px;
+}
+
+.widgetTitle {
+	font-family: "Cormorant Infant", serif;
+	font-weight: 700;
+	font-size: 1.2em;
+	text-align: center;
+	flex-basis: 1.5em;
+	flex-grow: 0;
+	bottom: 0px;
 }
