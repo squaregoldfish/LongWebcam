@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,700|Ek+Mukta:400,700';
+@import 'https://fonts.googleapis.com/css?family=Rasa:400,700|Ek+Mukta:400,700';
 
 body {
 	font-family: 'Ek Mukta', sans-serif;
@@ -91,6 +91,7 @@ input:focus {
 
 .widgetHeader {
 	color: white;
+	font-size: 1.1em;
 	background-color: #aaaaaa;
 	flex-grow: 0;
 }
@@ -109,8 +110,8 @@ input:focus {
 }
 
 .widgetTitle {
-	font-family: "Cormorant Infant", serif;
-	font-weight: 700;
+	font-family: "Rasa", serif;
+	font-weight: 400;
 	font-size: 1.2em;
 	text-align: center;
 	flex-basis: 1.5em;
