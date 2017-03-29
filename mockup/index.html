@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
   	<link rel="stylesheet" type="text/css" href="main.css" />
@@ -14,18 +15,82 @@
     </div>
     <div id="mainHeader" class="heading">
       <img src="logo.png" class="headingItem"/>
-      <input id="search" type="text" class="headingItem" placeholder="Find a camera" />
+      <input id="search" type="text" class="headingItem headingSearch" placeholder="Find a camera" />
+      <div class="headingStats">
+        17 Cameras. 9,760 images.
+      </div>
     </div>
-    <div class="cameraWidget">
-    	<div class="widgetHeader">
-    		Latest Cameras
-    	</div>
-    	<div class="widgetImage">
-    		<img src="images/bird.jpg" class="thumbnail"/>
-    	</div>
-    	<div class="widgetTitle">
-    		Helsinki Central Square
-    	</div>
+    <div id="widgets">
+      <div class="widget">
+        <div class="widgetHeader">
+          Latest Cameras
+        </div>
+        <div class="widgetContent">
+          <img src="images/bird.jpg" class="imageWidgetImage"/>
+          <div class="imageWidgetTitle widgetCamera">
+            Helsinki Central Square
+          </div>
+        </div>
+      </div>
+      <div class="widget">
+        <div class="widgetHeader">
+          Favourite Cameras
+        </div>
+        <div class="widgetContent">
+          <img src="images/bird.jpg" class="imageWidgetImage"/>
+          <div class="imageWidgetTitle widgetCamera">
+            Helsinki Central Square
+          </div>
+        </div>
+      </div>
+      <div class="widget">
+        <div class="widgetHeader">
+          Recent Events
+        </div>
+        <div class="widgetContent">
+          <table class="widgetTable">
+            <tr>
+              <td rowspan="2" class="widgetTableID">
+                4 Jul 2017
+              </td>
+              <td>
+                Harvest
+              </td>
+            </tr>
+            <tr>
+              <td class="widgetCamera">
+                Idaho Potato Farm
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="widgetTableID">
+                18 Jun 2017
+              </td>
+              <td>
+                Storm Surge
+              </td>
+            </tr>
+            <tr>
+              <td class="widgetCamera">
+                Bondi Beach South View
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="widgetTableID">
+                16 Feb 2017
+              </td>
+              <td>
+                Lord Mayor's Parade
+              </td>
+            </tr>
+            <tr>
+              <td class="widgetCamera">
+                Birmingham New Street Station
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </body>
 </html>
