@@ -1,17 +1,29 @@
-@import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,700|Ek+Mukta:400,700';
+@import 'https://fonts.googleapis.com/css?family=Rasa:400,700|Ek+Mukta:400,700';
 
 body {
 	font-family: 'Ek Mukta', sans-serif;
 	font-weight: 400;
-	font-size: 15px;
+	font-size: 16px;
 	margin: 0px;
 
 }
 
-#pageHeader {
+input {
+	font-family: 'Ek Mukta', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	border: 1px solid;
+}
+
+input:focus {
+	outline: none;
+	border: 3px solid;
+}
+
+#preHeader {
 	position: absolute;
 	top: 0px;
-	width: 100%;
+	width: 95%;
 	height: 40px;
 	overflow: hidden;
 	padding-top: 4px;
@@ -25,14 +37,85 @@ body {
 	top: 0px;
 	right: 4px;
 	font-weight: 700;
+	font-size: 1.1em;
+	height: 40px;
+	padding-left: 60px;
+	background: -moz-linear-gradient(left, rgba(30,87,153,0) 0px, rgba(255,255,255,1) 40px, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, rgba(30,87,153,0) 0px,rgba(255,255,255,1) 40px,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, rgba(30,87,153,0) 0px,rgba(255,255,255,1) 40px,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-#searchBar {
+.heading {
 	padding: 8px;
 	margin-top: 40px;
+	display: flex;
+	align-items: center;
+	background-color: #595959;
+	color: #eeeeee;
 }
 
-.controls {
+.headingItem {
+	margin-right: 50px;
+	flex-grow: 1;
+}
+
+.headingItem:last-child {
+	flex-grow: 1000;
+	margin-right: 20px;
+}
+
+.heading input {
+	background-color: inherit;
+	color: inherit;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 10px;
+}
+
+#search {
+	background-image: url('search.png');
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
+}
+
+.cameraWidget {
+	border: 2px solid #aaaaaa;
+	width: 320px;
+	height: 300px;
+	margin: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.widgetHeader {
 	color: white;
-	background-color: #595959;
+	font-size: 1.1em;
+	background-color: #aaaaaa;
+	flex-grow: 0;
+}
+
+.widgetImage {
+	text-align: center;
+	margin: 5px;
+	flex-grow: 1000;
+	display: flex;
+	align-items: center;
+}
+
+.thumbnail {
+	max-width: 300px;
+	max-height: 300px;
+	margin: auto;
+}
+
+.widgetTitle {
+	font-family: "Rasa", serif;
+	font-weight: 400;
+	font-size: 1.2em;
+	text-align: center;
+	flex-basis: 1.5em;
+	flex-grow: 0;
+	bottom: 0px;
 }
