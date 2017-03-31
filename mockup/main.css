@@ -150,5 +150,6 @@ td {
 	font-weight: 700;
 	vertical-align: top;
 	white-space: nowrap;
-	padding-right: 5px;
+	padding-right: 7px;
+	text-align: right;
 }
