@@ -54,6 +54,7 @@ td {
 }
 
 .heading {
+	height: 34px;
 	padding: 8px;
 	margin-top: 40px;
 	display: flex;
