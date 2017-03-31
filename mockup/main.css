@@ -92,64 +92,11 @@ td {
 	background-position: 5px 50%;
 }
 
-#widgets {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.widget {
-	border: 2px solid #aaaaaa;
-	width: 320px;
-	height: 300px;
-	margin: 5px;
-	display: flex;
-	flex-direction: column;
-}
-
-.widgetHeader {
-	color: white;
-	font-weight: 700;
-	padding-left: 4px;
-	font-size: 1.1em;
-	background-color: #aaaaaa;
-	flex-grow: 0;
-}
-
-.widgetContent {
+#quote {
 	font-family: "Rasa", serif;
 	font-weight: 400;
 	font-size: 1.2em;
-	flex-grow: 1000;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.imageWidgetImage {
-	max-width: 300px;
-	max-height: 300px;
-	margin: auto;
-}
-
-.imageWidgetTitle {
-	text-align: center;
-	flex-basis: 1.5em;
-	flex-grow: 0;
-	bottom: 0px;
-}
-
-.widgetCamera {
 	font-style: italic;
-}
-
-.widgetTable {
-	margin: 5px;
-}
-
-.widgetTableID {
-	font-weight: 700;
-	vertical-align: top;
-	white-space: nowrap;
-	padding-right: 7px;
-	text-align: right;
+	flex-grow: 1000;
+	margin-right: 20px;
 }
