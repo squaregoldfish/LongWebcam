@@ -26,3 +26,18 @@ body {
 	min-height: 100%;
 	overflow: hidden;
 }
+
+/* Overrides for OpenLayers */
+.ol-zoom {
+	top: 10px;
+	left: auto;
+	right: 10px;
+}
+
+.ol-control button {
+	background-color: #595959;
+}
+
+.ol-control button:hover {
+	background-color: #aaaaaa;
+}

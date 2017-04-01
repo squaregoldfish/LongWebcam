@@ -2,23 +2,34 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <link rel="stylesheet" type="text/css" href="map.css" />
     <link rel="stylesheet" type="text/css" href="openlayers4.0.1/ol.css" />
+    <!-- This must come last as is overrides some styles in the openlayers css-->
+    <link rel="stylesheet" type="text/css" href="map.css" />
     <title>
       Long Webcam
     </title>
-    <script src="map.js"></script>
     <script src="jquery-3.2.0.js"></script>
     <script src="openlayers4.0.1/ol.js"></script>
+    <script src="map.js"></script>
     <script>
       $(document).ready(function() {
+
+        var mapSource = new ol.source.Stamen({
+          layer: "terrain",
+          url: "https://stamen-tiles-{a-d}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png"
+        });
+
         var map = new ol.Map({
           target: 'map',
           layers: [
             new ol.layer.Tile({
-              source: new ol.source.XYZ({
-                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-              })
+//              source: new ol.source.XYZ({
+//                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+//              })
+                source: mapSource
+            }),
+            new ol.layer.Vector({
+              source: getCameraLayer(mapSource.getProjection())
             })
           ],
           view: new ol.View({
