@@ -28,12 +28,8 @@
             new ol.layer.Vector({
               source: getCameraLayer(mapSource.getProjection()),
               style: new ol.style.Style({
-                image: new ol.style.Circle({
-                  radius: 10,
-                  fill: new ol.style.Fill({
-                    color: '#ff9900',
-                    opacity: 1
-                  })
+                image: new ol.style.Icon({
+                  src: 'camera_icon.png'
                 })
               })
             })
