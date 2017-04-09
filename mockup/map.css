@@ -27,6 +27,36 @@ body {
 	overflow: hidden;
 }
 
+#infoPopup {
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	top: 0px;
+	left: 0px;
+	z-index: 100;
+	background-color: #eeeeee;
+	border-radius: 10px;
+	border: 2px solid #595959;
+	padding: 5px;
+	display: none;
+}
+
+#infoTitle {
+	font-family: "Rasa", serif;
+	font-weight: 700;
+	font-size: 1.25em;
+	overflow: hidden;
+	height: 25px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 295px;
+}
+
+#infoImage {
+	max-width: 295px;
+	max-height: 170px;
+}
+
 /* Overrides for OpenLayers */
 .ol-zoom {
 	top: 10px;
