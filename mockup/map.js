@@ -78,6 +78,7 @@ function displayFeatureInfo(pixel) {
 		$('#map').css({
 			cursor: 'default'
 		});
+		currentPopupCamera = null;
 	}
 }
 
