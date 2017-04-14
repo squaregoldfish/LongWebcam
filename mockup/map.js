@@ -56,14 +56,16 @@ function displayFeatureInfo(pixel) {
     });
 
     if (feature) {
-		var featurePixel = map.getPixelFromCoordinate(feature.getGeometry().getFirstCoordinate());
+		//var featurePixel = map.getPixelFromCoordinate(feature.getGeometry().getFirstCoordinate());
 
 
 		var camName = feature.get('name');
 		if (camName != currentPopupCamera) {
 			infoPopup.css({
-	  			left: (featurePixel[0] + 25) + 'px',
-				top: (featurePixel[1]) + 'px'
+	  			//left: (featurePixel[0] + 25) + 'px',
+				//top: (featurePixel[1]) + 'px'
+	  			left: (pixel[0] + 25) + 'px',
+				top: (pixel[1]) + 'px'
 			});
 			infoTitle.html(feature.get('name'));
 			infoImage.attr('src', feature.get('imageUrl'));
