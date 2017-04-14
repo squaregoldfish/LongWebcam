@@ -138,8 +138,9 @@ $(document).ready(function() {
   		],
   		view: new ol.View({
     		center: ol.proj.fromLonLat([10, 45]),
-    		zoom: 4
-  		})
+    		zoom: 4,
+    		minZoom: 2
+  		}),
 	});
 
 	map.on('pointermove', function(evt) {
