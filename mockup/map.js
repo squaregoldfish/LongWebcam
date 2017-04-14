@@ -1,6 +1,7 @@
 // Map stuff
 var mapSource = null;
 var map = null;
+var mapDiv = null;
 var infoPopup = null;
 var infoTitle = null;
 var infoImage = null;
@@ -56,25 +57,56 @@ function displayFeatureInfo(pixel) {
     });
 
     if (feature) {
-		var featurePixel = map.getPixelFromCoordinate(feature.getGeometry().getFirstCoordinate());
+		//var featurePixel = map.getPixelFromCoordinate(feature.getGeometry().getFirstCoordinate());
+		var featurePixel = pixel;
 
 
 		var camName = feature.get('name');
 		if (camName != currentPopupCamera) {
+			
+			var horizontal_shift = 25;
+			var vertical_shift = 0;
+
+			var topLimit = (infoPopup.height()) + 25;
+			var bottomLimit = mapDiv.height() - topLimit;
+			var leftLimit = (infoPopup.height()) + 25;
+			var rightLimit = mapDiv.width() - leftLimit;
+
+			if (featurePixel[1] <= topLimit) {
+				vertical_shift = (infoPopup.height() / 2) + 25;
+
+				if (featurePixel[0] >= rightLimit) {
+					horizontal_shift = (infoPopup.width() + 25) * -1;
+				} else if (featurePixel[0] > leftLimit) {
+					horizontal_shift = (infoPopup.width() / 2) * -1;
+				}
+			} else if (featurePixel[1] >= bottomLimit) {
+				vertical_shift = ((infoPopup.height() / 2) + 50) * -1;
+
+				if (featurePixel[0] >= rightLimit) {
+					horizontal_shift = (infoPopup.width() + 25) * -1;
+				} else if (featurePixel[0] > leftLimit) {
+					horizontal_shift = (infoPopup.width() / 2) * -1;
+				}
+			} else if (featurePixel[0] >= rightLimit) {
+				horizontal_shift = (infoPopup.width() + 25) * -1;
+			}
+
 			infoPopup.css({
-	  			left: (featurePixel[0] + 25) + 'px',
-				top: (featurePixel[1]) + 'px'
+	  			left: (featurePixel[0] + horizontal_shift) + 'px',
+				top: (featurePixel[1] + vertical_shift) + 'px'
 			});
+
 			infoTitle.html(feature.get('name'));
 			infoImage.attr('src', feature.get('imageUrl'));
 			currentPopupCamera = camName;
 		}
-		infoPopup.show();
+		infoPopup.fadeIn(100);
 		$('#map').css({
 			cursor: 'pointer'
 		});
 	} else {
-		infoPopup.hide();
+		infoPopup.fadeOut(100);
 		$('#map').css({
 			cursor: 'default'
 		});
@@ -106,8 +138,9 @@ $(document).ready(function() {
   		],
   		view: new ol.View({
     		center: ol.proj.fromLonLat([10, 45]),
-    		zoom: 4
-  		})
+    		zoom: 4,
+    		minZoom: 2
+  		}),
 	});
 
 	map.on('pointermove', function(evt) {
@@ -119,6 +152,7 @@ $(document).ready(function() {
   		displayFeatureInfo(map.getEventPixel(evt.originalEvent));
 	});
 
+	mapDiv = $('#map');
 	infoPopup = $('#infoPopup');
 	infoTitle = $('#infoTitle');
 	infoImage = $('#infoImage');
