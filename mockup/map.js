@@ -57,13 +57,29 @@ function displayFeatureInfo(pixel) {
     });
 
     if (feature) {
-		//var featurePixel = map.getPixelFromCoordinate(feature.getGeometry().getFirstCoordinate());
-		var featurePixel = pixel;
 
+		var featureCoord = ol.proj.toLonLat(feature.getGeometry().getFirstCoordinate());
+
+		var featureCoordOK = false;
+		var featurePixel = map.getPixelFromCoordinate(ol.proj.fromLonLat(featureCoord));
+		var mapMin = mapDiv.offset().left;
+		var mapMax = mapMin + mapDiv.width();
+
+
+		while (!featureCoordOK) {
+			if (featurePixel[0] < mapMin) {
+				featureCoord[0] = featureCoord[0] + 360
+			} else if (featurePixel[0] > mapMax) {
+				featureCoord[0] = featureCoord[0] - 360
+			} else {
+				featureCoordOK = true;
+			}
+
+			featurePixel = map.getPixelFromCoordinate(ol.proj.fromLonLat(featureCoord));
+		}
 
 		var camName = feature.get('name');
 		if (camName != currentPopupCamera) {
-			
 			var horizontal_shift = 25;
 			var vertical_shift = 0;
 
