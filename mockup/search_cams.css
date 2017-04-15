@@ -22,3 +22,48 @@ body {
 	position: absolute;
 	left: 200px;
 }
+
+.cameraResult {
+	padding: 5px;
+	display: inline-grid;
+	grid-template-columns: 255px 370px;
+	grid-template-rows: 140px;
+	cursor: pointer;
+}
+
+.cameraResult .thumbnail {
+	max-width: 250px;
+	max-height: 250px;
+}
+
+.cameraResult .title {
+	font-family: "Rasa", serif;
+	font-weight: 700;
+	font-size: 1.25em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 25px;
+}
+
+.cameraResult .description {
+	font-family: "Rasa", serif;
+	font-weight: 400;
+	overflow: hidden;
+	height: 115px;
+}
+
+.cameraResult .location {
+	position: relative;
+	height: 25px;
+	top: -140px;
+	padding-top: 115px;
+	font-size: 0.9em;
+	color: #666666;
+	font-style: italic;
+	width: 370px;
+	z-index: 100;
+	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 95px, rgba(255,255,255,1) 110px, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 95px,rgba(255,255,255,1) 110px,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 95px,rgba(255,255,255,1) 110px,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
