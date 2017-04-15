@@ -84,15 +84,15 @@ function displayFeatureInfo(pixel) {
 			var vertical_shift = 0;
 
 			var topLimit = (infoPopup.height()) + 25;
-			var bottomLimit = mapDiv.height() - topLimit;
+			var bottomLimit = mapDiv.height() - topLimit - 25;
 			var leftLimit = (infoPopup.height()) + 25;
-			var rightLimit = mapDiv.width() - leftLimit;
+			var rightLimit = mapDiv.width() - leftLimit - 110;
 
 			if (featurePixel[1] <= topLimit) {
 				vertical_shift = (infoPopup.height() / 2) + 25;
 
 				if (featurePixel[0] >= rightLimit) {
-					horizontal_shift = (infoPopup.width() + 25) * -1;
+					horizontal_shift = (infoPopup.width() + 35) * -1;
 				} else if (featurePixel[0] > leftLimit) {
 					horizontal_shift = (infoPopup.width() / 2) * -1;
 				}
@@ -100,12 +100,12 @@ function displayFeatureInfo(pixel) {
 				vertical_shift = ((infoPopup.height() / 2) + 50) * -1;
 
 				if (featurePixel[0] >= rightLimit) {
-					horizontal_shift = (infoPopup.width() + 25) * -1;
+					horizontal_shift = (infoPopup.width() + 35) * -1;
 				} else if (featurePixel[0] > leftLimit) {
 					horizontal_shift = (infoPopup.width() / 2) * -1;
 				}
 			} else if (featurePixel[0] >= rightLimit) {
-				horizontal_shift = (infoPopup.width() + 25) * -1;
+				horizontal_shift = (infoPopup.width() + 35) * -1;
 			}
 
 			infoPopup.css({
