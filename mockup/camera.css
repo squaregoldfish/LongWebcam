@@ -1,0 +1,42 @@
+#content {
+	display: flex;
+}
+
+#title {
+	font-family: "Rasa", serif;
+	font-weight: 700;
+	font-size: 1.75em;
+	border: 1px solid green;
+}
+
+#description {
+	font-family: "Rasa", serif;
+	font-size: 1.25em;
+	border: 1px solid blue;
+}
+
+#imageContainer {
+	border: 1px solid red;
+}
+
+#cameraImage {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#tags {
+	border: 1px solid brown;
+}
+
+#events {
+	border: 1px solid orange;
+}
+
+#timeline {
+	border: 1px solid purple;
+}
+
+#controls {
+	border: 1px solid yellow;
+}
+
