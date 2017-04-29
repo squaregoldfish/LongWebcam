@@ -1,7 +1,7 @@
 require 'xml'
 require 'date'
 require 'base64'
-require 'RMagick'
+require 'rmagick'
 
 class UploadController < ApplicationController
     # This controller does not use user security, so there's no session
