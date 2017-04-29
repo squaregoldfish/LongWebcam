@@ -1,5 +1,7 @@
 # Methods for interrogating the main server
 #
+require 'net/http'
+
 module MainServer
 
     RESPONSE_OK = "200"

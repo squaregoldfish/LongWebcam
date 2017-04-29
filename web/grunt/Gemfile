@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '5.1.0'
 
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.21'
+gem 'mysql2', '~> 0.4.5'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #
@@ -17,14 +17,14 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.11'
 
 # XML handler
-gem 'libxml-ruby', '~> 2.7.0'
+gem 'libxml-ruby', '~> 3.0.0'
 
 # Image processing
-gem 'rmagick', '~> 2.13.2'
+gem 'rmagick', '~> 2.16.0'
 
 # XML Builder
-gem 'builder', '~> 3.0'
+gem 'builder', '~> 3.2.3'
 

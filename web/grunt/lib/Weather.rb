@@ -1,5 +1,6 @@
 require 'xml'
 require 'Location'
+require 'net/http'
 
 # Class for retrieving weather information
 # for a given location.
