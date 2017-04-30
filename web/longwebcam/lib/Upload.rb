@@ -1,6 +1,7 @@
 require 'xml'
 require 'base64'
 require 'rmagick'
+require 'net/http'
 
 # Class for handling the upload of images and related weather information.
 class Upload
@@ -8,6 +9,7 @@ class Upload
     # CONSTANTS
     ACCOUNT_NAME = "LWCUpload"
     RESPONSE_OK = '200'
+
 
     # Constructor - stores passed in info and retrieves additional
     # required details

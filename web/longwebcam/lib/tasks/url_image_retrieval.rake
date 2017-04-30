@@ -1,6 +1,7 @@
 require 'rmagick'
 require 'Upload'
 require 'Weather'
+require 'net/http'
 
 namespace :lwc do
     desc "Retrieves URL-based camera images and weather"

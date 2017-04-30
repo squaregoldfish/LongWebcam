@@ -27,10 +27,14 @@ class Image < ActiveRecord::Base
     def Image.getImageRecord(camera_id, date)
         record = nil
 
-        records = find(:all, :conditions => ['camera_id LIKE ? AND date LIKE ?', camera_id, date])
+        begin
+            records = find(:all, :conditions => ['camera_id LIKE ? AND date LIKE ?', camera_id, date])
 
-        if records.size > 0
-            record = records.first
+            if records.size > 0
+                record = records.first
+            end
+        rescue ActiveRecord::RecordNotFound
+            record = nil
         end
 
         return record
