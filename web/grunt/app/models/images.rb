@@ -1,4 +1,4 @@
-require 'RMagick'
+require 'rmagick'
 
 class Images < ActiveRecord::Base
     include ActiveModel::ForbiddenAttributesProtection

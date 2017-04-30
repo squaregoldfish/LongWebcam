@@ -4,8 +4,8 @@ require 'xml'
 # It will only work if the correct security code is supplied.
 class GruntController < ApplicationController
     # This controller does not use user security, so there's no session
-    skip_before_filter :verify_authenticity_token
-    before_filter :init_vars
+    skip_before_action :verify_authenticity_token
+    before_action :init_vars
 
     ACCOUNT_NAME = "Grunt"
 

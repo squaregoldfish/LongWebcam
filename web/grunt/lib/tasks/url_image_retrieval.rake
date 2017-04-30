@@ -1,4 +1,4 @@
-require 'RMagick'
+require 'rmagick'
 require 'Upload'
 require 'Weather'
 require 'MainServer'
@@ -110,12 +110,12 @@ namespace :lwc_grunt do
                         image_record = Images.createImageRecord(camera_id, image)
 
                         # Add the weather to the image record
-                        logger.trace("Retrieving weather")
+                        logger.debug("Retrieving weather")
                         weather = Weather.new(camera_record.longitude, camera_record.latitude, camera_id)
                         weather.retrieve_data
 
                         if weather.data_retrieved?
-                            logger.trace("Weather retrieved OK")
+                            logger.debug("Weather retrieved OK")
                             image_record.add_weather(weather)
                         end
                     end

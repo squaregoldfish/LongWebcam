@@ -1,6 +1,6 @@
 require 'xml'
 require 'base64'
-require 'RMagick'
+require 'rmagick'
 
 # Class for handling the upload of images and related weather information.
 class Upload
