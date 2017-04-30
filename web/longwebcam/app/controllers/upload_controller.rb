@@ -5,7 +5,7 @@ require 'rmagick'
 
 class UploadController < ApplicationController
     # This controller does not use user security, so there's no session
-    skip_before_filter :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
 
     # Status codes for various processing responses
     # These will be used to look up the appropriate
