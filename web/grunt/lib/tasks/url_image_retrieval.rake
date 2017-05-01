@@ -39,8 +39,16 @@ namespace :lwc_grunt do
 
                     camera_id = details.camera_id
 
-                    # See if there's been an image downloaded today
-                    last_image = Images.find_by_sql("SELECT * FROM images WHERE camera_id = '#{camera_id}' ORDER BY date DESC LIMIT 1")[0]
+                    last_image = nil
+
+                    begin
+
+                        # See if there's been an image downloaded today
+                        last_image = Images.find_by_sql("SELECT * FROM images WHERE camera_id = '#{camera_id}' ORDER BY date DESC LIMIT 1")[0]
+                    rescue ActiveRecord::RecordNotFound
+                        last_image = nil
+                    end
+
                     if last_image == nil
                         cameras_to_download << camera_id
                     elsif last_image.date != camera_time.to_date
