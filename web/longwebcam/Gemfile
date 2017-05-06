@@ -23,3 +23,5 @@ gem 'rmagick', '~> 2.16.0'
 # XML Builder
 gem 'builder', '~> 3.2.3'
 
+# ActiveRecod sessions
+gem 'activerecord-session_store'
