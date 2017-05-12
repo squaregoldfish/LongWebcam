@@ -25,3 +25,9 @@ gem 'builder', '~> 3.2.3'
 
 # ActiveRecod sessions
 gem 'activerecord-session_store'
+
+# jQuery
+gem 'jquery-rails', '~> 4.3.0'
+
+# turbolinks
+gem 'turbolinks', '~> 5.0.0'
