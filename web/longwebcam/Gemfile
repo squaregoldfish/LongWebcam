@@ -28,6 +28,7 @@ gem 'activerecord-session_store'
 
 # jQuery
 gem 'jquery-rails', '~> 4.3.0'
+gem 'jquery-ui-rails', '~> 6.0.0'
 
 # turbolinks
 gem 'turbolinks', '~> 5.0.0'

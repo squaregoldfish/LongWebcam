@@ -1,7 +1,7 @@
 Longwebcam::Application.routes.draw do
 
   # Root
-  root :to => 'welcome#index'
+  root :to => 'alpha#index'
 
   # This should allow us to deal with all alpha access stuff
   resources :alpha

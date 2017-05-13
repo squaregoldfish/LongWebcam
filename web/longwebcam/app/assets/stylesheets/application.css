@@ -10,4 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require jquery-ui
  */
+
+@import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,600i,700|Ek+Mukta:400,700';
