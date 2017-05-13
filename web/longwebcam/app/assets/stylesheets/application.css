@@ -66,3 +66,7 @@ a:hover {
 p.majorLink {
 	text-align: center;
 }
+
+.error {
+	color: #FF0000;
+}

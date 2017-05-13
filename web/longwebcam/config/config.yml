@@ -1,6 +1,7 @@
 defaults: &defaults
   base_url: "http://localhost:3000"
   grunt_url: "http://localhost:3001"
+  alpha_code: "a999"
 
 development:
   <<: *defaults

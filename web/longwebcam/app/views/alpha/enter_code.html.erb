@@ -1,1 +1,17 @@
-So apparently I can just put some text here.
+<article class="summary">
+	<p>
+		When you joined the Alpha program, you received a code.
+		<br/>
+		Please enter it below.
+		<%= form_tag do %>
+			<%= text_field_tag(:code) %>
+			<%= submit_tag("Access Alpha") %>
+		<% end %>
+
+		<% if @check_result == false %>
+			<div class="error">
+				INVALID CODE
+			</div>
+		<% end %>
+	</p>
+</article>

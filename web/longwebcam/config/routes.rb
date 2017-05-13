@@ -3,8 +3,8 @@ Longwebcam::Application.routes.draw do
   # Root
   root :to => 'alpha#index'
 
-  # This should allow us to deal with all alpha access stuff
-  resources :alpha
+  # Routes for alpha control
+  match '/alpha/enter_code', to: 'alpha#enter_code', via: [:get, :post]
 
   # Upload handler
   match '/upload', to: 'upload#upload', via: [:post]
