@@ -14,3 +14,55 @@
  */
 
 @import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,600i,700|Ek+Mukta:400,700';
+
+header {
+	margin-bottom: 40px;
+}
+
+body {
+	font-family: 'Ek Mukta', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	text-align: center;
+	margin-top: 65px;
+}
+
+article {
+	font-family: 'Cormorant Infant', serif;
+	font-weight: 600;
+	font-size: 1.3rem;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
+	text-align: left;
+}
+
+article.summary {
+	text-align: center;
+}
+
+h1 {
+	font-family: 'Cormorant Infant', serif;
+	font-weight: 700;
+	font-variant: small-caps;
+	font-size: 2.5em;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+a, a:visited {
+	color: black;
+	transition-property: box-shadow;
+	transition-duration: 0.25s;
+}
+
+a:hover {
+	color: black;
+	box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.4);
+	transition-property: box-shadow;
+	transition-duration: 0.25s;
+}
+
+p.majorLink {
+	text-align: center;
+}

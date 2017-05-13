@@ -1,69 +1,44 @@
-<!DOCTYPE html> 
-<html>
-	<head>
-		<title>Long Webcam</title>
- 		<script type="text/javascript">
- 			function showDescription() {
- 				$('#alpha').hide("blind", {direction: "up"}, 500);
- 				$('#projectDescription').show("fade", {direction: "up"}, 500);
- 				return false;
- 			}
-
- 			function hideDescription() {
- 				$('#alpha').show("blind", {direction: "up"}, 500);
- 				$('#projectDescription').hide("fade", {direction: "up"}, 500);
- 				return false;
- 			}
- 		</script>
- 	</head>
-	<body>
-		<header>
-			<%= image_tag "alpha_logo.png", alt: "Long Webcam Logo" %>
-		</header>
-		<article id="alpha" class="summary">
-			<h1>Restricted Alpha</h1>
-			<p>
-				Long Webcam is currently in development, with invited participants only.
-			</p>
-			<p class="majorLink">
-				<a href="#" onclick="return showDescription();">Read about the project</a>
-			</p>
-		</article>
-		<article id="projectDescription">
-			<div class="quote">
-				<p class="quote-body">
-					I saw trees growing and changing like puffs of vapour, now brown, now green;
-					they grew, spread, shivered, and passed away.  I saw huge buildings rise up faint
-					and fair, and pass like dreams.  The whole surface of the earth seemed changed
-					&mdash; melting and flowing under my eyes.
-				</p>
-				<p class="quote-byline">
-					H. G. Wells, The Time Traveller
-				</p>
-			</div>
-			<p>
-				The Long Webcam project has grown out of a fascination of all forms of time-lapse photography,
-				together with an interest in the work of the <a href="https://www.longwebcam.org">Long Now Foundation</a>.
-			</p>
-			<p>
-				Time-lapse photography produces videos of events that take too long for conventional video to capture
-				comfortably &ndash; single events that take hours or longer to complete. They allow us to see the changes
-				in objects that our normal senses cannot easily comprehend &ndash; stars moving across the sky, flowers opening etc.
-				Some projects have recorded events of much longer time scales &ndash; construction of buildings, or the ageing of a person
-				over several years.
-			</p>
-			<p>
-				It is still very hard to capture changes on the scales at which landscapes changes.
-				Trees grow and perish, glaciers advance and retreat, buildings are built and destroyed. Streets change around us.
-				The Long Webcam project aims to capture such events over many years, and create an archive of our changing world.
-			</p>
-			<p>
-				If you are interested in the project, please send us a message:
-				<a href="mailto:info@longwebcam.org">info@longwebcam.org</a>
-			</p>
-			<p class="majorLink">
-				<a href="#" onclick="return hideDescription();">Back</a>
-			</p>
-		</article>
-	</body>
-</html>
+<article id="alpha_info" class="summary">
+	<p>
+		Long Webcam is currently in development, with invited participants only.
+	</p>
+	<p class="majorLink">
+		<a href="#" onclick="return showDescription();">Read about the project</a>
+	</p>
+</article>
+<article id="projectDescription">
+	<div class="quote">
+		<p class="quote-body">
+			I saw trees growing and changing like puffs of vapour, now brown, now green;
+			they grew, spread, shivered, and passed away.  I saw huge buildings rise up faint
+			and fair, and pass like dreams.  The whole surface of the earth seemed changed
+			&mdash; melting and flowing under my eyes.
+		</p>
+		<p class="quote-byline">
+			H. G. Wells, The Time Traveller
+		</p>
+	</div>
+	<p>
+		The Long Webcam project has grown out of a fascination of all forms of time-lapse photography,
+		together with an interest in the work of the <a href="https://www.longwebcam.org">Long Now Foundation</a>.
+	</p>
+	<p>
+		Time-lapse photography produces videos of events that take too long for conventional video to capture
+		comfortably &ndash; single events that take hours or longer to complete. They allow us to see the changes
+		in objects that our normal senses cannot easily comprehend &ndash; stars moving across the sky, flowers opening etc.
+		Some projects have recorded events of much longer time scales &ndash; construction of buildings, or the ageing of a person
+		over several years.
+	</p>
+	<p>
+		It is still very hard to capture changes on the scales at which landscapes changes.
+		Trees grow and perish, glaciers advance and retreat, buildings are built and destroyed. Streets change around us.
+		The Long Webcam project aims to capture such events over many years, and create an archive of our changing world.
+	</p>
+	<p>
+		If you are interested in the project, please send us a message:
+		<a href="mailto:info@longwebcam.org">info@longwebcam.org</a>
+	</p>
+	<p class="majorLink">
+		<a href="#" onclick="return hideDescription();">Back</a>
+	</p>
+</article>
