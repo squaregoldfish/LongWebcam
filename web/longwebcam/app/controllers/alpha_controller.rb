@@ -8,7 +8,7 @@ class AlphaController < ApplicationController
 		unless code.nil?
 
 			# Check whether the code is valid
-			if code_valid(code)
+			if APP_CONFIG["alpha_code"] == code
 				session[:alpha_allowed] = true
 				redirect_to "/"
 			else
@@ -17,9 +17,5 @@ class AlphaController < ApplicationController
 			end
 
 		end
-	end
-
-	def code_valid(code)
-		return APP_CONFIG["alpha_code"] == code
 	end
 end

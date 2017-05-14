@@ -4,6 +4,9 @@ Longwebcam::Application.routes.draw do
   root :to => 'application#index'
 
   # Routes for alpha control
+  match '/alpha/index', to: 'alpha#index', via: [:get, :post]
+
+  # Routes for alpha control
   match '/alpha/enter_code', to: 'alpha#enter_code', via: [:get, :post]
 
   # Upload handler

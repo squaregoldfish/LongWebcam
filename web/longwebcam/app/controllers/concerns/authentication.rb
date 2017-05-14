@@ -5,7 +5,7 @@ module Authentication
 	# passed the alpha code check
 	def check_alpha_code
 		unless session[:alpha_allowed]
-			redirect_to "/alpha/enter_code"
+			redirect_to "/alpha/index"
 		end
 	end
 end
