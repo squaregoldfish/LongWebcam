@@ -3,15 +3,15 @@
 		When you joined the Alpha program, you received a code.
 		<br/>
 		Please enter it below.
-		<%= form_tag do %>
-			<%= text_field_tag(:code) %>
-			<%= submit_tag("Access Alpha") %>
-		<% end %>
-
 		<% if @check_result == false %>
-			<div class="error">
+			<div class="form-message error">
 				INVALID CODE
 			</div>
+		<% end %>
+		<%= form_tag do %>
+			<%= text_field_tag(:code) %>
+			<br/>
+			<%= submit_tag("Access Alpha") %>
 		<% end %>
 	</p>
 </article>

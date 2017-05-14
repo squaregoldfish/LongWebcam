@@ -1,5 +1,16 @@
 body {
 	overflow: hidden;
+	text-align: center;
+	margin-top: 55px;
+}
+
+input:not([type=submit]):not([type=file]) {
+	text-align: center;
+	width: 150px;
+}
+
+input[type="submit"] {
+	margin-top: 15px;
 }
 
 #projectDescription {
