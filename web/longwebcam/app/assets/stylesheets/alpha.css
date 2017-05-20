@@ -1,6 +1,9 @@
 body {
 	overflow: hidden;
 	text-align: center;
+}
+
+header {
 	margin-top: 55px;
 }
 

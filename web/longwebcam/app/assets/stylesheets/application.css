@@ -30,6 +30,11 @@ input, button, select, option, textarea {
 /*
  * HTML Styles
  */
+body {
+	width: 100%;
+	margin: 0px;
+}
+
 header {
 	margin-bottom: 40px;
 }
@@ -57,13 +62,13 @@ h1 {
 	margin-bottom: 0px;
 }
 
-a, a:visited {
+a.textLink, a.textLink:visited {
 	color: black;
 	transition-property: box-shadow;
 	transition-duration: 0.25s;
 }
 
-a:hover {
+a.textLink:hover {
 	color: black;
 	box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.4);
 	transition-property: box-shadow;

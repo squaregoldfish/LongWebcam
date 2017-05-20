@@ -3,10 +3,10 @@
 		Long Webcam is currently in development, with invited participants only.
 	</p>
 	<p class="majorLink">
-		<a href="#" onclick="return showDescription();">Read about the project</a>
+		<a href="#" class="textLink" onclick="return showDescription();">Read about the project</a>
 		<br/>
 		<br/>
-		<a href="enter_code">Access the Alpha Site</a>
+		<%= link_to "Access the Alpha Site", "enter_code", class: "textLink" %>
 	</p>
 </article>
 <article id="projectDescription">
@@ -23,7 +23,7 @@
 	</div>
 	<p>
 		The Long Webcam project has grown out of a fascination of all forms of time-lapse photography,
-		together with an interest in the work of the <a href="https://www.longwebcam.org">Long Now Foundation</a>.
+		together with an interest in the work of the <a class="textLink" href="https://www.longwebcam.org">Long Now Foundation</a>.
 	</p>
 	<p>
 		Time-lapse photography produces videos of events that take too long for conventional video to capture
@@ -39,9 +39,9 @@
 	</p>
 	<p>
 		If you are interested in the project, please send us a message:
-		<a href="mailto:info@longwebcam.org">info@longwebcam.org</a>
+		<a class="textLink" href="mailto:info@longwebcam.org">info@longwebcam.org</a>
 	</p>
 	<p class="majorLink">
-		<a href="#" onclick="return hideDescription();">Back</a>
+		<a href="#" class="textLink" onclick="return hideDescription();">Back</a>
 	</p>
 </article>
