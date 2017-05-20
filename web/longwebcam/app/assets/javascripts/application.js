@@ -15,3 +15,4 @@
 //= require jquery-ui/effects/effect-fade
 //= require turbolinks
 //= require_tree .
+//= require ol

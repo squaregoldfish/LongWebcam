@@ -9,8 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
- *= require jquery-ui
+ *= require ol
  */
 
 @import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,600i,700|Ek+Mukta:400,700';
@@ -138,4 +137,9 @@ p.majorLink {
 
 .error {
 	color: #F00;
+}
+
+#siteHeader {
+	background-color: #595959;
+	color: #eeeeee;
 }
