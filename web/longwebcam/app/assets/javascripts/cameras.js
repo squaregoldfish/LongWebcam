@@ -1,5 +1,5 @@
 // Page load JS. Decides what to do based on the page contents
-$(document).ready(function() {
+$(document).on('turbolinks:load', function (){
   if ($('#searchMap').length) {
     drawSearchMap();
   }
