@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Long Webcam</title>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "application", params[:controller], :media => "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", params[:controller] %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-	<div id="siteHeader">
-		Long Webcam header here
-	</div>
+	<head>
+	  <title>Long Webcam</title>
+	  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= stylesheet_link_tag "application", params[:controller], :media => "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", params[:controller] %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div id="siteHeader">
+			Long Webcam header here
+		</div>
 
-<%= yield %>
+	<%= yield %>
 
-</body>
+	</body>
 </html>

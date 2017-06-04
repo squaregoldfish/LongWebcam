@@ -2,7 +2,7 @@ class AlphaController < ApplicationController
 	skip_before_action :check_alpha_code
 
 	def enter_code
-		code = params[:code]
+		code = params[:alpha_code]
 
 		# If no code we'll just go back to the page
 		unless code.nil?
