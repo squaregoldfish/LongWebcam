@@ -32,3 +32,6 @@ gem 'jquery-ui-rails', '~> 6.0.0'
 
 # turbolinks
 gem 'turbolinks', '~> 5.0.0'
+
+# jBuilder
+gem 'jbuilder', '~> 2.6.4'

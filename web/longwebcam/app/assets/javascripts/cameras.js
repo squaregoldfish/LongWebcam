@@ -1,7 +1,13 @@
 // Page load JS. Decides what to do based on the page contents
-$(document).on('turbolinks:load', function (){
+$(document).on('turbolinks:load', function () {
   if ($('#searchMap').length) {
-    drawSearchMap();
+    //drawSearchMap();
+  }
+
+  if ($('#searchForm').length) {
+    $('#searchForm').on('ajax:success', function(e, data, status, xhr) {
+      $('#json').html(xhr.responseText);
+    });
   }
 });
 

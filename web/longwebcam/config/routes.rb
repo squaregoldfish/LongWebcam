@@ -9,13 +9,14 @@ Longwebcam::Application.routes.draw do
   # Routes for alpha control
   match '/alpha/enter_code', to: 'alpha#enter_code', via: [:get, :post]
 
-  # Search
-  match '/search', to: 'cameras#search', via: [:get, :post]
+  ## Search
+  # Goes to the search page
+  match '/search', to: 'cameras#index', via: [:get]
 
   # All things for cameras
-  resource :camera do
-    member do
-      get 'search'
+  resources :cameras do
+    collection do
+      get 'doMapSearch'
     end
   end
 
