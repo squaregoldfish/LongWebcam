@@ -11,7 +11,6 @@ class MessageType < ActiveRecord::Base
             result = mtype.id
         end
 
-        return result
-
+        result
     end
 end

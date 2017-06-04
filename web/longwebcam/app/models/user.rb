@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     # Validate the to passwords match, but only if the password is being changed.
     validates_confirmation_of :new_password, :if=>:password_changed?
 
+    # Permissions bits
+    PRIVILEGE_VIEW_TEST_IMAGES = 1
+
+
     # Determines whether or not a new password has been passed in
     def password_changed?
         !@new_password.blank?
@@ -26,6 +30,16 @@ class User < ActiveRecord::Base
 
         # Hash the salt and password together
         self.password_digest = BCrypt::Engine.hash_secret(@new_password, self.password_salt)
+    end
+
+    # See if a privilieges object has the specified privilege bit set
+    def self.has_privilege(privileges, privilege_bit)
+        privileges & permission_bit
+    end
+
+    # See if the user can view test cameras
+    def self.view_test_images(privileges)
+        has_privilege(privileges, PRIVILEGE_VIEW_TEST_IMAGES)
     end
 
     # As is the 'standard' with rails apps we'll return the user record if the
@@ -45,7 +59,7 @@ class User < ActiveRecord::Base
         
         # If we get here it means either there's no user with that email, or the wrong
         # password was provided.  But we don't want to let an attacker know which. 
-        return authenticated_user
+        authenticated_user
     end
 
     # Create a new user and generate a password for them
@@ -67,8 +81,7 @@ class User < ActiveRecord::Base
 
         user.save
 
-        return generated_password
-
+        generated_password
     end
 end
 

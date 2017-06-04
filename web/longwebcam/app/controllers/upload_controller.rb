@@ -105,7 +105,6 @@ class UploadController < ApplicationController
         # If it does, retrieve it. Otherwise create a new one
         if result_code == OK_CODE
 
-
             image_date_string = upload_xml.find_first('//x:image_upload/x:image/x:date', ns_string).content
             image_date = Date.parse(image_date_string)
             image_datetime = DateTime.parse(image_date_string)
@@ -155,7 +154,6 @@ class UploadController < ApplicationController
                     end
                 end
             end
-
 
             # Extract the weather data from the XML (if it exists), and add it to the image record
             #

@@ -15,7 +15,6 @@ class AlphaController < ApplicationController
 				session[:alpha_allowed] = false
 				@check_result = false
 			end
-
 		end
 	end
 end

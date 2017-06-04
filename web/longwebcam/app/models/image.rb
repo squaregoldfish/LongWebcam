@@ -37,7 +37,7 @@ class Image < ActiveRecord::Base
             record = nil
         end
 
-        return record
+        record
     end
 
     # Add a set of weather data to this record

@@ -20,6 +20,6 @@ class UploadResponse < ActiveRecord::Base
             b.message(self.message)
         }
 
-        return response_xml
+        response_xml
     end
 end

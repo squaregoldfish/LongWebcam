@@ -14,8 +14,6 @@ class Message < ActiveRecord::Base
         new_message.extra_data = extra_data
 
         new_message.save
-
-        return new_message
     end
 
     def to_s
