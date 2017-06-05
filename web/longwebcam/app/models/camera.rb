@@ -7,6 +7,8 @@ class Camera < ActiveRecord::Base
     has_many :images
     has_many :events, :through => :cameras_events
 
+    # Search scopes
+    scope :freetext, -> (text) {where("title LIKE ? OR description LIKE ?", "%#{text}%", "%#{text}%")}
 
 	#####################
     # Constants

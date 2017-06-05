@@ -1,4 +1,5 @@
 class CamerasController < ApplicationController
+	include CameraSearchHelper
 	skip_before_action :check_alpha_code
 
 	def index
@@ -6,7 +7,7 @@ class CamerasController < ApplicationController
 	end
 
 	def doMapSearch
-		@searchResults = Camera.all
+		@searchResults = do_camera_search(params)
 		render "map_search_results"
 	end
 end

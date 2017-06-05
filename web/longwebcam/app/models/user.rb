@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
     validates_confirmation_of :new_password, :if=>:password_changed?
 
     # Permissions bits
-    PRIVILEGE_VIEW_TEST_IMAGES = 1
-
+    PRIVILEGE_VIEW_TEST_CAMERAS = 1
 
     # Determines whether or not a new password has been passed in
     def password_changed?
@@ -34,12 +33,7 @@ class User < ActiveRecord::Base
 
     # See if a privilieges object has the specified privilege bit set
     def self.has_privilege(privileges, privilege_bit)
-        privileges & permission_bit
-    end
-
-    # See if the user can view test cameras
-    def self.view_test_images(privileges)
-        has_privilege(privileges, PRIVILEGE_VIEW_TEST_IMAGES)
+        privileges & privilege_bit > 0
     end
 
     # As is the 'standard' with rails apps we'll return the user record if the
