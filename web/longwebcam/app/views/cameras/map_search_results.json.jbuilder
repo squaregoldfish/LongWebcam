@@ -1,13 +1,13 @@
 json.array! @searchResults do |camera|
-	camera_details = CameraDetails.where(:camera_id => camera.id).order("details_date").last
-	unless camera_details.nil?
+	details = camera.camera_details.order("details_date").last
+	unless details.nil?
 		json.id camera.id
 		json.title camera.title
 		json.description camera.description
-		json.longitude camera_details.longitude
-		json.latitude camera_details.latitude
+		json.longitude details.longitude
+		json.latitude details.latitude
 
-		image = Image.where(:camera_id => camera.id).where(:image_present => 1).order("date").last
+		image = camera.images.where(:image_present => 1).order("date").last
 		unless image.nil?
 			json.url = thumbnail_image_path(image)
 		end

@@ -8,7 +8,7 @@ module CameraSearchHelper
 		if can_view_test_cameras
 			search_results = Camera.where(nil)
 		else
-			search_results = Camera.where(test_camera: 0)
+			search_results = Camera.where(test_camera: false)
 		end
 
 		search_results = search_results.freetext(params[:freetext]) unless params[:freetext].empty?
