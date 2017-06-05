@@ -35,3 +35,6 @@ gem 'turbolinks', '~> 5.0.0'
 
 # jBuilder
 gem 'jbuilder', '~> 2.6.4'
+
+# Specify WebRICK version
+gem 'thin', '~> 1.7.0'
