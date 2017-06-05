@@ -20,6 +20,11 @@ Longwebcam::Application.routes.draw do
     end
   end
 
+  resources :images do
+    member do
+      get 'thumbnail'
+    end
+  end
 
 
   # Upload handler
