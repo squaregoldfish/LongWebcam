@@ -33,4 +33,25 @@ class ImagesController < ApplicationController
 			head 404
 		end
 	end
+
+	def image
+		begin
+			image = Image.find(params[:id])
+			camera = Camera.find(image.camera_id)
+
+			if camera.test_camera? && !can_view_test_cameras
+				head 403
+			else
+				image_location = get_image_location(image.camera_id, image.date)
+
+				if !File.exists?(image_location)
+					head 404
+				else
+					send_file(image_location, disposition: "inline")
+				end
+			end
+		rescue ActiveRecord::RecordNotFound
+			head 404
+		end
+	end
 end
