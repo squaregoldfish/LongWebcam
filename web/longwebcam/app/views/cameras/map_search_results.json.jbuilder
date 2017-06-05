@@ -1,6 +1,7 @@
 json.array! @searchResults do |camera|
 	camera_details = CameraDetails.where(:camera_id => camera.id).order("details_date").last
 	unless camera_details.nil?
+		json.id camera.id
 		json.title camera.title
 		json.description camera.description
 		json.longitude camera_details.longitude
