@@ -7,7 +7,7 @@ json.array! @searchResults do |camera|
 		json.latitude camera.current_details.latitude
 
 		unless camera.latest_image.nil?
-			json.url = thumbnail_image_path(camera.latest_image)
+			json.url thumbnail_image_path(camera.latest_image)
 		end
 	end
 end

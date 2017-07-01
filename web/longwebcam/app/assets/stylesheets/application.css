@@ -12,13 +12,13 @@
  *= require ol
  */
 
-@import 'https://fonts.googleapis.com/css?family=Cormorant+Infant:600,600i,700|Ek+Mukta:400,700';
+@import 'https://fonts.googleapis.com/css?family=Rasa:400,700|Ek+Mukta:400,700';
 
 /*
  * Font specifications
  */
 body, input, button, select, option, textarea {
-	font-family: 'Ek Mukta', sans-serif;
+	font-family: 'Rasa', sans-serif;
 	font-weight: 400;
 	font-size: 18px;
 }
@@ -137,7 +137,7 @@ p.majorLink {
 }
 
 .form-message {
-	font-family: 'Ek Mukta', sans-serif;
+	font-family: 'Rasa', sans-serif;
 }
 
 .error {
