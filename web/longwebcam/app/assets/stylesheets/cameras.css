@@ -2,12 +2,33 @@ body {
 	overflow: hidden;
 }
 
+#searchForm {
+	position: absolute;
+	top: 31px;
+	left: 0px;
+	z-index: 10;
+	min-height: 100%;
+	overflow: hidden;
+	background-color: white;
+	width: 300px;
+}
+
 #searchMap {
 	position: absolute;
-	top: 80px;
+	top: 31px;
 	left: 0;
 	margin-bottom: 0px;
 	width: 100%;
 	min-height: 100%;
 	overflow: hidden;
+}
+
+/* Override default OpenLayers stuff */
+.ol-zoom {
+	right: 0.5em;
+	left: auto;
+}
+
+.ol-attribution {
+	bottom: 2em;
 }

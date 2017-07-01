@@ -1,12 +1,7 @@
-<div id="searchForm">
-
+<div id="searchFormContainer">
 	<%= form_tag("/cameras/doMapSearch", id: 'searchForm', method: "get", remote: true) do |sf| %>
 		<%= text_field_tag(:freetext) %>
 	<% end %>
-
-	<div id="json">
-		JSON will go here.
-	</div>
 </div>
 <div id="searchMap">
 </div>

@@ -9,7 +9,7 @@ class Camera < ActiveRecord::Base
     has_many :images
     has_many :events, :through => :cameras_events
 
-    # Associations for eager loading
+    # Associations for basic camera details
     has_one :current_details, -> { order("details_date DESC").limit(1) }, class_name: "CameraDetail"
     has_one :latest_image, -> { where(image_present: 1).order("date DESC").limit(1) }, class_name: "Image"
 
