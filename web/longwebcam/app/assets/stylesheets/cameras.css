@@ -13,14 +13,21 @@ body {
 	width: 300px;
 }
 
-#searchMap {
+.resultsPanel {
 	position: absolute;
 	top: 31px;
 	left: 301px;
 	margin-bottom: 0px;
-	width: 100%;
-	min-height: 100%;
+	width: calc(100% - 300px);
+	height: calc(100% - 30px);
+}
+
+.resultsMap {
 	overflow: hidden;
+}
+
+.resultsList {
+	overflow-y: auto;
 }
 
 #infoPopup {
@@ -48,9 +55,40 @@ body {
 	max-width: 295px;
 }
 
-#infoImage {
-	max-width: 295px;
-	max-height: 170px;
+.listResult {
+	display: inline-flex;
+	width: 600px;
+	height: 200px;
+	border: 1px solid green;
+	margin-right: 1px;
+}
+
+.listResultLeft {
+	width: 295px;
+}
+
+.listResultRight {
+	width: 355px;
+}
+
+.listImage {
+	height: 170px;
+	width: 295px;
+	text-align: center;
+}
+
+.listCountry {
+	text-align: center;
+}
+
+.listTitle {
+	width: 100%;
+	overflow: hidden;
+	font-weight: 700;
+}
+
+.listDescription {
+	width: 100%;
 }
 
 /* Override default OpenLayers stuff */

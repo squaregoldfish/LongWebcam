@@ -1,14 +1,21 @@
 <div id="searchFormContainer">
 	<%= form_tag("/cameras/doSearch", id: 'searchForm', method: "get", remote: true) do |sf| %>
+		<div id="resultsModeContainer">
+			<input id="resultsModeMap" type="radio" name="resultsMode" value="map" checked="checked">
+			<label for="resultsModeMap">Map</label>
+			<input id="resultsModeList" type="radio" name="resultsMode" value="list">
+			<label for="resultsModeList">List</label>
+		</div>
+
 		Showing <div id="resultsCount" class="inlineVariable">0 cameras</div>
 		<br/>
 		Text search:
 		<%= text_field_tag(:freetext) %>
 	<% end %>
 </div>
-<div id="searchMap">
-</div>
+<div id="searchMap" class="resultsPanel resultsMap"></div>
+<div id="searchList" class="resultsPanel resultsList invisible"></div>
 <div id="infoPopup">
 	<div id="infoTitle">Camera Title</div>
-	<img id="infoImage" src="/assets/camera_icon.png"/>
+	<img id="infoImage" class="thumbnail" src="/assets/camera_icon.png"/>
 </div>

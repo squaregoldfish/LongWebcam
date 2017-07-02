@@ -153,3 +153,12 @@ p.majorLink {
 .inlineVariable {
 	display: inline;
 }
+
+.invisible {
+	display: none;
+}
+
+.thumbnail {
+	max-width: 295px;
+	max-height: 170px;
+}

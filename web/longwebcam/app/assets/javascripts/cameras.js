@@ -31,6 +31,10 @@ $(document).on('turbolinks:load', function () {
         freetextSearch();
       });
 
+      $('input[id^=resultsMode').on('change', function() {
+        changeResultsMode();
+      });
+
       bindingsAdded = true;
     }
 
@@ -85,9 +89,18 @@ function drawSearchResults() {
   if (searchResults.length != 1) {
     countHtml += 's';
   }
-
   $('#resultsCount').html(countHtml);
-  drawMapSearchResults();
+
+  switch($('[id^=resultsMode]:checked').val()) {
+  case 'map': {
+    drawMapSearchResults();
+    break;
+  }
+  case 'list': {
+    drawListSearchResults();
+    break;
+  }
+  }
 }
 
 function drawMapSearchResults() {
@@ -198,4 +211,46 @@ function displayFeatureInfo(pixel) {
     });
     currentPopupCamera = null;
   }
+}
+
+function changeResultsMode() {
+  switch($('[id^=resultsMode]:checked').val()) {
+  case 'map': {
+    $('#searchList').hide();
+    $('#searchMap').show();
+    drawMapSearchResults();
+    break;
+  }
+  case 'list': {
+    $('#searchMap').hide();
+    $('#searchList').show();
+    drawListSearchResults();
+    break;
+  }
+  }
+}
+
+function drawListSearchResults() {
+
+  var html = '';
+
+  if (searchResults.length == 0) {
+    html += 'No cameras found';
+  } else {
+    
+    for (var i = 0; i < searchResults.length; i++) {
+      var result = searchResults[i];
+
+      html += '<div id="camera-' + result['id'] + '" class="listResult">';
+      html += '<div class="listResultLeft">';
+      html += '<div class="listImage"><img src="' + result['url'] + '" class="thumbnail"/></div>';
+      html += '<div class="listCountry">' + result['country'] + '</div>';
+      html += '</div><div class="listResultRight">';
+      html += '<div class="listTitle">' + result['title'] + '</div>';
+      html += '<div class="listDescription">' + result['description'] + '</div>';
+      html += '</div></div>';
+    }
+
+  }
+  $('#searchList').html(html);
 }
