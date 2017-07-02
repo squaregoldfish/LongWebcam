@@ -3,11 +3,11 @@ class CamerasController < ApplicationController
 	skip_before_action :check_alpha_code
 
 	def index
-		render "map"
+		render "search"
 	end
 
-	def doMapSearch
+	def doSearch
 		@searchResults = do_camera_search(params)
-		render "map_search_results"
+		render "search_results"
 	end
 end

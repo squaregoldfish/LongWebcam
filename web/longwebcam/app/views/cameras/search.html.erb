@@ -1,11 +1,11 @@
 <div id="searchFormContainer">
-	<%= form_tag("/cameras/doMapSearch", id: 'searchForm', method: "get", remote: true) do |sf| %>
+	<%= form_tag("/cameras/doSearch", id: 'searchForm', method: "get", remote: true) do |sf| %>
 		<%= text_field_tag(:freetext) %>
 	<% end %>
 </div>
 <div id="searchMap">
 </div>
 <div id="infoPopup">
-	<div id="infoTitle">sdfsd</div>
+	<div id="infoTitle">Camera Title</div>
 	<img id="infoImage" src="/assets/camera_icon.png"/>
 </div>

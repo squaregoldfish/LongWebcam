@@ -16,7 +16,7 @@ Longwebcam::Application.routes.draw do
   # All things for cameras
   resources :cameras do
     collection do
-      get 'doMapSearch'
+      get 'doSearch'
     end
   end
 
