@@ -149,3 +149,7 @@ p.majorLink {
 	color: #eeeeee;
 	height: 30px;
 }
+
+.inlineVariable {
+	display: inline;
+}

@@ -1,5 +1,8 @@
 <div id="searchFormContainer">
 	<%= form_tag("/cameras/doSearch", id: 'searchForm', method: "get", remote: true) do |sf| %>
+		Showing <div id="resultsCount" class="inlineVariable">0 cameras</div>
+		<br/>
+		Text search:
 		<%= text_field_tag(:freetext) %>
 	<% end %>
 </div>

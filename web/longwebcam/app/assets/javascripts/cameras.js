@@ -5,6 +5,7 @@ var searchResults = null;
 var searchResultsMapLayer = null;
 var onLoadRun = false;
 var currentPopupCamera = null;
+var searchTimer = null;
 
 // Page load JS. Decides what to do based on the page contents
 $(document).on('turbolinks:load', function () {
@@ -18,6 +19,18 @@ $(document).on('turbolinks:load', function () {
         searchResults = JSON.parse(xhr.responseText);
         drawSearchResults();  
       });
+
+      $('#searchForm').on('submit', function() {
+        if (null != searchTimer) {
+          clearTimeout(searchTimer);
+          searchTimer = null;
+        }
+      });
+
+      $('#freetext').on('keyup', function() {
+        freetextSearch();
+      });
+
       bindingsAdded = true;
     }
 
@@ -26,6 +39,13 @@ $(document).on('turbolinks:load', function () {
     onLoadRun = true;
   }
 });
+
+function freetextSearch() {
+  if (null != searchTimer) {
+    clearTimeout(searchTimer);
+  }
+  searchTimer = setTimeout("$('#searchForm').submit()", 200);
+}
 
 function drawSearchMap() {
 	if (null == map) {
@@ -61,6 +81,12 @@ function drawSearchMap() {
 }
 
 function drawSearchResults() {
+  var countHtml = searchResults.length + ' camera';
+  if (searchResults.length != 1) {
+    countHtml += 's';
+  }
+
+  $('#resultsCount').html(countHtml);
   drawMapSearchResults();
 }
 
