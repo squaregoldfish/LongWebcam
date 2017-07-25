@@ -1,9 +1,9 @@
 <div id="searchFormContainer">
 	<%= form_tag("/cameras/doSearch", id: 'searchForm', method: "get", remote: true) do |sf| %>
 		<div id="resultsModeContainer">
-			<input id="resultsModeMap" type="radio" name="resultsMode" value="map" checked="checked">
+			<input id="resultsModeMap" type="radio" name="resultsMode" value="map">
 			<label for="resultsModeMap">Map</label>
-			<input id="resultsModeList" type="radio" name="resultsMode" value="list">
+			<input id="resultsModeList" type="radio" name="resultsMode" value="list" checked="checked">
 			<label for="resultsModeList">List</label>
 		</div>
 

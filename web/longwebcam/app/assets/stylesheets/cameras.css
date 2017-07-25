@@ -27,6 +27,8 @@ body {
 }
 
 .resultsList {
+	display: flex;
+	flex-wrap: wrap;
 	overflow-y: auto;
 }
 
@@ -56,39 +58,33 @@ body {
 }
 
 .listResult {
-	display: inline-flex;
 	width: 600px;
 	height: 200px;
-	border: 1px solid green;
 	margin-right: 1px;
 }
 
-.listResultLeft {
-	width: 295px;
-}
-
-.listResultRight {
-	width: 355px;
-}
-
 .listImage {
+	float: left;
+	width: 270px;
 	height: 170px;
-	width: 295px;
-	text-align: center;
-}
-
-.listCountry {
 	text-align: center;
 }
 
 .listTitle {
-	width: 100%;
 	overflow: hidden;
 	font-weight: 700;
 }
 
 .listDescription {
-	width: 100%;
+	overflow: auto;
+}
+
+.listCountry {
+	float: left;
+	clear: left;
+	width: 270px;
+	height: 30px;
+	text-align: center;
 }
 
 /* Override default OpenLayers stuff */
