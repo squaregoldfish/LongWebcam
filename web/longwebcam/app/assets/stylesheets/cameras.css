@@ -61,6 +61,7 @@ body {
 	width: 600px;
 	height: 200px;
 	margin-right: 1px;
+	border: 1px solid blue;
 }
 
 .listImage {
@@ -73,9 +74,11 @@ body {
 .listTitle {
 	overflow: hidden;
 	font-weight: 700;
+	height: 20px;
 }
 
 .listDescription {
+	height: 180px;
 	overflow: auto;
 }
 
