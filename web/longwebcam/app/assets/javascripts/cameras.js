@@ -9,35 +9,29 @@ var searchTimer = null;
 
 // Page load JS. Decides what to do based on the page contents
 $(document).on('turbolinks:load', function () {
-  if (!onLoadRun) {
-    if ($('#searchForm').length) {
-      $('#searchForm').on('ajax:success', function(e, data, status, xhr) {
-        searchResults = JSON.parse(xhr.responseText);
-        drawSearchResults();  
-      });
+  if ($('#searchForm').length && null == searchResults) {
+    $('#searchForm').on('ajax:success', function(e, data, status, xhr) {
+      searchResults = JSON.parse(xhr.responseText);
+      drawSearchResults();  
+    });
 
-      $('#searchForm').on('submit', function() {
-        if (null != searchTimer) {
-          clearTimeout(searchTimer);
-          searchTimer = null;
-        }
-      });
+    $('#searchForm').on('submit', function() {
+      if (null != searchTimer) {
+        clearTimeout(searchTimer);
+        searchTimer = null;
+      }
+    });
 
-      $('#freetext').on('keyup', function() {
-        freetextSearch();
-      });
+    $('#freetext').on('keyup', function() {
+      freetextSearch();
+    });
 
-      $('input[id^=resultsMode').on('change', function() {
-        changeResultsMode();
-      });
-
-      bindingsAdded = true;
-    }
-
-    $('#searchForm').submit();
-
-    onLoadRun = true;
+    $('input[id^=resultsMode').on('change', function() {
+      changeResultsMode();
+    });
   }
+
+  $('#searchForm').submit();
 });
 
 function freetextSearch() {
@@ -80,6 +74,7 @@ function drawSearchMap() {
 }
 
 function drawSearchResults() {
+  console.log("Drawing search results");
   var countHtml = searchResults.length + ' camera';
   if (searchResults.length != 1) {
     countHtml += 's';
