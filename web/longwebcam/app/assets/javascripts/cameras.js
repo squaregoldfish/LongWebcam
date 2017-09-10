@@ -69,7 +69,6 @@ function drawSearchMap() {
       })
     });
 
-    /*
     map.on('pointermove', function(evt) {
       if (evt.dragging) {
         $('#infoPopup').hide();
@@ -78,7 +77,6 @@ function drawSearchMap() {
 
       displayFeatureInfo(map.getEventPixel(evt.originalEvent));
     });
-    */
   }
 }
 
