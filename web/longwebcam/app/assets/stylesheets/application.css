@@ -155,7 +155,7 @@ p.majorLink {
 }
 
 .invisible {
-	display: none;
+	visibility: hidden;
 }
 
 .thumbnail {

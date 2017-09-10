@@ -3,7 +3,6 @@ var map = null;
 var mapSource = null;
 var searchResults = null;
 var searchResultsMapLayer = null;
-var onLoadRun = false;
 var currentPopupCamera = null;
 var searchTimer = null;
 
@@ -15,6 +14,7 @@ $(document).on('turbolinks:load', function () {
       drawSearchResults();  
     });
 
+    // Prevent the search being submitted too frequently
     $('#searchForm').on('submit', function() {
       if (null != searchTimer) {
         clearTimeout(searchTimer);
@@ -22,10 +22,12 @@ $(document).on('turbolinks:load', function () {
       }
     });
 
+    // Run the search as the freetext input is changed
     $('#freetext').on('keyup', function() {
       freetextSearch();
     });
 
+    // Detect changes to the search results mode
     $('input[id^=resultsMode').on('change', function() {
       changeResultsMode();
     });
@@ -34,12 +36,17 @@ $(document).on('turbolinks:load', function () {
   $('#searchForm').submit();
 });
 
+// Run the search based on changes to the
+// freetext field. This is delayed slightly
+// in case more input is coming, to ensure searches
+// aren't submitted too frequently
 function freetextSearch() {
   if (null != searchTimer) {
     clearTimeout(searchTimer);
   }
   searchTimer = setTimeout("$('#searchForm').submit()", 200);
 }
+
 
 function drawSearchMap() {
 	if (null == map) {
@@ -62,6 +69,7 @@ function drawSearchMap() {
       })
     });
 
+    /*
     map.on('pointermove', function(evt) {
       if (evt.dragging) {
         $('#infoPopup').hide();
@@ -70,11 +78,11 @@ function drawSearchMap() {
 
       displayFeatureInfo(map.getEventPixel(evt.originalEvent));
     });
+    */
   }
 }
 
 function drawSearchResults() {
-  console.log("Drawing search results");
   var countHtml = searchResults.length + ' camera';
   if (searchResults.length != 1) {
     countHtml += 's';
@@ -94,6 +102,8 @@ function drawSearchResults() {
 }
 
 function drawMapSearchResults() {
+  $('#searchList').hide();
+  $('#searchMap').show();
   drawSearchMap();
 
   if (null != searchResultsMapLayer) {
@@ -101,32 +111,31 @@ function drawMapSearchResults() {
     searchResultsMapLayer = null;
   }
 
-  var cameraFeatures = new Array(searchResults.length);
+  if (searchResults.length > 0) {
+    var cameraFeatures = new Array(searchResults.length);
 
-  for (var i = 0; i < searchResults.length; i++) {
-    var camera = searchResults[i];
-    cameraFeatures[i] = new ol.Feature({
-      geometry: new ol.geom.Point([camera['longitude'], camera['latitude']]).transform(ol.proj.get("EPSG:4326"), mapSource.getProjection()),
-      name: camera['title'],
-      imageUrl: camera['url']
-    }); 
-  }
+    for (var i = 0; i < searchResults.length; i++) {
+      var camera = searchResults[i];
+      cameraFeatures[i] = new ol.Feature({
+        geometry: new ol.geom.Point([camera['longitude'], camera['latitude']]).transform(ol.proj.get("EPSG:4326"), mapSource.getProjection()),
+        name: camera['title'],
+        imageUrl: camera['url']
+      }); 
+    }
 
-  searchResultsMapLayer = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      features: cameraFeatures
-    }),
-    style: new ol.style.Style({
-      image: new ol.style.Icon({
-        src: '/assets/camera_icon.png'
+    searchResultsMapLayer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: cameraFeatures
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          src: '/assets/camera_icon.png'
+        })
       })
-    })
-  });
+    });
 
-  map.addLayer(searchResultsMapLayer);
-
-  $('#searchList').hide();
-  $('#searchMap').show();
+    map.addLayer(searchResultsMapLayer);
+  }
 }
 
 function displayFeatureInfo(pixel) {

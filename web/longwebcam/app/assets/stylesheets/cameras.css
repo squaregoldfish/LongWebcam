@@ -92,8 +92,8 @@ body {
 
 /* Override default OpenLayers stuff */
 .ol-zoom {
-	right: 0.5em;
-	left: auto;
+	right: 0.5em !important;
+	left: auto !important;
 }
 
 .ol-attribution {
