@@ -34,7 +34,7 @@ class ImagesController < ApplicationController
 		end
 	end
 
-	def image
+	def show
 		begin
 			image = Image.find(params[:id])
 			camera = Camera.find(image.camera_id)
@@ -53,5 +53,25 @@ class ImagesController < ApplicationController
 		rescue ActiveRecord::RecordNotFound
 			head 404
 		end
+	end
+
+	def destroy
+		head 403
+	end
+
+	def update
+		head 403
+	end
+
+	def create
+		head 403
+	end
+
+	def new
+		head 403
+	end
+
+	def edit
+		head 403
 	end
 end

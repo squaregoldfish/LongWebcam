@@ -24,11 +24,7 @@ Longwebcam::Application.routes.draw do
     member do
       get 'thumbnail'
     end
-    member do
-      get 'image'
-    end
   end
-
 
   # Upload handler
   match '/upload', to: 'upload#upload', via: [:post]
