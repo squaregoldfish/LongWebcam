@@ -1,5 +1,3 @@
-require 'rmagick'
-
 class ImagesController < ApplicationController
 	include ImagesHelper
 	include PrivilegesHelper

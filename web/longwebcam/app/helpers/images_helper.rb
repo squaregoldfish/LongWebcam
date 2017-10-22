@@ -1,3 +1,5 @@
+require 'rmagick'
+
 module ImagesHelper
 
 	def get_image_location(camera_id, date)
