@@ -24,6 +24,9 @@ Longwebcam::Application.routes.draw do
     member do
       get 'thumbnail'
     end
+    member do
+      get 'medium'
+    end
   end
 
   # Upload handler
