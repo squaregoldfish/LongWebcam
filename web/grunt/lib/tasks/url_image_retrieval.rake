@@ -119,12 +119,12 @@ namespace :lwc_grunt do
 
                         # Add the weather to the image record
                         logger.debug("Retrieving weather")
-                        weather = Weather.new(camera_record.longitude, camera_record.latitude, camera_id)
-                        weather.retrieve_data
+#                        weather = Weather.new(camera_record.longitude, camera_record.latitude, camera_id)
+#                        weather.retrieve_data
 
-                        if weather.data_retrieved?
-                            logger.debug("Weather retrieved OK")
-                            image_record.add_weather(weather)
+#                        if weather.data_retrieved?
+#                            logger.debug("Weather retrieved OK")
+#                            image_record.add_weather(weather)
                         end
                     end
                 end

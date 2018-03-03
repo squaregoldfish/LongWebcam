@@ -106,12 +106,12 @@ namespace :lwc do
 
                     # Download the weather and add it to the upload object
                     #
-                    weather = Weather.new(camera_details.longitude, camera_details.latitude, camera_id)
-                    weather.retrieve_data
+#                    weather = Weather.new(camera_details.longitude, camera_details.latitude, camera_id)
+#                    weather.retrieve_data
 
-                    if weather.data_retrieved?
-                        upload.addWeather(weather)
-                    end
+#                    if weather.data_retrieved?
+#                        upload.addWeather(weather)
+#                    end
 
                     # Send the upload
                     upload_response = upload.doUpload
