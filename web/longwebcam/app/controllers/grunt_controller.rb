@@ -11,7 +11,7 @@ class GruntController < ApplicationController
 
     # The SQL statement for getting the camera details required by the grunt.
     # We only want the latest set of details for each camera.
-    CAMERA_SELECT_STATEMENT = "SELECT c.id, c.url, c.upload_code, " +
+    CAMERA_SELECT_STATEMENT = "SELECT c.id, c.url, c.upload_code, c.disabled, " +
                 "d.timezone_id, d.daylight_saving, d.utc_offset, d.download_start, d.download_end, " +
                 "d.longitude, d.latitude " +
                 "FROM cameras c INNER JOIN camera_details d ON c.id = d.camera_id " +
@@ -21,13 +21,14 @@ class GruntController < ApplicationController
     COL_CAMERA_ID = 0
     COL_URL = 1
     COL_UPLOAD_CODE = 2
-    COL_TIMEZONE_ID = 3
-    COL_DAYLIGHT_SAVING = 4
-    COL_UTC_OFFSET = 5
-    COL_DOWNLOAD_START = 6
-    COL_DOWNLOAD_END = 7
-    COL_LONGITUDE = 8
-    COL_LATITUDE = 9
+    COL_DISABLED = 3
+    COL_TIMEZONE_ID = 4
+    COL_DAYLIGHT_SAVING = 5
+    COL_UTC_OFFSET = 6
+    COL_DOWNLOAD_START = 7
+    COL_DOWNLOAD_END = 8
+    COL_LONGITUDE = 9
+    COL_LATITUDE = 10
 
     def init_vars
         @cameras = nil
@@ -68,6 +69,11 @@ class GruntController < ApplicationController
 
             @cameras.each do |camera|
                 output.camera { |b| b.id(camera[COL_CAMERA_ID]);
+                             if camera[COL_DISABLED] == 1
+                                b.disabled("true");
+                             else
+                                b.disabled("false");
+                             end
                              b.timezone_id(camera[COL_TIMEZONE_ID]);
                              b.daylight_saving(camera[COL_DAYLIGHT_SAVING]);
                              b.utc_offset(camera[COL_UTC_OFFSET]);
@@ -117,7 +123,7 @@ class GruntController < ApplicationController
         if response_code != :ok
             head response_code
         else
-            render :text => image_exists
+            render :body => image_exists
         end
     end
 end

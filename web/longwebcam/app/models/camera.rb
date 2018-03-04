@@ -15,4 +15,8 @@ class Camera < ActiveRecord::Base
     URL_TYPE = 1
     NET_CONNECTED_TYPE = 2
     STANDALONE_TYPE = 3
+
+    def disabled()
+        return disabled == 1 ? true : false
+    end
 end
