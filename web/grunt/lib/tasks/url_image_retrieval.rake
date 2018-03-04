@@ -125,7 +125,7 @@ namespace :lwc_grunt do
 #                        if weather.data_retrieved?
 #                            logger.debug("Weather retrieved OK")
 #                            image_record.add_weather(weather)
-                        end
+#                        end
                     end
                 end
             }
