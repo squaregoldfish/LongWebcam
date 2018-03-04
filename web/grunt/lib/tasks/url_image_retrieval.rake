@@ -119,13 +119,13 @@ namespace :lwc_grunt do
 
                         # Add the weather to the image record
                         logger.debug("Retrieving weather")
-                        weather = Weather.new(camera_record.longitude, camera_record.latitude, camera_id)
-                        weather.retrieve_data
+#                        weather = Weather.new(camera_record.longitude, camera_record.latitude, camera_id)
+#                        weather.retrieve_data
 
-                        if weather.data_retrieved?
-                            logger.debug("Weather retrieved OK")
-                            image_record.add_weather(weather)
-                        end
+#                        if weather.data_retrieved?
+#                            logger.debug("Weather retrieved OK")
+#                            image_record.add_weather(weather)
+#                        end
                     end
                 end
             }
@@ -245,7 +245,7 @@ namespace :lwc_grunt do
                 # end
 
     #            if !schema_valid
-    #                logger.error "Upload XML invalid"
+    #                logger.error "Camera XML invalid"
     #            end
 
                 if schema_valid
@@ -256,9 +256,6 @@ namespace :lwc_grunt do
                     # Set up the namespace info
                     ns_string = "x:" + GRUNT_CONFIG["main_url"] + "/xml/camera_details"
 
-                    # Find the camera record
-                    # camera_id = camera_xml.find_first('//x:camera_details/x:camera/x:id', ns_string).content
-
                     # Get all the camera IDs already in the database
                     existing_cameras = Camera.pluck(:camera_id)
 
@@ -266,30 +263,40 @@ namespace :lwc_grunt do
                     xml_cameras = camera_xml.find('//x:camera_details/x:camera', ns_string).each do |xml_camera|
 
                         camera_id = Integer(xml_camera.find_first('x:id', ns_string).content)
+                        disabled = xml_camera.find_first('x:disabled', ns_string).content
 
-                        database_camera = Camera.find_by_camera_id(camera_id)
+                        if disabled == "true"
+                            if existing_cameras.include? camera_id
+                                logger.info "Camera #{camera_id} disabled - removing"
+                                Camera.destroy(camera_id)
+                            end
+                        else
 
-                        # Create the record if it doesn't exist
-                        if (database_camera.nil?)
-                            logger.debug("New camera #{camera_id}")
-                            database_camera = Camera.new
-                            database_camera.camera_id = camera_id
+                            database_camera = Camera.find_by_camera_id(camera_id)
+
+                            # Create the record if it doesn't exist
+                            if (database_camera.nil?)
+                                logger.debug("New camera #{camera_id}")
+                                database_camera = Camera.new
+                                database_camera.camera_id = camera_id
+                            end
+
+                            # Set all the fields
+                            database_camera.retrieved = retrieval_time
+                            database_camera.timezone_id = xml_camera.find_first('x:timezone_id', ns_string).content
+                            database_camera.daylight_saving = xml_camera.find_first('x:daylight_saving', ns_string).content
+                            database_camera.utc_offset = xml_camera.find_first('x:utc_offset', ns_string).content
+                            database_camera.download_start = xml_camera.find_first('x:download_start', ns_string).content
+                            database_camera.download_end = xml_camera.find_first('x:download_end', ns_string).content
+                            database_camera.url = xml_camera.find_first('x:url', ns_string).content
+                            database_camera.upload_code = xml_camera.find_first('x:upload_code', ns_string).content
+                            database_camera.longitude = xml_camera.find_first('x:longitude', ns_string).content
+                            database_camera.latitude = xml_camera.find_first('x:latitude', ns_string).content
+
+                            # Save the camera
+                            database_camera.save
+
                         end
-
-                        # Set all the fields
-                        database_camera.retrieved = retrieval_time
-                        database_camera.timezone_id = xml_camera.find_first('x:timezone_id', ns_string).content
-                        database_camera.daylight_saving = xml_camera.find_first('x:daylight_saving', ns_string).content
-                        database_camera.utc_offset = xml_camera.find_first('x:utc_offset', ns_string).content
-                        database_camera.download_start = xml_camera.find_first('x:download_start', ns_string).content
-                        database_camera.download_end = xml_camera.find_first('x:download_end', ns_string).content
-                        database_camera.url = xml_camera.find_first('x:url', ns_string).content
-                        database_camera.upload_code = xml_camera.find_first('x:upload_code', ns_string).content
-                        database_camera.longitude = xml_camera.find_first('x:longitude', ns_string).content
-                        database_camera.latitude = xml_camera.find_first('x:latitude', ns_string).content
-
-                        # Save the camera
-                        database_camera.save
 
                         # Remove the ID from the list of pre-existing database cameras
                         existing_cameras.delete(camera_id)
@@ -298,8 +305,8 @@ namespace :lwc_grunt do
                     # Now existing_cameras just has the cameras that are no longer in the main database
                     # They can be deleted
                     existing_cameras.each do |old_camera_id|
-                        logger.debug("Deleting old camera #{camera_id}")
-                        Camera.find_by_camera_id(old_camera_id).destroy
+                        logger.debug("Deleting old camera #{old_camera_id}")
+                        #Camera.find_by_camera_id(old_camera_id).destroy
                     end
                 end
             end

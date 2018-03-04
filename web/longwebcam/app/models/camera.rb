@@ -25,6 +25,10 @@ class Camera < ActiveRecord::Base
     NET_CONNECTED_TYPE = 2
     STANDALONE_TYPE = 3
 
+    def disabled()
+        return disabled == 1 ? true : false
+    end
+
     def image_ranges
         
         image_dates = Array.new

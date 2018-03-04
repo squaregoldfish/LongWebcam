@@ -91,9 +91,9 @@ class Weather
 
                 
             end
+            @data_retrieved = true
         end
 
-        @data_retrieved = true
         return @data_retrieved
     end
 
