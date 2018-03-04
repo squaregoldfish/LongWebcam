@@ -18,6 +18,7 @@
                             <xs:element name="upload_code" type="xs:string"/>
                             <xs:element name="longitude" type="xs:decimal"/>
                             <xs:element name="latitude" type="xs:decimal"/>
+                            <xs:element name="disabled" type="xs:boolean"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
