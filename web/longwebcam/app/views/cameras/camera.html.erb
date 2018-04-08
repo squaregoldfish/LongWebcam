@@ -4,5 +4,10 @@
 <br/>
 <%= @camera.description %>
 <br/>
-<div id="timeline">timeline will go here</div>
+<div id="timeline">
+    First image: <%= @camera.first_date %>
+    Latest image: <%= @camera.last_date %>
+
+    timeline will go here
+</div>
 <%= @camera.image_ranges %>

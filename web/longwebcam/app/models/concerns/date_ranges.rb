@@ -3,6 +3,8 @@ module DateRanges
 	extend ActiveSupport::Concern
 
 	class DateRange
+		attr_reader :start
+		attr_reader :finish
 
 		# Constructor
 		def initialize(start, finish)
@@ -60,10 +62,19 @@ module DateRanges
 			end
 		end
 
+		# Get the start date of the first range
+		def first_date
+			@ranges[0].start
+		end
+
+		# Get the end date of the last range
+		def last_date
+			@ranges[@ranges.length() - 1].finish
+		end
+
+		# Get all the date ranges as a JSON string
 		def to_json
-
 			json = "["
-
 			i = 0
 			while i < @ranges.length()
 				json = json + @ranges[i].to_json
@@ -73,9 +84,7 @@ module DateRanges
 
 				i = i + 1
 			end
-
 			json = json + "]"
-
 			json
 		end
 	end
