@@ -30,16 +30,12 @@ class Camera < ActiveRecord::Base
     end
 
     def image_ranges
-        
         image_dates = Array.new
-
-
         images.each do |image|
             image_dates.push image.date
         end
 
         range_set = DateRangeSet.new(image_dates)
-
         range_set.to_json
     end
 end
