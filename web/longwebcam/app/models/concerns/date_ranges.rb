@@ -23,7 +23,7 @@ module DateRanges
 		end
 
 		def to_json
-			"[new Date('#{@start}'), new Date('#{@finish}')]"
+			"{start: '#{@start}', end: '#{@finish}'}"
 		end
 	end
 
@@ -77,14 +77,14 @@ module DateRanges
 			json = "["
 			i = 0
 			while i < @ranges.length()
-				json = json + @ranges[i].to_json
+				json.concat("{\"id\":#{i},\"start\":\"#{@ranges[i].start}\",\"end\":\"#{@ranges[i].finish}\"}")
 				if i < (@ranges.length() - 1)
-					json = json + ","
+					json.concat(",")
 				end
 
 				i = i + 1
 			end
-			json = json + "]"
+			json.concat("]")
 			json
 		end
 	end

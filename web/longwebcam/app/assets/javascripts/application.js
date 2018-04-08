@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require_tree .
 //= require ol
+//= require vis-timeline-graph2d.min

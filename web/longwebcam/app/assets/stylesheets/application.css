@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require ol
+ *= require vis-timeline-graph2d.min
  */
 
 @import 'https://fonts.googleapis.com/css?family=Rasa:400,700|Ek+Mukta:400,700';

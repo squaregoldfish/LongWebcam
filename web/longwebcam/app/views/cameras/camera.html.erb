@@ -4,10 +4,19 @@
 <br/>
 <%= @camera.description %>
 <br/>
-<div id="timeline">
-    First image: <%= @camera.first_date %>
-    Latest image: <%= @camera.last_date %>
-
-    timeline will go here
-</div>
-<%= @camera.image_ranges %>
+First image: <%= @camera.first_date %>
+Latest image: <%= @camera.last_date %>
+<div id="timelineContainer"></div>
+<script>
+    var TIMELINE_OPTIONS = {
+        stack: false,
+        showCurrentTime: false,
+        selectable: false,
+        editable: false,
+        moment: function(date) {
+            return vis.moment(date).utc();
+        }
+    };
+    var ranges =  new vis.DataSet(<%= raw @camera.image_ranges %>);
+    var timeline = new vis.Timeline(timelineContainer, ranges, null, TIMELINE_OPTIONS);
+</script>
